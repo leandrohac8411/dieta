@@ -1,0 +1,2065 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Dieta Leandro · Corte 2026</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Outfit:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent
+        }
+
+        :root {
+            --bg: #0a0a0f;
+            --card: #16161f;
+            --card2: #1c1c28;
+            --border: #ffffff0f;
+            --border2: #ffffff1a;
+            --text: #f2f2f8;
+            --muted: #7a7a9a;
+            --cyan: #00e5cc;
+            --cyan-dim: #00e5cc1a;
+            --orange: #ff7b3d;
+            --orange-dim: #ff7b3d1a;
+            --green: #39d98a;
+            --green-dim: #39d98a1a;
+            --blue: #4d9fff;
+            --blue-dim: #4d9fff1a;
+            --yellow: #ffd166;
+            --yellow-dim: #ffd1661a;
+            --pink: #e040fb;
+            --pink-dim: #e040fb1a;
+            --red: #ff5c5c;
+            --r: 12px;
+            --rs: 8px;
+        }
+
+        html {
+            scroll-behavior: smooth
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Outfit', sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+            padding-bottom: env(safe-area-inset-bottom, 20px)
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background: radial-gradient(ellipse 70% 50% at 85% 5%, #00e5cc09 0%, transparent 55%), radial-gradient(ellipse 60% 60% at 5% 90%, #4d9fff07 0%, transparent 55%);
+            pointer-events: none;
+            z-index: 0
+        }
+
+        .wrap {
+            position: relative;
+            z-index: 1;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 16px 60px
+        }
+
+        /* HEADER */
+        header {
+            padding: 40px 0 36px;
+            border-bottom: 1px solid var(--border2);
+            margin-bottom: 36px
+        }
+
+        .htag {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10px;
+            letter-spacing: 3px;
+            color: var(--cyan);
+            text-transform: uppercase;
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px
+        }
+
+        .htag::before {
+            content: '';
+            width: 16px;
+            height: 1px;
+            background: var(--cyan)
+        }
+
+        h1 {
+            font-family: 'Syne', sans-serif;
+            font-weight: 800;
+            font-size: clamp(44px, 10vw, 96px);
+            line-height: .9;
+            letter-spacing: -2px;
+            margin-bottom: 14px
+        }
+
+        h1 em {
+            font-style: normal;
+            color: var(--cyan)
+        }
+
+        .hmeta {
+            font-size: 13px;
+            color: var(--muted);
+            line-height: 1.7
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 1px;
+            background: var(--border2);
+            border: 1px solid var(--border2);
+            border-radius: var(--r);
+            overflow: hidden;
+            margin-top: 28px
+        }
+
+        .stat {
+            background: var(--card);
+            padding: 14px 10px;
+            text-align: center;
+            transition: background .2s
+        }
+
+        .stat:hover {
+            background: var(--card2)
+        }
+
+        .stat-v {
+            font-family: 'Syne', sans-serif;
+            font-size: 18px;
+            color: var(--cyan);
+            line-height: 1;
+            margin-bottom: 3px
+        }
+
+        .stat-v.orange {
+            color: var(--orange)
+        }
+
+        .stat-v.green {
+            color: var(--green)
+        }
+
+        .stat-l {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 8px;
+            color: var(--muted);
+            letter-spacing: 1px;
+            text-transform: uppercase
+        }
+
+        /* NAV */
+        .nav-wrap {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            padding: 10px 0;
+            margin-bottom: 32px;
+            background: linear-gradient(var(--bg) 80%, transparent)
+        }
+
+        nav {
+            display: flex;
+            gap: 6px;
+            overflow-x: auto;
+            padding-bottom: 2px;
+            scrollbar-width: none
+        }
+
+        nav::-webkit-scrollbar {
+            display: none
+        }
+
+        .nb {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            padding: 6px 14px;
+            border-radius: 100px;
+            border: 1px solid var(--border2);
+            background: var(--card);
+            color: var(--muted);
+            cursor: pointer;
+            transition: all .2s;
+            text-decoration: none;
+            white-space: nowrap;
+            flex-shrink: 0
+        }
+
+        .nb:hover,
+        .nb.active {
+            background: var(--cyan-dim);
+            border-color: var(--cyan);
+            color: var(--cyan)
+        }
+
+        /* SECTION */
+        .section {
+            margin-bottom: 52px
+        }
+
+        .sh {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px
+        }
+
+        .badge {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 9px;
+            letter-spacing: 2px;
+            padding: 3px 9px;
+            border-radius: 100px;
+            border: 1px solid
+        }
+
+        .bc {
+            color: var(--cyan);
+            border-color: var(--cyan);
+            background: var(--cyan-dim)
+        }
+
+        .bo {
+            color: var(--orange);
+            border-color: var(--orange);
+            background: var(--orange-dim)
+        }
+
+        .bb {
+            color: var(--blue);
+            border-color: var(--blue);
+            background: var(--blue-dim)
+        }
+
+        .by {
+            color: var(--yellow);
+            border-color: var(--yellow);
+            background: var(--yellow-dim)
+        }
+
+        .bg {
+            color: var(--green);
+            border-color: var(--green);
+            background: var(--green-dim)
+        }
+
+        .bp {
+            color: var(--pink);
+            border-color: var(--pink);
+            background: var(--pink-dim)
+        }
+
+        .stitle {
+            font-family: 'Syne', sans-serif;
+            font-size: 20px;
+            font-weight: 700;
+            letter-spacing: -.3px
+        }
+
+        /* MACROS */
+        .macros-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-bottom: 12px
+        }
+
+        .mc {
+            background: var(--card);
+            border: 1px solid var(--border2);
+            border-radius: var(--r);
+            padding: 18px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            transition: transform .2s
+        }
+
+        .mc:hover {
+            transform: translateY(-2px)
+        }
+
+        .mc::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px
+        }
+
+        .mc.p::before {
+            background: var(--green)
+        }
+
+        .mc.c::before {
+            background: var(--blue)
+        }
+
+        .mc.f::before {
+            background: var(--orange)
+        }
+
+        .mn {
+            font-family: 'Syne', sans-serif;
+            font-size: 34px;
+            font-weight: 800;
+            line-height: 1
+        }
+
+        .mc.p .mn {
+            color: var(--green)
+        }
+
+        .mc.c .mn {
+            color: var(--blue)
+        }
+
+        .mc.f .mn {
+            color: var(--orange)
+        }
+
+        .ml {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 9px;
+            color: var(--muted);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-top: 3px
+        }
+
+        .ms {
+            font-size: 11px;
+            color: var(--muted);
+            margin-top: 4px
+        }
+
+        .bar-card {
+            background: var(--card);
+            border: 1px solid var(--border2);
+            border-radius: var(--r);
+            padding: 18px 20px
+        }
+
+        .br {
+            margin-bottom: 12px
+        }
+
+        .br:last-child {
+            margin-bottom: 0
+        }
+
+        .bi {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+            font-size: 12px
+        }
+
+        .bn {
+            color: var(--text);
+            font-weight: 500
+        }
+
+        .bv {
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--muted);
+            font-size: 11px
+        }
+
+        .bt {
+            height: 4px;
+            background: var(--border2);
+            border-radius: 10px;
+            overflow: hidden
+        }
+
+        .bf {
+            height: 100%;
+            border-radius: 10px
+        }
+
+        .bf.p {
+            width: 40%;
+            background: var(--green)
+        }
+
+        .bf.c {
+            width: 37%;
+            background: var(--blue)
+        }
+
+        .bf.f {
+            width: 23%;
+            background: var(--orange)
+        }
+
+        /* INFO BOX */
+        .ibox {
+            display: flex;
+            gap: 10px;
+            padding: 13px 15px;
+            border-radius: var(--rs);
+            font-size: 13px;
+            line-height: 1.6;
+            margin-bottom: 14px
+        }
+
+        .ibox.inf {
+            background: var(--blue-dim);
+            border: 1px solid #4d9fff2a;
+            color: #93c5fd
+        }
+
+        .iicon {
+            font-size: 14px;
+            flex-shrink: 0;
+            margin-top: 1px
+        }
+
+        /* MEALS */
+        .meals-list {
+            display: grid;
+            gap: 8px
+        }
+
+        .meal-card {
+            background: var(--card);
+            border: 1px solid var(--border2);
+            border-radius: var(--r);
+            overflow: hidden;
+            transition: border-color .25s, box-shadow .25s
+        }
+
+        .meal-card:hover {
+            border-color: #ffffff20;
+            box-shadow: 0 6px 30px #00000040
+        }
+
+        .meal-head {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--border);
+            background: var(--card2);
+            cursor: pointer;
+            user-select: none
+        }
+
+        .mtime {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            color: var(--cyan);
+            font-weight: 500;
+            min-width: 42px
+        }
+
+        .mname {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text);
+            flex: 1
+        }
+
+        .mkcal {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10px;
+            color: var(--muted);
+            background: var(--border);
+            padding: 2px 8px;
+            border-radius: 100px
+        }
+
+        .mchev {
+            color: var(--muted);
+            font-size: 11px;
+            transition: transform .25s;
+            flex-shrink: 0
+        }
+
+        .meal-card.open .mchev {
+            transform: rotate(180deg)
+        }
+
+        .meal-body {
+            display: none;
+            padding: 0
+        }
+
+        .meal-card.open .meal-body {
+            display: block
+        }
+
+        /* CAROUSEL */
+        .carousel {
+            position: relative
+        }
+
+        .carousel-track {
+            display: flex;
+            overflow: hidden;
+            transition: transform .35s cubic-bezier(.4, 0, .2, 1)
+        }
+
+        .carousel-slide {
+            min-width: 100%;
+            padding: 14px 16px
+        }
+
+        .carousel-nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 8px 14px;
+            border-top: 1px solid var(--border);
+            background: var(--card2)
+        }
+
+        .cnav-btn {
+            background: var(--border2);
+            border: 1px solid var(--border2);
+            color: var(--muted);
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all .2s;
+            flex-shrink: 0
+        }
+
+        .cnav-btn:hover:not(:disabled) {
+            background: var(--cyan-dim);
+            border-color: var(--cyan);
+            color: var(--cyan);
+            transform: scale(1.1)
+        }
+
+        .cnav-btn:active:not(:disabled) {
+            transform: scale(.9)
+        }
+
+        .cnav-btn:disabled {
+            opacity: .3;
+            cursor: default
+        }
+
+        .cdots {
+            display: flex;
+            gap: 5px;
+            align-items: center
+        }
+
+        .cdot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--border2);
+            transition: all .2s;
+            cursor: pointer
+        }
+
+        .cdot.active {
+            background: var(--cyan);
+            width: 18px;
+            border-radius: 10px
+        }
+
+        .cvariant {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10px;
+            color: var(--muted);
+            letter-spacing: 1px
+        }
+
+        .meal-item {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            padding: 7px 0;
+            border-bottom: 1px solid var(--border);
+            font-size: 13px;
+            cursor: pointer;
+            transition: opacity .15s
+        }
+
+        .meal-item:last-of-type {
+            border-bottom: none
+        }
+
+        .meal-item:active {
+            opacity: .7
+        }
+
+        .mchk {
+            width: 18px;
+            height: 18px;
+            border: 1.5px solid var(--border2);
+            border-radius: 5px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            transition: all .2s
+        }
+
+        .meal-item.chk .mchk {
+            background: var(--cyan);
+            border-color: var(--cyan);
+            color: #000;
+            animation: pop .2s ease
+        }
+
+        .meal-item.chk .mfood {
+            text-decoration: line-through;
+            color: var(--muted)
+        }
+
+        .mfood {
+            color: var(--text);
+            flex: 1;
+            line-height: 1.3
+        }
+
+        .mqty {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
+            color: var(--muted);
+            white-space: nowrap;
+            padding-left: 8px
+        }
+
+        .mnote {
+            margin-top: 10px;
+            padding: 9px 12px;
+            background: var(--cyan-dim);
+            border-left: 2px solid var(--cyan);
+            border-radius: 0 var(--rs) var(--rs) 0;
+            font-size: 12px;
+            color: var(--muted);
+            font-style: italic;
+            line-height: 1.5
+        }
+
+        .progress-line {
+            height: 2px;
+            background: var(--border);
+            border-radius: 10px;
+            margin: 10px 16px 0;
+            overflow: hidden
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--cyan), #00ffee, var(--cyan));
+            background-size: 200% 100%;
+            border-radius: 10px;
+            transition: width .4s;
+            animation: shimmer 2s linear infinite
+        }
+
+        @keyframes shimmer {
+            0% {
+                background-position: 200% 0
+            }
+
+            100% {
+                background-position: -200% 0
+            }
+        }
+
+        /* DAYS */
+        .days-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px
+        }
+
+        .day-card {
+            background: var(--card);
+            border: 1px solid var(--border2);
+            border-radius: var(--r);
+            padding: 14px;
+            transition: transform .2s
+        }
+
+        .day-card:hover {
+            transform: translateY(-2px)
+        }
+
+        .day-card.jiu {
+            border-top: 2px solid var(--blue)
+        }
+
+        .djiu {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 8px;
+            color: var(--blue);
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-bottom: 5px
+        }
+
+        .dname {
+            font-family: 'Syne', sans-serif;
+            font-size: 17px;
+            font-weight: 700;
+            margin-bottom: 4px
+        }
+
+        .dtreino {
+            font-size: 11px;
+            color: var(--muted);
+            margin-bottom: 6px;
+            line-height: 1.4
+        }
+
+        .dkcal {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            color: var(--cyan)
+        }
+
+        /* RULES */
+        .rules-list {
+            display: grid;
+            gap: 7px
+        }
+
+        .rule {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 13px 15px;
+            background: var(--card);
+            border: 1px solid var(--border2);
+            border-radius: var(--r);
+            transition: border-color .25s, transform .25s, box-shadow .25s
+        }
+
+        .rule:hover {
+            border-color: #ffffff28;
+            transform: translateX(4px);
+            box-shadow: 0 4px 20px #00000030
+        }
+
+        .ricon {
+            font-size: 17px;
+            flex-shrink: 0;
+            line-height: 1.4
+        }
+
+        .rs {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 1px
+        }
+
+        .rd {
+            font-size: 12px;
+            color: var(--muted);
+            line-height: 1.5
+        }
+
+        /* SHOP */
+        .shop-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px
+        }
+
+        .shop-cat {
+            background: var(--card);
+            border: 1px solid var(--border2);
+            border-radius: var(--r);
+            padding: 14px
+        }
+
+        .scat-title {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 9px;
+            color: var(--cyan);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            padding-bottom: 7px;
+            border-bottom: 1px solid var(--border2)
+        }
+
+        .sitem {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 5px 0;
+            border-bottom: 1px solid var(--border);
+            cursor: pointer;
+            transition: opacity .15s
+        }
+
+        .sitem:last-child {
+            border-bottom: none
+        }
+
+        .sitem:active {
+            opacity: .7
+        }
+
+        .schk {
+            width: 16px;
+            height: 16px;
+            border: 1.5px solid var(--border2);
+            border-radius: 4px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            transition: all .2s
+        }
+
+        .sitem.chk .schk {
+            background: var(--green);
+            border-color: var(--green);
+            color: #000;
+            animation: pop .2s ease
+        }
+
+        .sitem.chk .slabel {
+            text-decoration: line-through;
+            color: var(--muted)
+        }
+
+        .slabel {
+            font-size: 12px;
+            color: var(--text)
+        }
+
+        .shop-prog {
+            margin-bottom: 12px;
+            padding: 11px 14px;
+            background: var(--green-dim);
+            border: 1px solid #39d98a2a;
+            border-radius: var(--rs);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            color: var(--green);
+            text-align: center;
+            display: none
+        }
+
+        /* SUPP */
+        .supp-list {
+            display: grid;
+            gap: 7px
+        }
+
+        .supp {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 13px 15px;
+            background: var(--card);
+            border: 1px solid var(--border2);
+            border-radius: var(--r);
+            transition: border-color .25s, transform .25s
+        }
+
+        .supp:hover {
+            border-color: #ffffff28;
+            transform: translateX(4px)
+        }
+
+        .sdot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            flex-shrink: 0;
+            margin-top: 5px
+        }
+
+        .ss {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 1px
+        }
+
+        .sd {
+            font-size: 12px;
+            color: var(--muted);
+            line-height: 1.5
+        }
+
+        @keyframes pop {
+            0% {
+                transform: scale(.8)
+            }
+
+            60% {
+                transform: scale(1.2)
+            }
+
+            100% {
+                transform: scale(1)
+            }
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(16px)
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0)
+            }
+        }
+
+        .section {
+            animation: fadeUp .5s ease both
+        }
+
+        .section:nth-child(1) {
+            animation-delay: .05s
+        }
+
+        .section:nth-child(2) {
+            animation-delay: .1s
+        }
+
+        .section:nth-child(3) {
+            animation-delay: .15s
+        }
+
+        .meal-card {
+            animation: fadeUp .4s ease both
+        }
+
+        .day-card {
+            transition: transform .25s, box-shadow .25s, border-color .25s
+        }
+
+        .day-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 24px #00000050
+        }
+
+        footer {
+            border-top: 1px solid var(--border2);
+            padding-top: 24px;
+            text-align: center;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 9px;
+            color: var(--muted);
+            letter-spacing: 2px;
+            text-transform: uppercase
+        }
+
+        /* TMDB CALLOUT */
+        .tmb-bar {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 8px;
+            margin-top: 14px
+        }
+
+        .tmb-item {
+            background: var(--card2);
+            border: 1px solid var(--border2);
+            border-radius: var(--rs);
+            padding: 12px 14px
+        }
+
+        .tmb-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 9px;
+            color: var(--muted);
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-bottom: 4px
+        }
+
+        .tmb-val {
+            font-family: 'Syne', sans-serif;
+            font-size: 22px;
+            font-weight: 700
+        }
+
+        .tmb-sub {
+            font-size: 11px;
+            color: var(--muted);
+            margin-top: 2px
+        }
+
+        @media(max-width:860px) {
+            .stats-grid {
+                grid-template-columns: repeat(4, 1fr)
+            }
+
+            .stat:nth-child(5),
+            .stat:nth-child(6),
+            .stat:nth-child(7) {
+                display: none
+            }
+
+            .days-grid {
+                grid-template-columns: repeat(2, 1fr)
+            }
+
+            .shop-grid {
+                grid-template-columns: repeat(2, 1fr)
+            }
+
+            .tmb-bar {
+                grid-template-columns: 1fr 1fr 1fr
+            }
+        }
+
+        @media(max-width:540px) {
+            .wrap {
+                padding: 0 12px 60px
+            }
+
+            h1 {
+                font-size: 48px
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr)
+            }
+
+            .stat:nth-child(3),
+            .stat:nth-child(4) {
+                display: flex;
+                flex-direction: column;
+                align-items: center
+            }
+
+            .stat:nth-child(5),
+            .stat:nth-child(6),
+            .stat:nth-child(7) {
+                display: none
+            }
+
+            .macros-row {
+                grid-template-columns: 1fr 1fr 1fr
+            }
+
+            .mn {
+                font-size: 26px
+            }
+
+            .tmb-bar {
+                grid-template-columns: 1fr
+            }
+
+            .days-grid {
+                grid-template-columns: 1fr 1fr
+            }
+
+            .shop-grid {
+                grid-template-columns: 1fr 1fr
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrap">
+
+        <header>
+            <div class="htag">Plano Nutricional · Corte 2026</div>
+            <h1>DIETA<br><em>LEANDRO</em></h1>
+            <p class="hmeta">41 anos · 75,9kg · 168cm · 20,6% BF · Meta: 75kg com 10% BF</p>
+            <div class="stats-grid">
+                <div class="stat">
+                    <div class="stat-v">1.675</div>
+                    <div class="stat-l">TMB kcal</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-v orange">2.596</div>
+                    <div class="stat-l">TDEE kcal</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-v green">~2.200</div>
+                    <div class="stat-l">meta kcal</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-v">−400</div>
+                    <div class="stat-l">déficit</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-v">170g+</div>
+                    <div class="stat-l">proteína</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-v">~8kg</div>
+                    <div class="stat-l">gordura a perder</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-v">~24sem</div>
+                    <div class="stat-l">est. meta</div>
+                </div>
+            </div>
+        </header>
+
+        <div class="nav-wrap">
+            <nav>
+                <a class="nb" href="#macros">Macros</a>
+                <a class="nb" href="#refeicoes">Refeições</a>
+                <a class="nb" href="#semana">Semana</a>
+                <a class="nb" href="#regras">Regras</a>
+                <a class="nb" href="#compras">Compras</a>
+                <a class="nb" href="#suplementos">Suplementos</a>
+            </nav>
+        </div>
+
+        <div class="section" id="macros">
+            <div class="sh"><span class="badge bc">01</span><span class="stitle">Distribuição de Macros</span></div>
+            <div class="macros-row">
+                <div class="mc p">
+                    <div class="mn">170g</div>
+                    <div class="ml">Proteína</div>
+                    <div class="ms">680 kcal · 31%</div>
+                </div>
+                <div class="mc c">
+                    <div class="mn">210g</div>
+                    <div class="ml">Carboidrato</div>
+                    <div class="ms">840 kcal · 38%</div>
+                </div>
+                <div class="mc f">
+                    <div class="mn">75g</div>
+                    <div class="ml">Gordura</div>
+                    <div class="ms">675 kcal · 31%</div>
+                </div>
+            </div>
+            <div class="bar-card">
+                <div class="br">
+                    <div class="bi"><span class="bn">Proteína</span><span class="bv">170g · 31%</span></div>
+                    <div class="bt">
+                        <div class="bf p"></div>
+                    </div>
+                </div>
+                <div class="br">
+                    <div class="bi"><span class="bn">Carboidrato</span><span class="bv">210g · 38%</span></div>
+                    <div class="bt">
+                        <div class="bf c" style="width:38%"></div>
+                    </div>
+                </div>
+                <div class="br">
+                    <div class="bi"><span class="bn">Gordura</span><span class="bv">75g · 31%</span></div>
+                    <div class="bt">
+                        <div class="bf f" style="width:31%"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="tmb-bar">
+                <div class="tmb-item">
+                    <div class="tmb-label">TMB (repouso)</div>
+                    <div class="tmb-val" style="color:var(--cyan)">1.675 kcal</div>
+                    <div class="tmb-sub">o mínimo que seu corpo queima</div>
+                </div>
+                <div class="tmb-item">
+                    <div class="tmb-label">TDEE (ativo)</div>
+                    <div class="tmb-val" style="color:var(--orange)">2.596 kcal</div>
+                    <div class="tmb-sub">gasto real com treino + JiuJítsu</div>
+                </div>
+                <div class="tmb-item">
+                    <div class="tmb-label">Meta diária</div>
+                    <div class="tmb-val" style="color:var(--green)">~2.200 kcal</div>
+                    <div class="tmb-sub">déficit de ~400 kcal/dia</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section" id="refeicoes">
+            <div class="sh"><span class="badge bo">02</span><span class="stitle">Plano Alimentar Diário</span></div>
+            <div class="ibox inf">
+                <span class="iicon">ℹ</span>
+                <span>Use as setas <strong>&lt; &gt;</strong> para ver 3 variações de cada refeição. Marque o que comeu.
+                    Nos dias de JiuJítsu inclua o lanche das 16h30. Fim de semana: reduza carboidratos em 30%.</span>
+            </div>
+            <div class="meals-list" id="mealsList">
+
+                <div class="meal-card" data-meal="0">
+                    <div class="meal-head">
+                        <span class="mtime">6h30</span>
+                        <span class="mname">Café da manhã — Antes de tudo</span>
+                        <span class="mkcal">~100 kcal</span>
+                        <span class="mchev">▾</span>
+                    </div>
+                    <div class="meal-body">
+                        <div class="carousel" data-meal="0">
+                            <div class="carousel-track">
+                                <div class="carousel-slide">
+                                    <div class="meal-item" data-key="m0v0i0">
+                                        <div class="mchk"></div><span class="mfood">Biscoito de arroz ou torrada
+                                            integral leve</span><span class="mqty">2 unid.</span>
+                                    </div>
+                                    <div class="meal-item" data-key="m0v0i1">
+                                        <div class="mchk"></div><span class="mfood">Água</span><span
+                                            class="mqty">300ml</span>
+                                    </div>
+                                    <div class="mnote">Coma algo leve antes do Monster para proteger o estômago. Só
+                                        depois tome o energético.</div>
+                                </div>
+                                <div class="carousel-slide">
+                                    <div class="meal-item" data-key="m0v1i0">
+                                        <div class="mchk"></div><span class="mfood">Banana pequena</span><span
+                                            class="mqty">1 unid.</span>
+                                    </div>
+                                    <div class="meal-item" data-key="m0v1i1">
+                                        <div class="mchk"></div><span class="mfood">Água</span><span
+                                            class="mqty">300ml</span>
+                                    </div>
+                                    <div class="mnote">Variação com fruta — fácil, sem preparo. Monster só depois.</div>
+                                </div>
+                                <div class="carousel-slide">
+                                    <div class="meal-item" data-key="m0v2i0">
+                                        <div class="mchk"></div><span class="mfood">Iogurte grego zero (colherada
+                                            rápida)</span><span class="mqty">½ pote</span>
+                                    </div>
+                                    <div class="meal-item" data-key="m0v2i1">
+                                        <div class="mchk"></div><span class="mfood">Água</span><span
+                                            class="mqty">300ml</span>
+                                    </div>
+                                    <div class="mnote">Opção proteica leve para abrir o estômago antes do Monster.</div>
+                                </div>
+                            </div>
+                            <div class="progress-line">
+                                <div class="progress-fill" style="width:0%"></div>
+                            </div>
+                            <div class="carousel-nav">
+                                <button class="cnav-btn prev" disabled>‹</button>
+                                <div style="display:flex;align-items:center;gap:10px">
+                                    <span class="cvariant">VAR 1/3</span>
+                                    <div class="cdots">
+                                        <div class="cdot active"></div>
+                                        <div class="cdot"></div>
+                                        <div class="cdot"></div>
+                                    </div>
+                                </div>
+                                <button class="cnav-btn next">›</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="meal-card" data-meal="1">
+                    <div class="meal-head">
+                        <span class="mtime">6h45</span>
+                        <span class="mname">Monster Ultra — após o lanchinho</span>
+                        <span class="mkcal">0 kcal</span>
+                        <span class="mchev">▾</span>
+                    </div>
+                    <div class="meal-body">
+                        <div class="carousel" data-meal="1">
+                            <div class="carousel-track">
+                                <div class="carousel-slide">
+                                    <div class="meal-item" data-key="m1v0i0">
+                                        <div class="mchk"></div><span class="mfood">Monster Ultra (sem
+                                            açúcar)</span><span class="mqty">1 lata</span>
+                                    </div>
+                                    <div class="mnote">Tome após comer algo leve. A cafeína em jejum total pode causar
+                                        náusea e acidez. Com o estômago "aberto", o efeito é melhor e mais confortável.
+                                    </div>
+                                </div>
+                                <div class="carousel-slide">
+                                    <div class="meal-item" data-key="m1v1i0">
+                                        <div class="mchk"></div><span class="mfood">Café preto sem açúcar</span><span
+                                            class="mqty">300ml</span>
+                                    </div>
+                                    <div class="mnote">Substituição nos dias que não tiver Monster. Mesma cafeína, zero
+                                        custo.</div>
+                                </div>
+                                <div class="carousel-slide">
+                                    <div class="meal-item" data-key="m1v2i0">
+                                        <div class="mchk"></div><span class="mfood">Pré-treino em pó (se
+                                            tiver)</span><span class="mqty">1 dose</span>
+                                    </div>
+                                    <div class="meal-item" data-key="m1v2i1">
+                                        <div class="mchk"></div><span class="mfood">Água gelada</span><span
+                                            class="mqty">300ml</span>
+                                    </div>
+                                    <div class="mnote">Opção se usar suplemento. Também após o lanchinho leve.</div>
+                                </div>
+                            </div>
+                            <div class="progress-line">
+                                <div class="progress-fill" style="width:0%"></div>
+                            </div>
+                            <div class="carousel-nav">
+                                <button class="cnav-btn prev" disabled>‹</button>
+                                <div style="display:flex;align-items:center;gap:10px">
+                                    <span class="cvariant">VAR 1/3</span>
+                                    <div class="cdots">
+                                        <div class="cdot active"></div>
+                                        <div class="cdot"></div>
+                                        <div class="cdot"></div>
+                                    </div>
+                                </div>
+                                <button class="cnav-btn next">›</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="meal-card" data-meal="2">
+                    <div class="meal-head">
+                        <span class="mtime">8h00</span>
+                        <span class="mname">Pós-treino — Quebra do Jejum 🔑</span>
+                        <span class="mkcal">~550 kcal</span>
+                        <span class="mchev">▾</span>
+                    </div>
+                    <div class="meal-body">
+                        <div class="carousel" data-meal="2">
+                            <div class="carousel-track">
+                                <div class="carousel-slide">
+                                    <div class="meal-item" data-key="m2v0i0">
+                                        <div class="mchk"></div><span class="mfood">Ovos mexidos ou
+                                            estrelados</span><span class="mqty">4 ovos</span>
+                                    </div>
+                                    <div class="meal-item" data-key="m2v0i1">
+                                        <div class="mchk"></div><span class="mfood">Pão de forma integral</span><span
+                                            class="mqty">2 fatias</span>
+                                    </div>
+                                    <div class="meal-item" data-key="m2v0i2">
+                                        <div class="mchk"></div><span class="mfood">Banana</span><span class="mqty">1
+                                            unidade</span>
+                                    </div>
+                                    <div class="mnote">Clássico — rápido e eficiente. Só trocar o pão branco pelo
+                                        integral.</div>
+                                </div>
+                                <div class="carousel-slide">
+                                    <div class="meal-item" data-key="m2v1i0">
+                                        <div class="mchk"></div><span class="mfood">Whey protein com leite
+                                            desnatado</span><span class="mqty">1 dose + 250ml</span>
+                                    </div>
+                                    <div class="meal-item" data-key="m2v1i1">
+                                        <div class="mchk"></div><span class="mfood">Aveia em flocos finos</span><span
+                                            class="mqty">4 col. sopa</span>
+                                    </div>
+                                    <div class="meal-item" data-key="m2v1i2">
+                                        <div class="mchk"></div><span class="mfood">Banana amassada na aveia</span><span
+                                            class="mqty">1 unidade</span>
+                                    </div>
+                                    <div class="mnote">Opção sem fogão — mistura tudo e pronto. Ideal para dias com
+                                        pressa.</div>
+                                </div>
+                                <div class="carousel-slide">
+                                    <div class="meal-item" data-key="m2v2i0">
+                                        <div class="mchk"></div><span class="mfood">Tapioca com ovo e queijo
+                                            minas</span><span class="mqty">2 ovos + 1 fatia</span>
+                                    </div>
+                                    <div class="meal-item" data-key="m2v2i1">
+                                        <div class="mchk"></div><span class="mfood">Mamão ou maçã</span><span
+                                            class="mqty">1 porção</span>
+                                    </div>
+                                    <div class="mnote">Variação sem glúten, mais leve. Goma de tapioca pronta facilita o
+                                        preparo.</div>
+                                </div>
+                            </div>
+                            <div class="progress-line">
+                                <div class="progress-fill" style="width:0%"></div>
+                            </div>
+                            <div class="carousel-nav">
+                                <button class="cnav-btn prev" disabled>‹</button>
+                                <div style="display:flex;align-items:center;gap:10px">
+                                    <span class="cvariant">VAR 1/3</span>
+                                    <div class="cdots">
+                                        <div class="cdot active"></div>
+                                        <div class="cdot"></div>
+                                        <div class="cdot"></div>
+                                    </div>
+                                </div>
+                                <button class="cnav-btn next">›</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="meal-card" data-meal="3">
+                    <div class="meal-head">
+                        <span class="mtime">12h00</span>
+                        <span class="mname">Almoço — Refeição Principal</span>
+                        <span class="mkcal">~650 kcal</span>
+                        <span class="mchev">▾</span>
+                    </div>
+                    <div class="meal-body">
+                        <div class="carousel" data-meal="3">
+                            <div class="carousel-track">
+                                <div class="carousel-slide">
+                                    <div class="meal-item" data-key="m3v0i0">
+                                        <div class="mchk"></div><span class="mfood">Arroz branco</span><span
+                                            class="mqty">3 col. sopa</span>
+                                    </div>
+                                    <div class="meal-item" data-key="m3v0i1">
+                                        <div class="mchk"></div><span class="mfood">Feijão carioca</span><span
+                                            class="mqty">1 concha</span>
+                                    </div>
+                                    <div class="meal-item" data-key="m3v0i2">
+                                        <div class="mchk"></div><span class="mfood">Frango grelhado</span><span
+                                            class="mqty">200g</span>
+                                    </div>
+                                    <div class="meal-item" data-key="m3v0i3">
+                                        <div class="mchk"></div><span class="mfood">Tomate + cenoura ralada</span><span
+                                            class="mqty">à vontade</span>
+                                    </div>
+                                    <div class="mnote">Clássico brasileiro. Prepare o frango no domingo para a semana
+                                        toda.</div>
+                                </div>
+                                <div class="carousel-slide">
+                                    <div class="meal-item" data-key="m3v1i0">
+                                        <div class="mchk"></div><span class="mfood">Batata-doce cozida</span><span
+                                            class="mqty">150g</span>
+                                    </div>
+                                    <div class="meal-item" data-key="m3v1i1">
+                                        <div class="mchk"></div><span class="mfood">Bife grelhado (patinho ou coxão
+                                            mole)</span><span class="mqty">180g</span>
+                                    </div>
+                                    <div class="meal-item" data-key="m3v1i2">
+                                        <div class="mchk"></div><span class="mfood">Tomate com azeite e sal</span><span
+                                            class="mqty">à vontade</span>
+                                    </div>
+                                    <div class="mnote">Sem feijão, mais simples. Batata-doce cozida em lote no domingo
+                                        dura 4 dias.</div>
+                                </div>
+                                <div class="carousel-slide">
+                                    <div class="meal-item" data-key="m3v2i0">
+                                        <div class="mchk"></div><span class="mfood">Macarrão de trigo duro al
+                                            dente</span><span class="mqty">70g (seco)</span>
+                                    </div>
+                                    <div class="meal-item" data-key="m3v2i1">
+                                        <div class="mchk"></div><span class="mfood">Carne moída refogada com
+                                            temperos</span><span class="mqty">180g</span>
+                                    </div>
+                                    <div class="meal-item" data-key="m3v2i2">
+                                        <div class="mchk"></div><span class="mfood">Tomate picado no molho</span><span
+                                            class="mqty">à vontade</span>
+                                    </div>
+                                    <div class="mnote">Versão macarrão — índice glicêmico mais baixo com o trigo duro al
+                                        dente.</div>
+                                </div>
+                            </div>
+                            <div class="progress-line">
+                                <div class="progress-fill" style="width:0%"></div>
+                            </div>
+                            <div class="carousel-nav">
+                                <button class="cnav-btn prev" disabled>‹</button>
+                                <div style="display:flex;align-items:center;gap:10px">
+                                    <span class="cvariant">VAR 1/3</span>
+                                    <div class="cdots">
+                                        <div class="cdot active"></div>
+                                        <div class="cdot"></div>
+                                        <div class="cdot"></div>
+                                    </div>
+                                </div>
+                                <button class="cnav-btn next">›</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="meal-card" data-meal="4">
+                    <div class="meal-head">
+                        <span class="mtime">16h30</span>
+                        <span class="mname">Lanche — Obrigatório nos dias de JiuJítsu</span>
+                        <span class="mkcal">~320 kcal</span>
+                        <span class="mchev">▾</span>
+                    </div>
+                    <div class="meal-body">
+                        <div class="carousel" data-meal="4">
+                            <div class="carousel-track">
+                                <div class="carousel-slide">
+                                    <div class="meal-item" data-key="m4v0i0">
+                                        <div class="mchk"></div><span class="mfood">Iogurte grego natural</span><span
+                                            class="mqty">1 pote (170g)</span>
+                                    </div>
+                                    <div class="meal-item" data-key="m4v0i1">
+                                        <div class="mchk"></div><span class="mfood">Aveia em flocos finos</span><span
+                                            class="mqty">3 col. sopa</span>
+                                    </div>
+                                    <div class="meal-item" data-key="m4v0i2">
+                                        <div class="mchk"></div><span class="mfood">Maçã ou mamão</span><span
+                                            class="mqty">1 porção</span>
+                                    </div>
+                                    <div class="mnote">Dias sem JiuJítsu: pode pular ou só comer a fruta + 2 castanhas.
+                                    </div>
+                                </div>
+                                <div class="carousel-slide">
+                                    <div class="meal-item" data-key="m4v1i0">
+                                        <div class="mchk"></div><span class="mfood">Banana</span><span class="mqty">2
+                                            unidades</span>
+                                    </div>
+                                    <div class="meal-item" data-key="m4v1i1">
+                                        <div class="mchk"></div><span class="mfood">Castanha-do-pará</span><span
+                                            class="mqty">4 unidades</span>
+                                    </div>
+                                    <div class="meal-item" data-key="m4v1i2">
+                                        <div class="mchk"></div><span class="mfood">Queijo minas frescal</span><span
+                                            class="mqty">1 fatia (40g)</span>
+                                    </div>
+                                    <div class="mnote">Opção rápida sem preparo — ótimo para comer antes de sair de casa
+                                        pro JiuJítsu.</div>
+                                </div>
+                                <div class="carousel-slide">
+                                    <div class="meal-item" data-key="m4v2i0">
+                                        <div class="mchk"></div><span class="mfood">Pão integral com atum e
+                                            azeite</span><span class="mqty">2 fatias + ½ lata</span>
+                                    </div>
+                                    <div class="meal-item" data-key="m4v2i1">
+                                        <div class="mchk"></div><span class="mfood">Maçã</span><span class="mqty">1
+                                            unidade</span>
+                                    </div>
+                                    <div class="mnote">Versão mais proteica e saciante. Boa para quem treinou pesado de
+                                        manhã.</div>
+                                </div>
+                            </div>
+                            <div class="progress-line">
+                                <div class="progress-fill" style="width:0%"></div>
+                            </div>
+                            <div class="carousel-nav">
+                                <button class="cnav-btn prev" disabled>‹</button>
+                                <div style="display:flex;align-items:center;gap:10px">
+                                    <span class="cvariant">VAR 1/3</span>
+                                    <div class="cdots">
+                                        <div class="cdot active"></div>
+                                        <div class="cdot"></div>
+                                        <div class="cdot"></div>
+                                    </div>
+                                </div>
+                                <button class="cnav-btn next">›</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="meal-card" data-meal="5">
+                    <div class="meal-head">
+                        <span class="mtime">19h30</span>
+                        <span class="mname">Jantar — Leve e proteico</span>
+                        <span class="mkcal">~480 kcal</span>
+                        <span class="mchev">▾</span>
+                    </div>
+                    <div class="meal-body">
+                        <div class="carousel" data-meal="5">
+                            <div class="carousel-track">
+                                <div class="carousel-slide">
+                                    <div class="meal-item" data-key="m5v0i0">
+                                        <div class="mchk"></div><span class="mfood">Omelete com queijo minas ou
+                                            muçarela</span><span class="mqty">3 ovos</span>
+                                    </div>
+                                    <div class="meal-item" data-key="m5v0i1">
+                                        <div class="mchk"></div><span class="mfood">Arroz branco ou
+                                            batata-doce</span><span class="mqty">3 col. sopa</span>
+                                    </div>
+                                    <div class="mnote">Dias de JiuJítsu: jante após o treino (~21h). Pode ser mais leve.
+                                    </div>
+                                </div>
+                                <div class="carousel-slide">
+                                    <div class="meal-item" data-key="m5v1i0">
+                                        <div class="mchk"></div><span class="mfood">Frango grelhado (do prep do
+                                            domingo)</span><span class="mqty">150g</span>
+                                    </div>
+                                    <div class="meal-item" data-key="m5v1i1">
+                                        <div class="mchk"></div><span class="mfood">Macarrão de trigo duro</span><span
+                                            class="mqty">60g (seco)</span>
+                                    </div>
+                                    <div class="meal-item" data-key="m5v1i2">
+                                        <div class="mchk"></div><span class="mfood">Molho de tomate natural</span><span
+                                            class="mqty">3 col. sopa</span>
+                                    </div>
+                                    <div class="mnote">Use o frango já preparado — jantar em 10 minutos.</div>
+                                </div>
+                                <div class="carousel-slide">
+                                    <div class="meal-item" data-key="m5v2i0">
+                                        <div class="mchk"></div><span class="mfood">Atum em lata no azeite</span><span
+                                            class="mqty">1 lata (170g)</span>
+                                    </div>
+                                    <div class="meal-item" data-key="m5v2i1">
+                                        <div class="mchk"></div><span class="mfood">Arroz branco</span><span
+                                            class="mqty">3 col. sopa</span>
+                                    </div>
+                                    <div class="meal-item" data-key="m5v2i2">
+                                        <div class="mchk"></div><span class="mfood">Tomate picado com azeite</span><span
+                                            class="mqty">à vontade</span>
+                                    </div>
+                                    <div class="mnote">Opção sem cozinhar. Rápida, barata e muito proteica.</div>
+                                </div>
+                            </div>
+                            <div class="progress-line">
+                                <div class="progress-fill" style="width:0%"></div>
+                            </div>
+                            <div class="carousel-nav">
+                                <button class="cnav-btn prev" disabled>‹</button>
+                                <div style="display:flex;align-items:center;gap:10px">
+                                    <span class="cvariant">VAR 1/3</span>
+                                    <div class="cdots">
+                                        <div class="cdot active"></div>
+                                        <div class="cdot"></div>
+                                        <div class="cdot"></div>
+                                    </div>
+                                </div>
+                                <button class="cnav-btn next">›</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="meal-card" data-meal="6">
+                    <div class="meal-head">
+                        <span class="mtime">22h00</span>
+                        <span class="mname">Ceia — Só se sentir fome real</span>
+                        <span class="mkcal">~150 kcal</span>
+                        <span class="mchev">▾</span>
+                    </div>
+                    <div class="meal-body">
+                        <div class="carousel" data-meal="6">
+                            <div class="carousel-track">
+                                <div class="carousel-slide">
+                                    <div class="meal-item" data-key="m6v0i0">
+                                        <div class="mchk"></div><span class="mfood">Iogurte grego zero</span><span
+                                            class="mqty">1 pote</span>
+                                    </div>
+                                    <div class="meal-item" data-key="m6v0i1">
+                                        <div class="mchk"></div><span class="mfood">Castanha-do-pará</span><span
+                                            class="mqty">2 unidades</span>
+                                    </div>
+                                    <div class="mnote">Fome de tédio: água com gás ou chá primeiro. Espere 10 minutos.
+                                    </div>
+                                </div>
+                                <div class="carousel-slide">
+                                    <div class="meal-item" data-key="m6v1i0">
+                                        <div class="mchk"></div><span class="mfood">Requesão light com torrada
+                                            integral</span><span class="mqty">2 col. + 2 torradas</span>
+                                    </div>
+                                    <div class="mnote">Opção mais sólida para quem treinou JiuJítsu à noite.</div>
+                                </div>
+                                <div class="carousel-slide">
+                                    <div class="meal-item" data-key="m6v2i0">
+                                        <div class="mchk"></div><span class="mfood">Chá de camomila ou
+                                            erva-cidreira</span><span class="mqty">1 xícara</span>
+                                    </div>
+                                    <div class="meal-item" data-key="m6v2i1">
+                                        <div class="mchk"></div><span class="mfood">Maçã</span><span class="mqty">½
+                                            unidade</span>
+                                    </div>
+                                    <div class="mnote">Muitas vezes a "fome" noturna é ansiedade. O chá ajuda a relaxar
+                                        e dormir melhor.</div>
+                                </div>
+                            </div>
+                            <div class="progress-line">
+                                <div class="progress-fill" style="width:0%"></div>
+                            </div>
+                            <div class="carousel-nav">
+                                <button class="cnav-btn prev" disabled>‹</button>
+                                <div style="display:flex;align-items:center;gap:10px">
+                                    <span class="cvariant">VAR 1/3</span>
+                                    <div class="cdots">
+                                        <div class="cdot active"></div>
+                                        <div class="cdot"></div>
+                                        <div class="cdot"></div>
+                                    </div>
+                                </div>
+                                <button class="cnav-btn next">›</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="section" id="semana">
+            <div class="sh"><span class="badge bb">03</span><span class="stitle">Visão Semanal</span></div>
+            <div class="days-grid">
+                <div class="day-card">
+                    <div class="dname">Segunda</div>
+                    <div class="dtreino">Treino A<br>Costas · Bíceps · Tríceps</div>
+                    <div class="dkcal">~2.200 kcal</div>
+                </div>
+                <div class="day-card jiu">
+                    <div class="djiu">★ Jiu-Jítsu 19h</div>
+                    <div class="dname">Terça</div>
+                    <div class="dtreino">Treino B<br>Peito · Ombro · Trapézio</div>
+                    <div class="dkcal">~2.400 kcal</div>
+                </div>
+                <div class="day-card">
+                    <div class="dname">Quarta</div>
+                    <div class="dtreino">Treino C<br>Inferior</div>
+                    <div class="dkcal">~2.200 kcal</div>
+                </div>
+                <div class="day-card jiu">
+                    <div class="djiu">★ Jiu-Jítsu 19h</div>
+                    <div class="dname">Quinta</div>
+                    <div class="dtreino">Treino A ou B</div>
+                    <div class="dkcal">~2.400 kcal</div>
+                </div>
+                <div class="day-card">
+                    <div class="dname">Sexta</div>
+                    <div class="dtreino">Treino C ou cardio extra</div>
+                    <div class="dkcal">~2.200 kcal</div>
+                </div>
+                <div class="day-card">
+                    <div class="dname">Sábado</div>
+                    <div class="dtreino">Descanso ativo<br>🍕 Refeição livre à noite</div>
+                    <div class="dkcal">~2.000 kcal</div>
+                </div>
+                <div class="day-card">
+                    <div class="dname">Domingo</div>
+                    <div class="dtreino">Descanso<br>🍗 Prep da semana</div>
+                    <div class="dkcal">~2.000 kcal</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section" id="regras">
+            <div class="sh"><span class="badge by">04</span><span class="stitle">Regras Anti-Sabotagem</span></div>
+            <div class="rules-list">
+                <div class="rule"><span class="ricon">🗑️</span>
+                    <div>
+                        <div class="rs">Tire o lixo de casa</div>
+                        <div class="rd">Jogue fora: biscoito recheado, salgadinho, pão branco, bolacha. Se não está em
+                            casa, você não come.</div>
+                    </div>
+                </div>
+                <div class="rule"><span class="ricon">🥛</span>
+                    <div>
+                        <div class="rs">Substitua o biscoito pelo iogurte grego</div>
+                        <div class="rd">Vontade de beliscar? Iogurte grego ou fruta. Mesma satisfação, sem quebrar a
+                            dieta.</div>
+                    </div>
+                </div>
+                <div class="rule"><span class="ricon">💧</span>
+                    <div>
+                        <div class="rs">Beba água antes de beliscar</div>
+                        <div class="rd">Fome fora do horário: 1 copo d'água + 10 minutos de espera. Muitas vezes é sede
+                            ou tédio.</div>
+                    </div>
+                </div>
+                <div class="rule"><span class="ricon">🍗</span>
+                    <div>
+                        <div class="rs">Prep no domingo — 30 min que valem a semana</div>
+                        <div class="rd">Cozinhe 1kg de frango e deixe na geladeira. Quando não souber o que comer, já
+                            tem proteína pronta.</div>
+                    </div>
+                </div>
+                <div class="rule"><span class="ricon">📱</span>
+                    <div>
+                        <div class="rs">Home office + tédio = armadilha</div>
+                        <div class="rd">Vontade de comer besteira: levanta, bebe água, 5 minutos de caminhada. Sai da
+                            cozinha.</div>
+                    </div>
+                </div>
+                <div class="rule"><span class="ricon">🍕</span>
+                    <div>
+                        <div class="rs">1 refeição livre por semana — planejada</div>
+                        <div class="rd">Sábado à noite, coma o que quiser sem culpa. É 1 refeição, não o dia inteiro.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section" id="compras">
+            <div class="sh"><span class="badge bg">05</span><span class="stitle">Lista de Compras — Domingo</span></div>
+            <div class="shop-prog" id="shopProg"></div>
+            <div class="shop-grid">
+                <div class="shop-cat">
+                    <div class="scat-title">Proteínas</div>
+                    <div class="sitem" data-key="s0">
+                        <div class="schk"></div><span class="slabel">Peito de frango (1,5kg)</span>
+                    </div>
+                    <div class="sitem" data-key="s1">
+                        <div class="schk"></div><span class="slabel">Ovos (30 unid.)</span>
+                    </div>
+                    <div class="sitem" data-key="s2">
+                        <div class="schk"></div><span class="slabel">Carne moída ou patinho</span>
+                    </div>
+                    <div class="sitem" data-key="s3">
+                        <div class="schk"></div><span class="slabel">Atum em lata (6 latas)</span>
+                    </div>
+                    <div class="sitem" data-key="s4">
+                        <div class="schk"></div><span class="slabel">Iogurte grego (6 potes)</span>
+                    </div>
+                    <div class="sitem" data-key="s5">
+                        <div class="schk"></div><span class="slabel">Queijo minas ou cottage</span>
+                    </div>
+                    <div class="sitem" data-key="s6">
+                        <div class="schk"></div><span class="slabel">Requesão light</span>
+                    </div>
+                </div>
+                <div class="shop-cat">
+                    <div class="scat-title">Carboidratos</div>
+                    <div class="sitem" data-key="s7">
+                        <div class="schk"></div><span class="slabel">Arroz branco (pacote)</span>
+                    </div>
+                    <div class="sitem" data-key="s8">
+                        <div class="schk"></div><span class="slabel">Batata-doce (1kg)</span>
+                    </div>
+                    <div class="sitem" data-key="s9">
+                        <div class="schk"></div><span class="slabel">Pão integral fatiado</span>
+                    </div>
+                    <div class="sitem" data-key="s10">
+                        <div class="schk"></div><span class="slabel">Aveia em flocos finos</span>
+                    </div>
+                    <div class="sitem" data-key="s11">
+                        <div class="schk"></div><span class="slabel">Macarrão trigo duro</span>
+                    </div>
+                    <div class="sitem" data-key="s12">
+                        <div class="schk"></div><span class="slabel">Feijão carioca</span>
+                    </div>
+                    <div class="sitem" data-key="s13">
+                        <div class="schk"></div><span class="slabel">Torradas integrais</span>
+                    </div>
+                    <div class="sitem" data-key="s14">
+                        <div class="schk"></div><span class="slabel">Goma de tapioca</span>
+                    </div>
+                </div>
+                <div class="shop-cat">
+                    <div class="scat-title">Frutas</div>
+                    <div class="sitem" data-key="s15">
+                        <div class="schk"></div><span class="slabel">Banana (cacho)</span>
+                    </div>
+                    <div class="sitem" data-key="s16">
+                        <div class="schk"></div><span class="slabel">Maçã (6 unid.)</span>
+                    </div>
+                    <div class="sitem" data-key="s17">
+                        <div class="schk"></div><span class="slabel">Mamão (1 unid.)</span>
+                    </div>
+                    <div class="sitem" data-key="s18">
+                        <div class="schk"></div><span class="slabel">Limão (para temperar)</span>
+                    </div>
+                </div>
+                <div class="shop-cat">
+                    <div class="scat-title">Extras</div>
+                    <div class="sitem" data-key="s19">
+                        <div class="schk"></div><span class="slabel">Azeite extra virgem</span>
+                    </div>
+                    <div class="sitem" data-key="s20">
+                        <div class="schk"></div><span class="slabel">Alho, cebola, sal</span>
+                    </div>
+                    <div class="sitem" data-key="s21">
+                        <div class="schk"></div><span class="slabel">Castanha-do-pará</span>
+                    </div>
+                    <div class="sitem" data-key="s22">
+                        <div class="schk"></div><span class="slabel">Monster Ultra (estoque)</span>
+                    </div>
+                    <div class="sitem" data-key="s23">
+                        <div class="schk"></div><span class="slabel">Biscoito de arroz</span>
+                    </div>
+                    <div class="sitem" data-key="s24">
+                        <div class="schk"></div><span class="slabel">Creatina monohidratada</span>
+                    </div>
+                    <div class="sitem" data-key="s25">
+                        <div class="schk"></div><span class="slabel">Multivitamínico</span>
+                    </div>
+                    <div class="sitem" data-key="s26">
+                        <div class="schk"></div><span class="slabel">Vitamina B12</span>
+                    </div>
+                    <div class="sitem" data-key="s27">
+                        <div class="schk"></div><span class="slabel">Vitamina D3 + K2</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section" id="suplementos">
+            <div class="sh"><span class="badge bp">06</span><span class="stitle">Suplementação</span></div>
+            <div class="supp-list">
+                <div class="supp">
+                    <div class="sdot" style="background:var(--green)"></div>
+                    <div>
+                        <div class="ss">Multivitamínico</div>
+                        <div class="sd">Tome pela manhã com o pós-treino. Cobre déficit de micronutrientes pela baixa
+                            ingestão de vegetais.</div>
+                    </div>
+                </div>
+                <div class="supp">
+                    <div class="sdot" style="background:var(--cyan)"></div>
+                    <div>
+                        <div class="ss">Creatina monohidratada — prioridade máxima</div>
+                        <div class="sd">3–5g/dia, todo dia, mesmo sem treino. ~R$40/mês. Aumenta força e preserva
+                            músculo no déficit calórico.</div>
+                    </div>
+                </div>
+                <div class="supp">
+                    <div class="sdot" style="background:var(--blue)"></div>
+                    <div>
+                        <div class="ss">Whey protein — opcional</div>
+                        <div class="sd">Se não conseguir bater 170g de proteína com comida, 1 dose pós-treino resolve.
+                            Não é obrigatório.</div>
+                    </div>
+                </div>
+                <div class="supp">
+                    <div class="sdot" style="background:var(--yellow)"></div>
+                    <div>
+                        <div class="ss">Vitamina D3 + K2</div>
+                        <div class="sd">2000–4000 UI/dia com o almoço. Impacta testosterona, imunidade e disposição
+                            geral.</div>
+                    </div>
+                </div>
+                <div class="supp">
+                    <div class="sdot" style="background:var(--red)"></div>
+                    <div>
+                        <div class="ss">Vitamina B12 — reposição necessária</div>
+                        <div class="sd">Nível baixo causa fadiga, fraqueza muscular e queda de rendimento. Tome conforme
+                            orientação médica. Reavalie com exame após 3 meses.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer>Leandro Henrique · Corte 2026 · Meta: 75kg / 10% BF · Início: Segunda-feira</footer>
+
+    </div>
+    <script>
+        (function () {
+            var LS = localStorage;
+            function save(k, v) { try { LS.setItem('dl_' + k, v ? '1' : '') } catch (e) { } }
+            function load(k) { try { return LS.getItem('dl_' + k) === '1' } catch (e) { return false } }
+
+            document.querySelectorAll('.meal-head').forEach(function (h) {
+                h.addEventListener('click', function () {
+                    h.closest('.meal-card').classList.toggle('open');
+                });
+            });
+
+            function updateCheck(el, isShop) {
+                var box = el.querySelector(isShop ? '.schk' : '.mchk');
+                if (box) box.textContent = el.classList.contains('chk') ? '✓' : '';
+            }
+
+            function updateMealProgress(card) {
+                var car = card.querySelector('.carousel');
+                if (!car) return;
+                var cur = parseInt(car.dataset.cur || 0);
+                var slides = car.querySelectorAll('.carousel-slide');
+                if (!slides[cur]) return;
+                var items = slides[cur].querySelectorAll('.meal-item[data-key]');
+                if (!items.length) return;
+                var done = 0;
+                items.forEach(function (i) { if (i.classList.contains('chk')) done++; });
+                var bar = card.querySelector('.progress-fill');
+                if (bar) bar.style.width = Math.round(done / items.length * 100) + '%';
+            }
+
+            document.querySelectorAll('.meal-item[data-key]').forEach(function (item) {
+                var k = item.dataset.key;
+                if (load(k)) item.classList.add('chk');
+                updateCheck(item, false);
+                item.addEventListener('click', function (e) {
+                    e.stopPropagation();
+                    item.classList.toggle('chk');
+                    updateCheck(item, false);
+                    save(k, item.classList.contains('chk'));
+                    updateMealProgress(item.closest('.meal-card'));
+                });
+            });
+
+            var shopItems = document.querySelectorAll('.sitem[data-key]');
+            shopItems.forEach(function (item) {
+                var k = item.dataset.key;
+                if (load(k)) item.classList.add('chk');
+                updateCheck(item, true);
+                item.addEventListener('click', function () {
+                    item.classList.toggle('chk');
+                    updateCheck(item, true);
+                    save(k, item.classList.contains('chk'));
+                    updateShopProg();
+                });
+            });
+
+            function updateShopProg() {
+                var total = shopItems.length;
+                var done = document.querySelectorAll('.sitem.chk').length;
+                var p = document.getElementById('shopProg');
+                if (!done) { p.style.display = 'none'; return; }
+                p.style.display = 'block';
+                p.textContent = done === total ? '✓ Lista completa — bora fazer o prep!' : done + ' de ' + total + ' itens marcados';
+            }
+            updateShopProg();
+
+            document.querySelectorAll('.carousel').forEach(function (car) {
+                var slides = car.querySelectorAll('.carousel-slide');
+                var track = car.querySelector('.carousel-track');
+                var dots = car.querySelectorAll('.cdot');
+                var varLabel = car.querySelector('.cvariant');
+                var prevBtn = car.querySelector('.prev');
+                var nextBtn = car.querySelector('.next');
+                var cur = 0;
+
+                car.dataset.cur = '0';
+
+                function goTo(n) {
+                    cur = n;
+                    car.dataset.cur = cur;
+                    track.style.transform = 'translateX(-' + cur * 100 + '%)';
+                    dots.forEach(function (d, i) { d.classList.toggle('active', i === cur) });
+                    varLabel.textContent = 'VAR ' + (cur + 1) + '/' + slides.length;
+                    prevBtn.disabled = cur === 0;
+                    nextBtn.disabled = cur === slides.length - 1;
+                    updateMealProgress(car.closest('.meal-card'));
+                }
+
+                prevBtn.addEventListener('click', function (e) { e.stopPropagation(); if (cur > 0) goTo(cur - 1) });
+                nextBtn.addEventListener('click', function (e) { e.stopPropagation(); if (cur < slides.length - 1) goTo(cur + 1) });
+                dots.forEach(function (d, i) { d.addEventListener('click', function (e) { e.stopPropagation(); goTo(i) }) });
+
+                var startX = 0;
+                track.addEventListener('touchstart', function (e) { startX = e.touches[0].clientX }, { passive: true });
+                track.addEventListener('touchend', function (e) {
+                    var dx = e.changedTouches[0].clientX - startX;
+                    if (Math.abs(dx) > 40) { if (dx < 0 && cur < slides.length - 1) goTo(cur + 1); else if (dx > 0 && cur > 0) goTo(cur - 1); }
+                }, { passive: true });
+            });
+
+            document.querySelectorAll('.meal-card').forEach(function (card) {
+                updateMealProgress(card);
+            });
+
+            var nbs = document.querySelectorAll('.nb');
+            nbs.forEach(function (b) {
+                b.addEventListener('click', function () {
+                    nbs.forEach(function (x) { x.classList.remove('active') });
+                    b.classList.add('active');
+                });
+            });
+
+            window.addEventListener('scroll', function () {
+                var ids = ['macros', 'refeicoes', 'semana', 'regras', 'compras', 'suplementos'];
+                var cur = '';
+                ids.forEach(function (id) {
+                    var el = document.getElementById(id);
+                    if (el && el.getBoundingClientRect().top < 140) cur = id;
+                });
+                nbs.forEach(function (b) { b.classList.toggle('active', b.getAttribute('href') === '#' + cur) });
+            }, { passive: true });
+        })();
+    </script>
+</body>
+
+</html>
