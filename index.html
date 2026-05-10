@@ -1301,121 +1301,101 @@ window.openAiPhoto=openAiPhoto;window.openGroq=openGroq;window.closeGroq=closeGr
 window.handleGroqImg=handleGroqImg;window.analyzeGroq=analyzeGroq;
 
 function formatGroq(raw){
-  // Strip markdown bold for processing
-  var txt = raw.replace(/\*\*([^*]+)\*\*/g,'<strong>$1</strong>');
-  var lines = raw.split('\n').map(function(l){return l.trim()}).filter(function(l){return l});
+  // Strip all ** and * markers first, then parse
+  function clean(s){
+    return s.replace(/\*\*/g,'').replace(/^\*\s*/,'').replace(/^-\s*/,'').trim();
+  }
+  function boldify(s){
+    // Re-apply bold only where pattern exists in original
+    return s.replace(/\*\*([^*]+)\*\*/g,'<strong style="color:#f2f2f8">$1</strong>');
+  }
 
-  // Extract sections by scanning for known patterns
-  var nome='', musculo='', intro='', steps=[], tips=[], outros=[];
-  var mode='intro';
+  var lines = raw.split('\n').map(function(l){return l.trim()}).filter(Boolean);
+  var nome='', musculo='', steps=[], tips=[];
+  var mode='scan';
 
   lines.forEach(function(line){
-    var clean = line.replace(/\*\*/g,'').replace(/\*/g,'').trim();
-    var lc = clean.toLowerCase();
+    var c2=clean(line);
+    var lc=c2.toLowerCase();
 
-    // Detect section headers
-    if(/nome.{0,20}aparelho|aparelho.{0,5}(é|e|parece|identificado)/i.test(clean)){
-      mode='nome'; return;
-    }
-    if(/músculo|musculo|trabalha|fortalec/i.test(clean) && clean.length < 80){
-      mode='musculo'; return;
-    }
-    if(/como usar|passo a passo|utilizar|usar o/i.test(clean) && clean.length < 60){
-      mode='steps'; return;
-    }
-    if(/dica|segurança|cuidado|atenção|importante/i.test(clean) && clean.length < 60){
-      mode='tips'; return;
-    }
+    // Section detection
+    if(/como usar|passo a passo|utilizar o aparelho/i.test(lc) && c2.length<70){mode='steps';return;}
+    if(/dica|segurança|execução correta|importante|cuidado/i.test(lc) && c2.length<70){mode='tips';return;}
+    if(/nome.{0,15}aparelho|^aparelho[:\s]/i.test(lc)){mode='nome';return;}
+    if(/músculo|musculo|trabalha|fortalec/i.test(lc) && c2.length<80 && !c2.match(/^[\d*-]/)){mode='musculo';return;}
 
-    // Detect step lines: "1. texto" or "* texto" or "- texto"
-    var stepMatch = clean.match(/^[\d]+[.)\s]\s*(.+)/);
-    var bulletMatch = clean.match(/^[\*\-]\s+(.+)/);
+    // Numbered steps: "1. texto" or "1) texto"
+    var numMatch=c2.match(/^[\d]+[.)\s]\s*(.+)/);
+    // Bullet: "* texto" or "- texto"  
+    var bulMatch=c2.match(/^[*-]\s+(.+)/)||line.trim().match(/^\*\s+(.+)/);
 
-    if(mode==='steps' || stepMatch){
-      if(stepMatch) steps.push(stepMatch[1]);
-      else if(bulletMatch && mode==='steps') steps.push(bulletMatch[1]);
-      else if(mode==='steps' && clean.length>10) steps.push(clean);
+    if(mode==='steps'){
+      if(numMatch) steps.push(clean(numMatch[1]));
+      else if(bulMatch) steps.push(clean(bulMatch[1]));
+      else if(c2.length>15) steps.push(c2);
       return;
     }
     if(mode==='tips'){
-      if(bulletMatch) tips.push(bulletMatch[1]);
-      else if(clean.length>10) tips.push(clean);
+      if(numMatch) tips.push(clean(numMatch[1]));
+      else if(bulMatch) tips.push(clean(bulMatch[1]));
+      else if(c2.length>15) tips.push(c2);
       return;
     }
-    if(mode==='nome'){
-      if(!nome && clean.length>2) nome=clean;
-      mode='intro'; return;
-    }
-    if(mode==='musculo'){
-      if(!musculo && clean.length>2) musculo=clean;
-      mode='intro'; return;
-    }
+    if(mode==='nome'){if(!nome&&c2.length>2){nome=c2;}mode='scan';return;}
+    if(mode==='musculo'){if(!musculo&&c2.length>2){musculo=c2;}mode='scan';return;}
 
-    // Detect inline patterns
+    // Auto-detect inline
     if(!nome){
-      var nm=clean.match(/(?:é uma?|parece ser|identificado como|aparelho[:\s]+)([^.!?,]+)/i);
-      if(nm) nome=nm[1].trim();
+      var nm=c2.match(/(?:é uma?|parece ser uma?|identificado como|aparelho[:\s]+)[\s]*((?:[A-ZÁÉÍÓÚÀÂÊÔÃÕÜ][^,.!?]*)+)/i);
+      if(nm) nome=clean(nm[1]);
     }
     if(!musculo){
-      var ms=clean.match(/(?:trabalha[dn]?o?s?|músculo[s]?[:\s]+|fortalece)([^.!?]+)/i);
-      if(ms) musculo=ms[1].trim();
+      var ms=c2.match(/(?:trabalha[dn]?o?s?\s+o?s?|músculo[s]?[:\s]+|fortalece\s+o?s?)[\s]*((?:[A-ZÁa-záéíóú][^,.!?]+))/i);
+      if(ms) musculo=clean(ms[1]);
     }
 
-    // Everything else goes to intro or bullets
-    if(bulletMatch) tips.push(bulletMatch[1]);
-    else if(clean.length>15 && mode==='intro') intro+=clean+' ';
+    // Loose bullets anywhere
+    if(bulMatch){
+      if(mode==='tips'||tips.length>0) tips.push(clean(bulMatch[1]));
+      else steps.push(clean(bulMatch[1]));
+    }
   });
 
-  // If steps still empty, try to pull numbered items from whole text
+  // Fallback: grab numbered items from raw if steps empty
   if(steps.length===0){
-    var numbered = raw.match(/[\d]+[.)][\s]+([^\n]+)/g)||[];
-    numbered.forEach(function(s){ steps.push(s.replace(/^[\d]+[.)][\s]+/,'').trim()); });
+    (raw.match(/[\d]+[.)][\s]+[^\n]+/g)||[]).forEach(function(s){
+      steps.push(clean(s.replace(/^[\d]+[.)][\s]+/,'')));
+    });
   }
   if(tips.length===0){
-    var bullets = raw.match(/(?:^|\n)\*\s+([^\n]+)/g)||[];
-    bullets.forEach(function(b){ tips.push(b.replace(/^\n?\*\s+/,'').trim()); });
+    (raw.match(/(?:^|\n)\*\s+[^\n]+/gm)||[]).forEach(function(b){
+      tips.push(clean(b.replace(/^\n?\*\s+/,'')));
+    });
   }
 
-  // Build HTML cards
+  var tipIcons=['⚠️','💡','🎯','✅','🔑'];
   var html='<div class="gr-wrap">';
 
-  // Card 1: Aparelho identificado
-  var cardName = nome || 'Aparelho identificado';
-  var cardMuscle = musculo || '';
-  // Clean markdown from name/muscle
-  cardName = cardName.replace(/\*\*/g,'').replace(/[:\-]/g,'').trim();
-  cardMuscle = cardMuscle.replace(/\*\*/g,'').replace(/[:\-]/g,'').trim();
-  if(cardMuscle.length>80) cardMuscle=cardMuscle.substring(0,80)+'...';
-
-  html+='<div class="gr-card">';
-  html+='<div class="gr-card-head"><span class="gr-card-icon">🏋️</span><span class="gr-card-label">Aparelho Identificado</span></div>';
-  html+='<div class="gr-card-body">';
-  html+='<div class="gr-name">'+cardName+'</div>';
-  if(cardMuscle) html+='<div class="gr-muscle-pill">💪 '+cardMuscle+'</div>';
-  if(intro && !nome) html+='<p class="gr-intro" style="margin-top:8px">'+intro.trim()+'</p>';
+  // Card: Aparelho
+  html+='<div class="gr-card"><div class="gr-card-head"><span class="gr-card-icon">🏋️</span><span class="gr-card-label">Aparelho Identificado</span></div><div class="gr-card-body">';
+  html+='<div class="gr-name">'+(nome||'Aparelho da foto')+'</div>';
+  if(musculo) html+='<div class="gr-muscle-pill">💪 '+musculo+'</div>';
   html+='</div></div>';
 
-  // Card 2: Como usar
-  if(steps.length>0){
-    html+='<div class="gr-card">';
-    html+='<div class="gr-card-head"><span class="gr-card-icon">📋</span><span class="gr-card-label">Como Usar</span></div>';
-    html+='<div class="gr-card-body"><div class="gr-steps">';
+  // Card: Como usar
+  if(steps.length){
+    html+='<div class="gr-card"><div class="gr-card-head"><span class="gr-card-icon">📋</span><span class="gr-card-label">Como Usar</span></div><div class="gr-card-body"><div class="gr-steps">';
     steps.forEach(function(s,i){
-      var sc=s.replace(/\*\*/g,'<strong>').replace(/\*\*/g,'</strong>').replace(/^[\*\-]\s*/,'');
-      html+='<div class="gr-step"><div class="gr-step-num">'+(i+1)+'</div><div class="gr-step-text">'+sc+'</div></div>';
+      html+='<div class="gr-step"><div class="gr-step-num">'+(i+1)+'</div><div class="gr-step-text">'+s+'</div></div>';
     });
     html+='</div></div></div>';
   }
 
-  // Card 3: Dicas
-  if(tips.length>0){
-    var tipIcons=['⚠️','💡','🎯','✅','🔑'];
-    html+='<div class="gr-card">';
-    html+='<div class="gr-card-head"><span class="gr-card-icon">⚠️</span><span class="gr-card-label">Dicas de Execução</span></div>';
-    html+='<div class="gr-card-body"><div class="gr-tips">';
+  // Card: Dicas
+  if(tips.length){
+    html+='<div class="gr-card"><div class="gr-card-head"><span class="gr-card-icon">⚠️</span><span class="gr-card-label">Dicas de Execução</span></div><div class="gr-card-body"><div class="gr-tips">';
     tips.forEach(function(t,i){
-      var tc=t.replace(/\*\*/g,'<strong>').replace(/\*\*/g,'</strong>').replace(/^[\*\-]\s*/,'');
-      html+='<div class="gr-tip"><span class="gr-tip-icon">'+tipIcons[i%tipIcons.length]+'</span><div class="gr-tip-text">'+tc+'</div></div>';
+      html+='<div class="gr-tip"><span class="gr-tip-icon">'+tipIcons[i%5]+'</span><div class="gr-tip-text">'+t+'</div></div>';
     });
     html+='</div></div></div>';
   }
@@ -1467,7 +1447,7 @@ window.formatGroq=formatGroq;
                   <span class="wex-dica">Puxe até o peito, cotovelos apontando para baixo</span>
                 
 </div>
-                <div class="wex-actions"><a class="wex-btn wex-btn-yt" href="https://www.youtube.com/results?search_query=como+fazer+Puxada+Frontal+academia" target="_blank" rel="noopener">▶ YouTube</a></div>
+                <div class="wex-actions"><a class="wex-btn wex-btn-yt" href="https://www.youtube.com/shorts/oF-RqXrkZHU" target="_blank" rel="noopener">▶ YouTube</a></div>
               </div>
             </div>
           </div>
@@ -1498,7 +1478,7 @@ window.formatGroq=formatGroq;
                   <span class="wex-dica">Costas retas, puxe até o abdômen</span>
                 
 </div>
-                <div class="wex-actions"><a class="wex-btn wex-btn-yt" href="https://www.youtube.com/results?search_query=como+fazer+Remada+Baixa+academia" target="_blank" rel="noopener">▶ YouTube</a></div>
+                <div class="wex-actions"><a class="wex-btn wex-btn-yt" href="https://www.youtube.com/shorts/zw0lUIPCq-U" target="_blank" rel="noopener">▶ YouTube</a></div>
               </div>
             </div>
           </div>
@@ -1565,7 +1545,7 @@ window.formatGroq=formatGroq;
                   <span class="wex-dica">Cotovelos fixos, contração máxima no topo</span>
                 
 </div>
-                <div class="wex-actions"><a class="wex-btn wex-btn-yt" href="https://www.youtube.com/results?search_query=como+fazer+Rosca+Direta+na+Polia+academia" target="_blank" rel="noopener">▶ YouTube</a></div>
+                <div class="wex-actions"><a class="wex-btn wex-btn-yt" href="https://www.youtube.com/shorts/M6CPOlx7n9g" target="_blank" rel="noopener">▶ YouTube</a></div>
               </div>
             </div>
           </div>
@@ -1596,7 +1576,7 @@ window.formatGroq=formatGroq;
                   <span class="wex-dica">Polia baixa, apoie no joelho, isole o movimento</span>
                 
 </div>
-                <div class="wex-actions"><a class="wex-btn wex-btn-yt" href="https://www.youtube.com/results?search_query=como+fazer+Rosca+Concentrada+na+Polia+academia" target="_blank" rel="noopener">▶ YouTube</a></div>
+                <div class="wex-actions"><a class="wex-btn wex-btn-yt" href="https://www.youtube.com/shorts/d0kd17p9-CA" target="_blank" rel="noopener">▶ YouTube</a></div>
               </div>
             </div>
           </div>
@@ -1627,7 +1607,7 @@ window.formatGroq=formatGroq;
                   <span class="wex-dica">Pegada neutra, movimento controlado</span>
                 
 </div>
-                <div class="wex-actions"><a class="wex-btn wex-btn-yt" href="https://www.youtube.com/results?search_query=como+fazer+Rosca+Martelo+academia" target="_blank" rel="noopener">▶ YouTube</a></div>
+                <div class="wex-actions"><a class="wex-btn wex-btn-yt" href="https://www.youtube.com/shorts/8PN6YfFC6Q4" target="_blank" rel="noopener">▶ YouTube</a></div>
               </div>
             </div>
           </div>
@@ -1658,7 +1638,7 @@ window.formatGroq=formatGroq;
                   <span class="wex-dica">Banco 45°, braços caídos, amplitude total</span>
                 
 </div>
-                <div class="wex-actions"><a class="wex-btn wex-btn-yt" href="https://www.youtube.com/results?search_query=como+fazer+Rosca+Alternada+Inclinada+academia" target="_blank" rel="noopener">▶ YouTube</a></div>
+                <div class="wex-actions"><a class="wex-btn wex-btn-yt" href="https://www.youtube.com/shorts/YZAnUESiH4Q" target="_blank" rel="noopener">▶ YouTube</a></div>
               </div>
             </div>
           </div>
@@ -1694,7 +1674,7 @@ window.formatGroq=formatGroq;
                   <span class="wex-dica">Cotovelos fixos ao lado do corpo</span>
                 
 </div>
-                <div class="wex-actions"><a class="wex-btn wex-btn-yt" href="https://www.youtube.com/results?search_query=como+fazer+Tríceps+Pulley+academia" target="_blank" rel="noopener">▶ YouTube</a></div>
+                <div class="wex-actions"><a class="wex-btn wex-btn-yt" href="https://www.youtube.com/shorts/UdfF_LQ1iak" target="_blank" rel="noopener">▶ YouTube</a></div>
               </div>
             </div>
           </div>
@@ -1725,7 +1705,7 @@ window.formatGroq=formatGroq;
                   <span class="wex-dica">Deitado, polia alta, cotovelos estáticos</span>
                 
 </div>
-                <div class="wex-actions"><a class="wex-btn wex-btn-yt" href="https://www.youtube.com/results?search_query=como+fazer+Tríceps+Testa+na+Polia+academia" target="_blank" rel="noopener">▶ YouTube</a></div>
+                <div class="wex-actions"><a class="wex-btn wex-btn-yt" href="https://www.youtube.com/shorts/aNr8yjs34nM" target="_blank" rel="noopener">▶ YouTube</a></div>
               </div>
             </div>
           </div>
