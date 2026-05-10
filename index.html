@@ -235,6 +235,39 @@ footer{border-top:1px solid var(--border2);padding-top:24px;text-align:center;fo
   .shop-grid{grid-template-columns:1fr 1fr}
   .sel-cards{flex-direction:column;align-items:center}.sc{max-width:100%;width:100%}
 }
+
+/* WORKOUT MODAL */
+.wmodal-overlay{position:fixed;inset:0;z-index:500;background:#000000cc;display:flex;align-items:flex-end;opacity:0;pointer-events:none;transition:opacity .3s}
+.wmodal-overlay.open{opacity:1;pointer-events:all}
+.wmodal{background:#0f0f18;border-radius:20px 20px 0 0;width:100%;max-height:92vh;overflow-y:auto;transform:translateY(100%);transition:transform .35s cubic-bezier(.4,0,.2,1);padding:0 0 env(safe-area-inset-bottom,20px)}
+.wmodal-overlay.open .wmodal{transform:translateY(0)}
+.wmodal-handle{width:40px;height:4px;background:#ffffff20;border-radius:10px;margin:14px auto 0}
+.wmodal-head{padding:20px 20px 0;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;background:#0f0f18;z-index:10;padding-bottom:16px;border-bottom:1px solid #ffffff0f}
+.wmodal-title{font-family:'Syne',sans-serif;font-size:18px;font-weight:700;color:#f2f2f8}
+.wmodal-close{background:#ffffff10;border:none;color:#7a7a9a;width:32px;height:32px;border-radius:50%;cursor:pointer;font-size:18px;display:flex;align-items:center;justify-content:center;transition:all .2s;flex-shrink:0}
+.wmodal-close:hover{background:#ffffff20;color:#f2f2f8}
+.wmodal-body{padding:16px 20px}
+.wgroup{margin-bottom:24px}
+.wgroup-title{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:3px;text-transform:uppercase;margin-bottom:12px;padding:6px 10px;border-radius:6px;display:inline-block}
+.wexercises{display:grid;gap:10px}
+.wex{background:#16161f;border:1px solid #ffffff0f;border-radius:12px;overflow:hidden;transition:border-color .2s}
+.wex:hover{border-color:#ffffff1a}
+.wex-inner{display:flex;gap:0;align-items:stretch}
+.wex-svg{width:90px;flex-shrink:0;background:#1c1c28;display:flex;align-items:center;justify-content:center;padding:12px}
+.wex-svg svg{width:66px;height:66px}
+.wex-info{padding:12px 14px;flex:1;min-width:0}
+.wex-name{font-size:14px;font-weight:600;color:#f2f2f8;margin-bottom:3px}
+.wex-muscle{font-size:11px;color:#7a7a9a;margin-bottom:8px}
+.wex-meta{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.wex-series{font-family:'JetBrains Mono',monospace;font-size:11px;padding:3px 8px;border-radius:6px;font-weight:500}
+.wex-dica{font-size:11px;color:#7a7a9a;font-style:italic;flex:1}
+
+/* WORKOUT SECTION in semana */
+.day-card.clickable{cursor:pointer}
+.day-card.clickable:hover .dname{opacity:.8}
+.day-treino-btn{font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:1px;text-transform:uppercase;margin-top:8px;padding:4px 8px;border-radius:6px;border:1px solid #ffffff18;background:#ffffff08;color:#7a7a9a;cursor:pointer;display:inline-block;transition:all .2s}
+.day-card.clickable:hover .day-treino-btn{background:#ffffff12;color:#f2f2f8}
+
 </style>
 </head>
 <body>
@@ -471,11 +504,11 @@ footer{border-top:1px solid var(--border2);padding-top:24px;text-align:center;fo
   <div class="section" id="l-sem">
     <div class="sh"><span class="badge bb">03</span><span class="stitle">Semana · Seg–Sex</span></div>
     <div class="days-grid">
-      <div class="day-card"><div class="dname">Segunda</div><div class="dtreino">Treino A — Costas · Bíceps · Tríceps</div><div class="dkcal">~2.200 kcal</div></div>
-      <div class="day-card jiu"><div class="djiu">★ Jiu-Jítsu 19h</div><div class="dname">Terça</div><div class="dtreino">Treino B — Peito · Ombro · Trapézio</div><div class="dkcal">~2.400 kcal</div></div>
-      <div class="day-card"><div class="dname">Quarta</div><div class="dtreino">Treino C — Inferior</div><div class="dkcal">~2.200 kcal</div></div>
-      <div class="day-card jiu"><div class="djiu">★ Jiu-Jítsu 19h</div><div class="dname">Quinta</div><div class="dtreino">Treino A ou B</div><div class="dkcal">~2.400 kcal</div></div>
-      <div class="day-card"><div class="dname">Sexta</div><div class="dtreino">Treino C ou cardio</div><div class="dkcal">~2.200 kcal</div></div>
+      <div class="day-card clickable" onclick="openWorkout('A')"><div class="dname">Segunda</div><div class="dtreino">Treino A — Costas · Bíceps · Tríceps</div><div class="dkcal">~2.200 kcal</div><div class="day-treino-btn">Ver treino →</div></div>
+      <div class="day-card jiu clickable" onclick="openWorkout('B')"><div class="djiu">★ Jiu-Jítsu 19h</div><div class="dname">Terça</div><div class="dtreino">Treino B — Peito · Ombro · Trapézio</div><div class="dkcal">~2.400 kcal</div><div class="day-treino-btn">Ver treino →</div></div>
+      <div class="day-card clickable" onclick="openWorkout('C')"><div class="dname">Quarta</div><div class="dtreino">Treino C — Inferior</div><div class="dkcal">~2.200 kcal</div><div class="day-treino-btn">Ver treino →</div></div>
+      <div class="day-card jiu clickable" onclick="openWorkout('A')"><div class="djiu">★ Jiu-Jítsu 19h</div><div class="dname">Quinta</div><div class="dtreino">Treino A ou B</div><div class="dkcal">~2.400 kcal</div><div class="day-treino-btn">Ver treino →</div></div>
+      <div class="day-card clickable" onclick="openWorkout('C')"><div class="dname">Sexta</div><div class="dtreino">Treino C ou cardio</div><div class="dkcal">~2.200 kcal</div><div class="day-treino-btn">Ver treino →</div></div>
     </div>
   </div>
 
@@ -738,11 +771,11 @@ footer{border-top:1px solid var(--border2);padding-top:24px;text-align:center;fo
   <div class="section" id="s-sem">
     <div class="sh"><span class="badge bb">03</span><span class="stitle">Semana · Seg–Sex</span></div>
     <div class="days-grid">
-      <div class="day-card"><div class="dname">Segunda</div><div class="dtreino">Treino B — Inferior<br>Pernas · Glúteos</div><div class="dkcal">~1.500 kcal</div></div>
-      <div class="day-card jiu"><div class="djiu">★ Jiu-Jítsu 19h</div><div class="dname">Terça</div><div class="dtreino">Treino A — Superior<br>Peito · Costas · Ombro</div><div class="dkcal">~1.650 kcal</div></div>
-      <div class="day-card"><div class="dname">Quarta</div><div class="dtreino">Treino B — Inferior<br>Pernas · Glúteos</div><div class="dkcal">~1.500 kcal</div></div>
-      <div class="day-card jiu"><div class="djiu">★ Jiu-Jítsu 19h</div><div class="dname">Quinta</div><div class="dtreino">Treino A — Superior</div><div class="dkcal">~1.650 kcal</div></div>
-      <div class="day-card"><div class="dname">Sexta</div><div class="dtreino">Treino B ou A<br>Revezar conforme semana</div><div class="dkcal">~1.500 kcal</div></div>
+      <div class="day-card clickable" onclick="openWorkout('SB')"><div class="dname">Segunda</div><div class="dtreino">Treino B — Inferior<br>Pernas · Glúteos</div><div class="dkcal">~1.500 kcal</div><div class="day-treino-btn">Ver treino →</div></div>
+      <div class="day-card jiu clickable" onclick="openWorkout('SA')"><div class="djiu">★ Jiu-Jítsu 19h</div><div class="dname">Terça</div><div class="dtreino">Treino A — Superior<br>Peito · Costas · Ombro</div><div class="dkcal">~1.650 kcal</div><div class="day-treino-btn">Ver treino →</div></div>
+      <div class="day-card clickable" onclick="openWorkout('SB')"><div class="dname">Quarta</div><div class="dtreino">Treino B — Inferior<br>Pernas · Glúteos</div><div class="dkcal">~1.500 kcal</div><div class="day-treino-btn">Ver treino →</div></div>
+      <div class="day-card jiu clickable" onclick="openWorkout('SA')"><div class="djiu">★ Jiu-Jítsu 19h</div><div class="dname">Quinta</div><div class="dtreino">Treino A — Superior</div><div class="dkcal">~1.650 kcal</div><div class="day-treino-btn">Ver treino →</div></div>
+      <div class="day-card clickable" onclick="openWorkout('SB')"><div class="dname">Sexta</div><div class="dtreino">Treino B ou A<br>Revezar conforme semana</div><div class="dkcal">~1.500 kcal</div><div class="day-treino-btn">Ver treino →</div></div>
     </div>
   </div>
 
@@ -956,6 +989,836 @@ function updateProg(screen,progId){
 initScreen('screen-l');
 initScreen('screen-s');
 })();
+
+function openWorkout(id){
+  var el=document.getElementById('wm'+id);
+  if(el){
+    document.body.style.overflow='hidden';
+    el.classList.add('open');
+  }
+}
+function closeWorkout(e,id){
+  if(e&&e.target!==e.currentTarget)return;
+  var el=document.getElementById('wm'+id);
+  if(el){
+    el.classList.remove('open');
+    document.body.style.overflow='';
+  }
+}
+window.openWorkout=openWorkout;
+window.closeWorkout=closeWorkout;
+// Close on ESC
+document.addEventListener('keydown',function(e){
+  if(e.key==='Escape'){
+    document.querySelectorAll('.wmodal-overlay.open').forEach(function(el){
+      el.classList.remove('open');
+      document.body.style.overflow='';
+    });
+  }
+});
+
 </script>
+<div class="wmodal-overlay" id="wmA" onclick="closeWorkout(event,'A')">
+  <div class="wmodal">
+    <div class="wmodal-handle"></div>
+    <div class="wmodal-head">
+      <span class="wmodal-title">Treino A — Costas · Bíceps · Tríceps</span>
+      <button class="wmodal-close" onclick="closeWorkout(null,'A')">✕</button>
+    </div>
+    <div class="wmodal-body">
+      <div class="wgroup">
+        <div class="wgroup-title" style="color:#00e5cc;background:#00e5cc22;border:1px solid #00e5cc33">COSTAS</div>
+        <div class="wexercises">
+          <div class="wex">
+            <div class="wex-inner">
+              <div class="wex-svg"><svg viewBox="0 0 66 66" fill="none">
+  <style>
+    .arm{transform-origin:33px 20px;animation:pull 1.5s ease-in-out infinite alternate}
+    @keyframes pull{from{transform:translateY(-8px)}to{transform:translateY(4px)}}
+  </style>
+  <circle cx="33" cy="10" r="6" fill="#00e5cc" opacity=".9"/>
+  <rect x="30" y="16" width="6" height="18" rx="3" fill="#00e5cc" opacity=".7"/>
+  <line x1="15" y1="4" x2="51" y2="4" stroke="#ffffff30" stroke-width="2" stroke-linecap="round"/>
+  <g class="arm">
+    <line x1="33" y1="16" x2="15" y2="5" stroke="#00e5cc" stroke-width="2.5" stroke-linecap="round"/>
+    <line x1="33" y1="16" x2="51" y2="5" stroke="#00e5cc" stroke-width="2.5" stroke-linecap="round"/>
+    <line x1="28" y1="34" x2="20" y2="50" stroke="#00e5cc" stroke-width="2.5" stroke-linecap="round"/>
+    <line x1="38" y1="34" x2="46" y2="50" stroke="#00e5cc" stroke-width="2.5" stroke-linecap="round"/>
+  </g>
+  <text x="33" y="62" text-anchor="middle" font-family="monospace" font-size="7" fill="#ffffff40">PUXADA</text>
+</svg></div>
+              <div class="wex-info">
+                <div class="wex-name">Puxada Frontal</div>
+                <div class="wex-muscle">Dorsal · Grande dorsal</div>
+                <div class="wex-meta">
+                  <span class="wex-series" style="color:#00e5cc;background:#00e5cc22">4x10–12</span>
+                  <span class="wex-dica">Puxe até o peito, cotovelos apontando para baixo</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="wex">
+            <div class="wex-inner">
+              <div class="wex-svg"><svg viewBox="0 0 66 66" fill="none">
+  <style>
+    .rarm{animation:row 1.5s ease-in-out infinite alternate;transform-origin:20px 30px}
+    @keyframes row{from{transform:translateX(8px)}to{transform:translateX(-4px)}}
+  </style>
+  <rect x="5" y="38" width="56" height="4" rx="2" fill="#ffffff15"/>
+  <circle cx="20" cy="26" r="6" fill="#00e5cc" opacity=".9"/>
+  <rect x="17" y="32" width="6" height="14" rx="3" fill="#00e5cc" opacity=".7"/>
+  <line x1="20" y1="40" x2="14" y2="56" stroke="#00e5cc" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="23" y1="40" x2="29" y2="56" stroke="#00e5cc" stroke-width="2.5" stroke-linecap="round"/>
+  <g class="rarm">
+    <line x1="20" y1="34" x2="48" y2="34" stroke="#00e5cc" stroke-width="2.5" stroke-linecap="round"/>
+    <circle cx="50" cy="34" r="4" fill="#ffffff20" stroke="#00e5cc" stroke-width="1.5"/>
+  </g>
+  <text x="33" y="62" text-anchor="middle" font-family="monospace" font-size="7" fill="#ffffff40">REMADA</text>
+</svg></div>
+              <div class="wex-info">
+                <div class="wex-name">Remada Baixa</div>
+                <div class="wex-muscle">Dorsal · Romboides</div>
+                <div class="wex-meta">
+                  <span class="wex-series" style="color:#00e5cc;background:#00e5cc22">4x10–12</span>
+                  <span class="wex-dica">Costas retas, puxe até o abdômen</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="wex">
+            <div class="wex-inner">
+              <div class="wex-svg"><svg viewBox="0 0 66 66" fill="none">
+  <style>
+    .arm{transform-origin:33px 20px;animation:pull 1.5s ease-in-out infinite alternate}
+    @keyframes pull{from{transform:translateY(-8px)}to{transform:translateY(4px)}}
+  </style>
+  <circle cx="33" cy="10" r="6" fill="#00e5cc" opacity=".9"/>
+  <rect x="30" y="16" width="6" height="18" rx="3" fill="#00e5cc" opacity=".7"/>
+  <line x1="15" y1="4" x2="51" y2="4" stroke="#ffffff30" stroke-width="2" stroke-linecap="round"/>
+  <g class="arm">
+    <line x1="33" y1="16" x2="15" y2="5" stroke="#00e5cc" stroke-width="2.5" stroke-linecap="round"/>
+    <line x1="33" y1="16" x2="51" y2="5" stroke="#00e5cc" stroke-width="2.5" stroke-linecap="round"/>
+    <line x1="28" y1="34" x2="20" y2="50" stroke="#00e5cc" stroke-width="2.5" stroke-linecap="round"/>
+    <line x1="38" y1="34" x2="46" y2="50" stroke="#00e5cc" stroke-width="2.5" stroke-linecap="round"/>
+  </g>
+  <text x="33" y="62" text-anchor="middle" font-family="monospace" font-size="7" fill="#ffffff40">PUXADA</text>
+</svg></div>
+              <div class="wex-info">
+                <div class="wex-name">Pulley Frente</div>
+                <div class="wex-muscle">Dorsal · Serrátil</div>
+                <div class="wex-meta">
+                  <span class="wex-series" style="color:#00e5cc;background:#00e5cc22">3x12–15</span>
+                  <span class="wex-dica">Amplitude total, contraia na posição final</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="wgroup">
+        <div class="wgroup-title" style="color:#4d9fff;background:#4d9fff22;border:1px solid #4d9fff33">BÍCEPS</div>
+        <div class="wexercises">
+          <div class="wex">
+            <div class="wex-inner">
+              <div class="wex-svg"><svg viewBox="0 0 66 66" fill="none">
+  <style>
+    .curl{transform-origin:30px 30px;animation:curl 1.5s ease-in-out infinite alternate}
+    @keyframes curl{from{transform:rotate(20deg)}to{transform:rotate(-30deg)}}
+  </style>
+  <circle cx="33" cy="10" r="6" fill="#4d9fff" opacity=".9"/>
+  <rect x="30" y="16" width="6" height="16" rx="3" fill="#4d9fff" opacity=".7"/>
+  <line x1="33" y1="32" x2="22" y2="48" stroke="#4d9fff" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="33" y1="32" x2="44" y2="48" stroke="#4d9fff" stroke-width="2.5" stroke-linecap="round"/>
+  <g class="curl">
+    <line x1="30" y1="24" x2="14" y2="26" stroke="#4d9fff" stroke-width="2.5" stroke-linecap="round"/>
+    <line x1="14" y1="26" x2="10" y2="18" stroke="#4d9fff" stroke-width="2.5" stroke-linecap="round"/>
+    <circle cx="8" cy="16" r="4" fill="#ffffff20" stroke="#4d9fff" stroke-width="1.5"/>
+  </g>
+  <text x="33" y="62" text-anchor="middle" font-family="monospace" font-size="7" fill="#ffffff40">ROSCA</text>
+</svg></div>
+              <div class="wex-info">
+                <div class="wex-name">Rosca Direta na Polia</div>
+                <div class="wex-muscle">Bíceps braquial</div>
+                <div class="wex-meta">
+                  <span class="wex-series" style="color:#4d9fff;background:#4d9fff22">3x12</span>
+                  <span class="wex-dica">Cotovelos fixos, contração máxima no topo</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="wex">
+            <div class="wex-inner">
+              <div class="wex-svg"><svg viewBox="0 0 66 66" fill="none">
+  <style>
+    .curl{transform-origin:30px 30px;animation:curl 1.5s ease-in-out infinite alternate}
+    @keyframes curl{from{transform:rotate(20deg)}to{transform:rotate(-30deg)}}
+  </style>
+  <circle cx="33" cy="10" r="6" fill="#4d9fff" opacity=".9"/>
+  <rect x="30" y="16" width="6" height="16" rx="3" fill="#4d9fff" opacity=".7"/>
+  <line x1="33" y1="32" x2="22" y2="48" stroke="#4d9fff" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="33" y1="32" x2="44" y2="48" stroke="#4d9fff" stroke-width="2.5" stroke-linecap="round"/>
+  <g class="curl">
+    <line x1="30" y1="24" x2="14" y2="26" stroke="#4d9fff" stroke-width="2.5" stroke-linecap="round"/>
+    <line x1="14" y1="26" x2="10" y2="18" stroke="#4d9fff" stroke-width="2.5" stroke-linecap="round"/>
+    <circle cx="8" cy="16" r="4" fill="#ffffff20" stroke="#4d9fff" stroke-width="1.5"/>
+  </g>
+  <text x="33" y="62" text-anchor="middle" font-family="monospace" font-size="7" fill="#ffffff40">ROSCA</text>
+</svg></div>
+              <div class="wex-info">
+                <div class="wex-name">Rosca Concentrada na Polia</div>
+                <div class="wex-muscle">Bíceps · Pico</div>
+                <div class="wex-meta">
+                  <span class="wex-series" style="color:#4d9fff;background:#4d9fff22">3x12</span>
+                  <span class="wex-dica">Polia baixa, apoie no joelho, isole o movimento</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="wex">
+            <div class="wex-inner">
+              <div class="wex-svg"><svg viewBox="0 0 66 66" fill="none">
+  <style>
+    .curl{transform-origin:30px 30px;animation:curl 1.5s ease-in-out infinite alternate}
+    @keyframes curl{from{transform:rotate(20deg)}to{transform:rotate(-30deg)}}
+  </style>
+  <circle cx="33" cy="10" r="6" fill="#4d9fff" opacity=".9"/>
+  <rect x="30" y="16" width="6" height="16" rx="3" fill="#4d9fff" opacity=".7"/>
+  <line x1="33" y1="32" x2="22" y2="48" stroke="#4d9fff" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="33" y1="32" x2="44" y2="48" stroke="#4d9fff" stroke-width="2.5" stroke-linecap="round"/>
+  <g class="curl">
+    <line x1="30" y1="24" x2="14" y2="26" stroke="#4d9fff" stroke-width="2.5" stroke-linecap="round"/>
+    <line x1="14" y1="26" x2="10" y2="18" stroke="#4d9fff" stroke-width="2.5" stroke-linecap="round"/>
+    <circle cx="8" cy="16" r="4" fill="#ffffff20" stroke="#4d9fff" stroke-width="1.5"/>
+  </g>
+  <text x="33" y="62" text-anchor="middle" font-family="monospace" font-size="7" fill="#ffffff40">ROSCA</text>
+</svg></div>
+              <div class="wex-info">
+                <div class="wex-name">Rosca Martelo</div>
+                <div class="wex-muscle">Braquial · Braquiorradial</div>
+                <div class="wex-meta">
+                  <span class="wex-series" style="color:#4d9fff;background:#4d9fff22">3x12</span>
+                  <span class="wex-dica">Pegada neutra, movimento controlado</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="wex">
+            <div class="wex-inner">
+              <div class="wex-svg"><svg viewBox="0 0 66 66" fill="none">
+  <style>
+    .curl{transform-origin:30px 30px;animation:curl 1.5s ease-in-out infinite alternate}
+    @keyframes curl{from{transform:rotate(20deg)}to{transform:rotate(-30deg)}}
+  </style>
+  <circle cx="33" cy="10" r="6" fill="#4d9fff" opacity=".9"/>
+  <rect x="30" y="16" width="6" height="16" rx="3" fill="#4d9fff" opacity=".7"/>
+  <line x1="33" y1="32" x2="22" y2="48" stroke="#4d9fff" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="33" y1="32" x2="44" y2="48" stroke="#4d9fff" stroke-width="2.5" stroke-linecap="round"/>
+  <g class="curl">
+    <line x1="30" y1="24" x2="14" y2="26" stroke="#4d9fff" stroke-width="2.5" stroke-linecap="round"/>
+    <line x1="14" y1="26" x2="10" y2="18" stroke="#4d9fff" stroke-width="2.5" stroke-linecap="round"/>
+    <circle cx="8" cy="16" r="4" fill="#ffffff20" stroke="#4d9fff" stroke-width="1.5"/>
+  </g>
+  <text x="33" y="62" text-anchor="middle" font-family="monospace" font-size="7" fill="#ffffff40">ROSCA</text>
+</svg></div>
+              <div class="wex-info">
+                <div class="wex-name">Rosca Alternada Inclinada</div>
+                <div class="wex-muscle">Bíceps · Cabeça longa</div>
+                <div class="wex-meta">
+                  <span class="wex-series" style="color:#4d9fff;background:#4d9fff22">3x10</span>
+                  <span class="wex-dica">Banco 45°, braços caídos, amplitude total</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="wgroup">
+        <div class="wgroup-title" style="color:#ff7b3d;background:#ff7b3d22;border:1px solid #ff7b3d33">TRÍCEPS</div>
+        <div class="wexercises">
+          <div class="wex">
+            <div class="wex-inner">
+              <div class="wex-svg"><svg viewBox="0 0 66 66" fill="none">
+  <style>
+    .tri{transform-origin:36px 26px;animation:tri 1.5s ease-in-out infinite alternate}
+    @keyframes tri{from{transform:rotate(-25deg)}to{transform:rotate(15deg)}}
+  </style>
+  <circle cx="33" cy="10" r="6" fill="#ff7b3d" opacity=".9"/>
+  <rect x="30" y="16" width="6" height="16" rx="3" fill="#ff7b3d" opacity=".7"/>
+  <line x1="33" y1="32" x2="22" y2="48" stroke="#ff7b3d" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="33" y1="32" x2="44" y2="48" stroke="#ff7b3d" stroke-width="2.5" stroke-linecap="round"/>
+  <g class="tri">
+    <line x1="36" y1="22" x2="50" y2="20" stroke="#ff7b3d" stroke-width="2.5" stroke-linecap="round"/>
+    <line x1="50" y1="20" x2="54" y2="32" stroke="#ff7b3d" stroke-width="2.5" stroke-linecap="round"/>
+    <circle cx="55" cy="34" r="4" fill="#ffffff20" stroke="#ff7b3d" stroke-width="1.5"/>
+  </g>
+  <text x="33" y="62" text-anchor="middle" font-family="monospace" font-size="7" fill="#ffffff40">TRÍCEPS</text>
+</svg></div>
+              <div class="wex-info">
+                <div class="wex-name">Tríceps Pulley</div>
+                <div class="wex-muscle">Tríceps · Cabeça lateral</div>
+                <div class="wex-meta">
+                  <span class="wex-series" style="color:#ff7b3d;background:#ff7b3d22">4x12</span>
+                  <span class="wex-dica">Cotovelos fixos ao lado do corpo</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="wex">
+            <div class="wex-inner">
+              <div class="wex-svg"><svg viewBox="0 0 66 66" fill="none">
+  <style>
+    .tri{transform-origin:36px 26px;animation:tri 1.5s ease-in-out infinite alternate}
+    @keyframes tri{from{transform:rotate(-25deg)}to{transform:rotate(15deg)}}
+  </style>
+  <circle cx="33" cy="10" r="6" fill="#ff7b3d" opacity=".9"/>
+  <rect x="30" y="16" width="6" height="16" rx="3" fill="#ff7b3d" opacity=".7"/>
+  <line x1="33" y1="32" x2="22" y2="48" stroke="#ff7b3d" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="33" y1="32" x2="44" y2="48" stroke="#ff7b3d" stroke-width="2.5" stroke-linecap="round"/>
+  <g class="tri">
+    <line x1="36" y1="22" x2="50" y2="20" stroke="#ff7b3d" stroke-width="2.5" stroke-linecap="round"/>
+    <line x1="50" y1="20" x2="54" y2="32" stroke="#ff7b3d" stroke-width="2.5" stroke-linecap="round"/>
+    <circle cx="55" cy="34" r="4" fill="#ffffff20" stroke="#ff7b3d" stroke-width="1.5"/>
+  </g>
+  <text x="33" y="62" text-anchor="middle" font-family="monospace" font-size="7" fill="#ffffff40">TRÍCEPS</text>
+</svg></div>
+              <div class="wex-info">
+                <div class="wex-name">Tríceps Testa na Polia</div>
+                <div class="wex-muscle">Tríceps · Todas as cabeças</div>
+                <div class="wex-meta">
+                  <span class="wex-series" style="color:#ff7b3d;background:#ff7b3d22">3x12</span>
+                  <span class="wex-dica">Deitado, polia alta, cotovelos estáticos</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="wex">
+            <div class="wex-inner">
+              <div class="wex-svg"><svg viewBox="0 0 66 66" fill="none">
+  <style>
+    .tri{transform-origin:36px 26px;animation:tri 1.5s ease-in-out infinite alternate}
+    @keyframes tri{from{transform:rotate(-25deg)}to{transform:rotate(15deg)}}
+  </style>
+  <circle cx="33" cy="10" r="6" fill="#ff7b3d" opacity=".9"/>
+  <rect x="30" y="16" width="6" height="16" rx="3" fill="#ff7b3d" opacity=".7"/>
+  <line x1="33" y1="32" x2="22" y2="48" stroke="#ff7b3d" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="33" y1="32" x2="44" y2="48" stroke="#ff7b3d" stroke-width="2.5" stroke-linecap="round"/>
+  <g class="tri">
+    <line x1="36" y1="22" x2="50" y2="20" stroke="#ff7b3d" stroke-width="2.5" stroke-linecap="round"/>
+    <line x1="50" y1="20" x2="54" y2="32" stroke="#ff7b3d" stroke-width="2.5" stroke-linecap="round"/>
+    <circle cx="55" cy="34" r="4" fill="#ffffff20" stroke="#ff7b3d" stroke-width="1.5"/>
+  </g>
+  <text x="33" y="62" text-anchor="middle" font-family="monospace" font-size="7" fill="#ffffff40">TRÍCEPS</text>
+</svg></div>
+              <div class="wex-info">
+                <div class="wex-name">Tríceps Francês Cabo</div>
+                <div class="wex-muscle">Tríceps · Cabeça longa</div>
+                <div class="wex-meta">
+                  <span class="wex-series" style="color:#ff7b3d;background:#ff7b3d22">3x12</span>
+                  <span class="wex-dica">Em pé, corda atrás da cabeça, extensão completa</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div><div class="wmodal-overlay" id="wmB" onclick="closeWorkout(event,'B')">
+  <div class="wmodal">
+    <div class="wmodal-handle"></div>
+    <div class="wmodal-head">
+      <span class="wmodal-title">Treino B — Peito · Ombro · Trapézio</span>
+      <button class="wmodal-close" onclick="closeWorkout(null,'B')">✕</button>
+    </div>
+    <div class="wmodal-body">
+      <div class="wgroup">
+        <div class="wgroup-title" style="color:#39d98a;background:#39d98a22;border:1px solid #39d98a33">PEITO</div>
+        <div class="wexercises">
+          <div class="wex">
+            <div class="wex-inner">
+              <div class="wex-svg"><svg viewBox="0 0 66 66" fill="none">
+  <style>
+    .press{transform-origin:33px 30px;animation:press 1.5s ease-in-out infinite alternate}
+    @keyframes press{from{transform:translateY(6px)}to{transform:translateY(-6px)}}
+  </style>
+  <circle cx="33" cy="12" r="6" fill="#39d98a" opacity=".9"/>
+  <rect x="30" y="18" width="6" height="16" rx="3" fill="#39d98a" opacity=".7"/>
+  <line x1="33" y1="34" x2="22" y2="50" stroke="#39d98a" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="33" y1="34" x2="44" y2="50" stroke="#39d98a" stroke-width="2.5" stroke-linecap="round"/>
+  <g class="press">
+    <line x1="28" y1="22" x2="12" y2="28" stroke="#39d98a" stroke-width="2.5" stroke-linecap="round"/>
+    <line x1="38" y1="22" x2="54" y2="28" stroke="#39d98a" stroke-width="2.5" stroke-linecap="round"/>
+    <circle cx="9" cy="28" r="4" fill="#ffffff20" stroke="#39d98a" stroke-width="1.5"/>
+    <circle cx="57" cy="28" r="4" fill="#ffffff20" stroke="#39d98a" stroke-width="1.5"/>
+  </g>
+  <text x="33" y="62" text-anchor="middle" font-family="monospace" font-size="7" fill="#ffffff40">SUPINO</text>
+</svg></div>
+              <div class="wex-info">
+                <div class="wex-name">Supino Máquina</div>
+                <div class="wex-muscle">Peitoral maior</div>
+                <div class="wex-meta">
+                  <span class="wex-series" style="color:#39d98a;background:#39d98a22">4x10–12</span>
+                  <span class="wex-dica">Ajuste o assento para cotovelos na altura do peito</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="wex">
+            <div class="wex-inner">
+              <div class="wex-svg"><svg viewBox="0 0 66 66" fill="none">
+  <style>
+    .fly{transform-origin:33px 26px;animation:fly 1.5s ease-in-out infinite alternate}
+    @keyframes fly{from{transform:scaleX(.6)}to{transform:scaleX(1)}}
+  </style>
+  <circle cx="33" cy="12" r="6" fill="#39d98a" opacity=".9"/>
+  <rect x="30" y="18" width="6" height="16" rx="3" fill="#39d98a" opacity=".7"/>
+  <line x1="33" y1="34" x2="22" y2="50" stroke="#39d98a" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="33" y1="34" x2="44" y2="50" stroke="#39d98a" stroke-width="2.5" stroke-linecap="round"/>
+  <g class="fly">
+    <line x1="28" y1="24" x2="10" y2="24" stroke="#39d98a" stroke-width="2.5" stroke-linecap="round"/>
+    <line x1="38" y1="24" x2="56" y2="24" stroke="#39d98a" stroke-width="2.5" stroke-linecap="round"/>
+    <circle cx="8" cy="24" r="4" fill="#ffffff20" stroke="#39d98a" stroke-width="1.5"/>
+    <circle cx="58" cy="24" r="4" fill="#ffffff20" stroke="#39d98a" stroke-width="1.5"/>
+  </g>
+  <text x="33" y="62" text-anchor="middle" font-family="monospace" font-size="7" fill="#ffffff40">CROSSOVER</text>
+</svg></div>
+              <div class="wex-info">
+                <div class="wex-name">Crossover</div>
+                <div class="wex-muscle">Peitoral · Porção interna</div>
+                <div class="wex-meta">
+                  <span class="wex-series" style="color:#39d98a;background:#39d98a22">3x12–15</span>
+                  <span class="wex-dica">Leve inclinação, cruze as mãos na frente</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="wex">
+            <div class="wex-inner">
+              <div class="wex-svg"><svg viewBox="0 0 66 66" fill="none">
+  <style>
+    .dip{transform-origin:33px 30px;animation:dip 1.5s ease-in-out infinite alternate}
+    @keyframes dip{from{transform:translateY(8px)}to{transform:translateY(-4px)}}
+  </style>
+  <line x1="10" y1="20" x2="10" y2="50" stroke="#ffffff25" stroke-width="3" stroke-linecap="round"/>
+  <line x1="56" y1="20" x2="56" y2="50" stroke="#ffffff25" stroke-width="3" stroke-linecap="round"/>
+  <g class="dip">
+    <circle cx="33" cy="20" r="6" fill="#39d98a" opacity=".9"/>
+    <rect x="30" y="26" width="6" height="14" rx="3" fill="#39d98a" opacity=".7"/>
+    <line x1="33" y1="40" x2="24" y2="56" stroke="#39d98a" stroke-width="2.5" stroke-linecap="round"/>
+    <line x1="33" y1="40" x2="42" y2="56" stroke="#39d98a" stroke-width="2.5" stroke-linecap="round"/>
+    <line x1="28" y1="28" x2="10" y2="24" stroke="#39d98a" stroke-width="2.5" stroke-linecap="round"/>
+    <line x1="38" y1="28" x2="56" y2="24" stroke="#39d98a" stroke-width="2.5" stroke-linecap="round"/>
+  </g>
+  <text x="33" y="66" text-anchor="middle" font-family="monospace" font-size="7" fill="#ffffff40">MERGULHO</text>
+</svg></div>
+              <div class="wex-info">
+                <div class="wex-name">Mergulho (Dips)</div>
+                <div class="wex-muscle">Peitoral inferior · Tríceps</div>
+                <div class="wex-meta">
+                  <span class="wex-series" style="color:#39d98a;background:#39d98a22">3x10–12</span>
+                  <span class="wex-dica">Incline o corpo para frente para focar no peito</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="wgroup">
+        <div class="wgroup-title" style="color:#ffd166;background:#ffd16622;border:1px solid #ffd16633">OMBRO</div>
+        <div class="wexercises">
+          <div class="wex">
+            <div class="wex-inner">
+              <div class="wex-svg"><svg viewBox="0 0 66 66" fill="none">
+  <style>
+    .sh{transform-origin:33px 26px;animation:sh 1.5s ease-in-out infinite alternate}
+    @keyframes sh{from{transform:translateY(4px)}to{transform:translateY(-8px)}}
+  </style>
+  <circle cx="33" cy="12" r="6" fill="#ffd166" opacity=".9"/>
+  <rect x="30" y="18" width="6" height="16" rx="3" fill="#ffd166" opacity=".7"/>
+  <line x1="33" y1="34" x2="22" y2="50" stroke="#ffd166" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="33" y1="34" x2="44" y2="50" stroke="#ffd166" stroke-width="2.5" stroke-linecap="round"/>
+  <g class="sh">
+    <line x1="28" y1="22" x2="12" y2="22" stroke="#ffd166" stroke-width="2.5" stroke-linecap="round"/>
+    <line x1="38" y1="22" x2="54" y2="22" stroke="#ffd166" stroke-width="2.5" stroke-linecap="round"/>
+    <line x1="12" y1="22" x2="12" y2="34" stroke="#ffd166" stroke-width="2.5" stroke-linecap="round"/>
+    <line x1="54" y1="22" x2="54" y2="34" stroke="#ffd166" stroke-width="2.5" stroke-linecap="round"/>
+  </g>
+  <text x="33" y="62" text-anchor="middle" font-family="monospace" font-size="7" fill="#ffffff40">OMBRO</text>
+</svg></div>
+              <div class="wex-info">
+                <div class="wex-name">Desenvolvimento Máquina</div>
+                <div class="wex-muscle">Deltóide anterior e medial</div>
+                <div class="wex-meta">
+                  <span class="wex-series" style="color:#ffd166;background:#ffd16622">4x10–12</span>
+                  <span class="wex-dica">Empurre até extensão quase completa, não tranque</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="wex">
+            <div class="wex-inner">
+              <div class="wex-svg"><svg viewBox="0 0 66 66" fill="none">
+  <style>
+    .el{transform-origin:33px 26px;animation:el 1.5s ease-in-out infinite alternate}
+    @keyframes el{from{transform:rotate(20deg)}to{transform:rotate(-10deg)}}
+  </style>
+  <circle cx="33" cy="14" r="6" fill="#ffd166" opacity=".9"/>
+  <rect x="30" y="20" width="6" height="16" rx="3" fill="#ffd166" opacity=".7"/>
+  <line x1="33" y1="36" x2="24" y2="52" stroke="#ffd166" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="33" y1="36" x2="42" y2="52" stroke="#ffd166" stroke-width="2.5" stroke-linecap="round"/>
+  <g class="el">
+    <line x1="28" y1="24" x2="10" y2="34" stroke="#ffd166" stroke-width="2.5" stroke-linecap="round"/>
+    <circle cx="8" cy="35" r="4" fill="#ffffff20" stroke="#ffd166" stroke-width="1.5"/>
+    <line x1="38" y1="24" x2="56" y2="34" stroke="#ffd166" stroke-width="2.5" stroke-linecap="round"/>
+    <circle cx="58" cy="35" r="4" fill="#ffffff20" stroke="#ffd166" stroke-width="1.5"/>
+  </g>
+  <text x="33" y="62" text-anchor="middle" font-family="monospace" font-size="7" fill="#ffffff40">ELEV.LAT</text>
+</svg></div>
+              <div class="wex-info">
+                <div class="wex-name">Elevação Lateral Cabo</div>
+                <div class="wex-muscle">Deltóide medial</div>
+                <div class="wex-meta">
+                  <span class="wex-series" style="color:#ffd166;background:#ffd16622">3x15</span>
+                  <span class="wex-dica">Cabo na cintura, cotovelo levemente flexionado</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="wex">
+            <div class="wex-inner">
+              <div class="wex-svg"><svg viewBox="0 0 66 66" fill="none">
+  <style>
+    .fp{transform-origin:46px 28px;animation:fp 1.5s ease-in-out infinite alternate}
+    @keyframes fp{from{transform:translateX(8px)}to{transform:translateX(-6px)}}
+  </style>
+  <circle cx="22" cy="14" r="6" fill="#ffd166" opacity=".9"/>
+  <rect x="19" y="20" width="6" height="16" rx="3" fill="#ffd166" opacity=".7"/>
+  <line x1="22" y1="36" x2="14" y2="52" stroke="#ffd166" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="22" y1="36" x2="30" y2="52" stroke="#ffd166" stroke-width="2.5" stroke-linecap="round"/>
+  <rect x="56" y="10" width="4" height="36" rx="2" fill="#ffffff20"/>
+  <g class="fp">
+    <line x1="25" y1="22" x2="54" y2="18" stroke="#ffd166" stroke-width="2.5" stroke-linecap="round"/>
+    <line x1="25" y1="26" x2="54" y2="30" stroke="#ffd166" stroke-width="2.5" stroke-linecap="round"/>
+  </g>
+  <text x="33" y="62" text-anchor="middle" font-family="monospace" font-size="7" fill="#ffffff40">FACE PULL</text>
+</svg></div>
+              <div class="wex-info">
+                <div class="wex-name">Face Pull</div>
+                <div class="wex-muscle">Deltóide posterior · Manguito</div>
+                <div class="wex-meta">
+                  <span class="wex-series" style="color:#ffd166;background:#ffd16622">3x15</span>
+                  <span class="wex-dica">Corda na altura da cabeça, puxe para o rosto</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="wgroup">
+        <div class="wgroup-title" style="color:#e040fb;background:#e040fb22;border:1px solid #e040fb33">TRAPÉZIO</div>
+        <div class="wexercises">
+          <div class="wex">
+            <div class="wex-inner">
+              <div class="wex-svg"><svg viewBox="0 0 66 66" fill="none">
+  <style>
+    .shrug{animation:shrug 1.5s ease-in-out infinite alternate;transform-origin:33px 22px}
+    @keyframes shrug{from{transform:translateY(0)}to{transform:translateY(-8px)}}
+  </style>
+  <g class="shrug">
+    <circle cx="33" cy="12" r="6" fill="#e040fb" opacity=".9"/>
+    <rect x="30" y="18" width="6" height="10" rx="3" fill="#e040fb" opacity=".7"/>
+    <line x1="28" y1="20" x2="12" y2="26" stroke="#e040fb" stroke-width="3" stroke-linecap="round"/>
+    <line x1="38" y1="20" x2="54" y2="26" stroke="#e040fb" stroke-width="3" stroke-linecap="round"/>
+  </g>
+  <rect x="30" y="28" width="6" height="18" rx="3" fill="#e040fb" opacity=".4"/>
+  <line x1="33" y1="46" x2="24" y2="60" stroke="#e040fb" stroke-width="2.5" stroke-linecap="round" opacity=".4"/>
+  <line x1="33" y1="46" x2="42" y2="60" stroke="#e040fb" stroke-width="2.5" stroke-linecap="round" opacity=".4"/>
+  <text x="33" y="64" text-anchor="middle" font-family="monospace" font-size="7" fill="#ffffff40">TRAPÉZIO</text>
+</svg></div>
+              <div class="wex-info">
+                <div class="wex-name">Encolhimento Barra</div>
+                <div class="wex-muscle">Trapézio superior</div>
+                <div class="wex-meta">
+                  <span class="wex-series" style="color:#e040fb;background:#e040fb22">4x12</span>
+                  <span class="wex-dica">Suba os ombros em direção às orelhas, sem girar</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div><div class="wmodal-overlay" id="wmC" onclick="closeWorkout(event,'C')">
+  <div class="wmodal">
+    <div class="wmodal-handle"></div>
+    <div class="wmodal-head">
+      <span class="wmodal-title">Treino C — Inferior</span>
+      <button class="wmodal-close" onclick="closeWorkout(null,'C')">✕</button>
+    </div>
+    <div class="wmodal-body">
+      <div class="wgroup">
+        <div class="wgroup-title" style="color:#ff6b9d;background:#ff6b9d22;border:1px solid #ff6b9d33">QUADRÍCEPS</div>
+        <div class="wexercises">
+          <div class="wex">
+            <div class="wex-inner">
+              <div class="wex-svg"><svg viewBox="0 0 66 66" fill="none">
+  <style>
+    .lp{transform-origin:20px 40px;animation:lp 1.5s ease-in-out infinite alternate}
+    @keyframes lp{from{transform:rotate(-20deg)}to{transform:rotate(10deg)}}
+  </style>
+  <rect x="4" y="30" width="28" height="30" rx="4" fill="#ffffff08"/>
+  <circle cx="18" cy="16" r="6" fill="#ff6b9d" opacity=".9"/>
+  <rect x="14" y="22" width="6" height="12" rx="3" fill="#ff6b9d" opacity=".7" transform="rotate(-30,17,28)"/>
+  <g class="lp">
+    <line x1="20" y1="34" x2="20" y2="52" stroke="#ff6b9d" stroke-width="3" stroke-linecap="round"/>
+    <line x1="20" y1="52" x2="10" y2="60" stroke="#ff6b9d" stroke-width="3" stroke-linecap="round"/>
+    <rect x="32" y="36" width="26" height="18" rx="4" fill="#ffffff10" stroke="#ff6b9d" stroke-width="1.5"/>
+  </g>
+  <text x="33" y="66" text-anchor="middle" font-family="monospace" font-size="7" fill="#ffffff40">LEG PRESS</text>
+</svg></div>
+              <div class="wex-info">
+                <div class="wex-name">Leg Press</div>
+                <div class="wex-muscle">Quadríceps · Glúteos</div>
+                <div class="wex-meta">
+                  <span class="wex-series" style="color:#ff6b9d;background:#ff6b9d22">4x10–12</span>
+                  <span class="wex-dica">Pés na largura dos ombros, desça até 90°</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="wex">
+            <div class="wex-inner">
+              <div class="wex-svg"><svg viewBox="0 0 66 66" fill="none">
+  <style>
+    .ext{transform-origin:20px 40px;animation:ext 1.5s ease-in-out infinite alternate}
+    @keyframes ext{from{transform:rotate(30deg)}to{transform:rotate(-5deg)}}
+  </style>
+  <rect x="4" y="28" width="28" height="32" rx="4" fill="#ffffff08"/>
+  <circle cx="18" cy="14" r="6" fill="#ff6b9d" opacity=".9"/>
+  <rect x="15" y="20" width="6" height="14" rx="3" fill="#ff6b9d" opacity=".7"/>
+  <g class="ext">
+    <line x1="20" y1="34" x2="20" y2="52" stroke="#ff6b9d" stroke-width="3" stroke-linecap="round"/>
+    <line x1="20" y1="52" x2="34" y2="56" stroke="#ff6b9d" stroke-width="3" stroke-linecap="round"/>
+    <circle cx="36" cy="57" r="5" fill="#ffffff15" stroke="#ff6b9d" stroke-width="1.5"/>
+  </g>
+  <text x="40" y="62" text-anchor="middle" font-family="monospace" font-size="7" fill="#ffffff40">EXTENSORA</text>
+</svg></div>
+              <div class="wex-info">
+                <div class="wex-name">Extensora</div>
+                <div class="wex-muscle">Quadríceps</div>
+                <div class="wex-meta">
+                  <span class="wex-series" style="color:#ff6b9d;background:#ff6b9d22">3x12–15</span>
+                  <span class="wex-dica">Extensão completa, segure 1s no topo</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="wex">
+            <div class="wex-inner">
+              <div class="wex-svg"><svg viewBox="0 0 66 66" fill="none">
+  <style>
+    .sq{transform-origin:33px 30px;animation:sq 1.5s ease-in-out infinite alternate}
+    @keyframes sq{from{transform:scaleY(.75) translateY(8px)}to{transform:scaleY(1) translateY(0)}}
+  </style>
+  <circle cx="33" cy="10" r="6" fill="#ff6b9d" opacity=".9"/>
+  <g class="sq">
+    <rect x="30" y="16" width="6" height="16" rx="3" fill="#ff6b9d" opacity=".7"/>
+    <line x1="33" y1="32" x2="20" y2="50" stroke="#ff6b9d" stroke-width="2.5" stroke-linecap="round"/>
+    <line x1="33" y1="32" x2="46" y2="50" stroke="#ff6b9d" stroke-width="2.5" stroke-linecap="round"/>
+    <line x1="20" y1="50" x2="16" y2="62" stroke="#ff6b9d" stroke-width="2.5" stroke-linecap="round"/>
+    <line x1="46" y1="50" x2="50" y2="62" stroke="#ff6b9d" stroke-width="2.5" stroke-linecap="round"/>
+    <line x1="28" y1="20" x2="14" y2="22" stroke="#ff6b9d" stroke-width="2.5" stroke-linecap="round"/>
+    <line x1="38" y1="20" x2="52" y2="22" stroke="#ff6b9d" stroke-width="2.5" stroke-linecap="round"/>
+  </g>
+  <text x="33" y="66" text-anchor="middle" font-family="monospace" font-size="7" fill="#ffffff40">AGACHO</text>
+</svg></div>
+              <div class="wex-info">
+                <div class="wex-name">Agachamento</div>
+                <div class="wex-muscle">Quadríceps · Glúteos · Posterior</div>
+                <div class="wex-meta">
+                  <span class="wex-series" style="color:#ff6b9d;background:#ff6b9d22">4x10</span>
+                  <span class="wex-dica">Coluna reta, joelhos alinhados com os pés</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="wgroup">
+        <div class="wgroup-title" style="color:#4d9fff;background:#4d9fff22;border:1px solid #4d9fff33">POSTERIOR</div>
+        <div class="wexercises">
+          <div class="wex">
+            <div class="wex-inner">
+              <div class="wex-svg"><svg viewBox="0 0 66 66" fill="none">
+  <style>
+    .lc{transform-origin:20px 32px;animation:lc 1.5s ease-in-out infinite alternate}
+    @keyframes lc{from{transform:rotate(0deg)}to{transform:rotate(-40deg)}}
+  </style>
+  <rect x="4" y="28" width="38" height="8" rx="4" fill="#ffffff10"/>
+  <circle cx="20" cy="20" r="6" fill="#4d9fff" opacity=".9"/>
+  <rect x="17" y="26" width="6" height="10" rx="3" fill="#4d9fff" opacity=".7"/>
+  <g class="lc">
+    <line x1="20" y1="36" x2="20" y2="54" stroke="#4d9fff" stroke-width="3" stroke-linecap="round"/>
+    <line x1="20" y1="54" x2="28" y2="60" stroke="#4d9fff" stroke-width="3" stroke-linecap="round"/>
+    <circle cx="30" cy="61" r="4" fill="#ffffff15" stroke="#4d9fff" stroke-width="1.5"/>
+  </g>
+  <text x="33" y="66" text-anchor="middle" font-family="monospace" font-size="7" fill="#ffffff40">POSTERIOR</text>
+</svg></div>
+              <div class="wex-info">
+                <div class="wex-name">Mesa Flexora</div>
+                <div class="wex-muscle">Isquiotibiais</div>
+                <div class="wex-meta">
+                  <span class="wex-series" style="color:#4d9fff;background:#4d9fff22">3x12</span>
+                  <span class="wex-dica">Quadril fixo na mesa, amplitude total</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="wex">
+            <div class="wex-inner">
+              <div class="wex-svg"><svg viewBox="0 0 66 66" fill="none">
+  <style>
+    .st{transform-origin:33px 28px;animation:st 1.5s ease-in-out infinite alternate}
+    @keyframes st{from{transform:rotate(-20deg)}to{transform:rotate(0deg)}}
+  </style>
+  <g class="st">
+    <circle cx="33" cy="10" r="6" fill="#4d9fff" opacity=".9"/>
+    <rect x="30" y="16" width="6" height="16" rx="3" fill="#4d9fff" opacity=".7"/>
+    <line x1="28" y1="20" x2="12" y2="22" stroke="#4d9fff" stroke-width="2.5" stroke-linecap="round"/>
+    <line x1="38" y1="20" x2="54" y2="22" stroke="#4d9fff" stroke-width="2.5" stroke-linecap="round"/>
+  </g>
+  <line x1="30" y1="32" x2="26" y2="52" stroke="#4d9fff" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="36" y1="32" x2="40" y2="52" stroke="#4d9fff" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="26" y1="52" x2="20" y2="62" stroke="#4d9fff" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="40" y1="52" x2="46" y2="62" stroke="#4d9fff" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="10" y1="24" x2="56" y2="24" stroke="#ffffff15" stroke-width="2" stroke-dasharray="4,3"/>
+  <text x="33" y="66" text-anchor="middle" font-family="monospace" font-size="7" fill="#ffffff40">STIFF</text>
+</svg></div>
+              <div class="wex-info">
+                <div class="wex-name">Stiff</div>
+                <div class="wex-muscle">Posterior · Glúteos</div>
+                <div class="wex-meta">
+                  <span class="wex-series" style="color:#4d9fff;background:#4d9fff22">3x12</span>
+                  <span class="wex-dica">Joelhos semi-flexionados, empurre o quadril para trás</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="wgroup">
+        <div class="wgroup-title" style="color:#00e5cc;background:#00e5cc22;border:1px solid #00e5cc33">GLÚTEO</div>
+        <div class="wexercises">
+          <div class="wex">
+            <div class="wex-inner">
+              <div class="wex-svg"><svg viewBox="0 0 66 66" fill="none">
+  <style>
+    .ab{transform-origin:33px 40px;animation:ab 1.5s ease-in-out infinite alternate}
+    @keyframes ab{from{transform:scaleX(.7)}to{transform:scaleX(1)}}
+  </style>
+  <rect x="10" y="38" width="46" height="8" rx="4" fill="#ffffff10"/>
+  <circle cx="33" cy="20" r="6" fill="#00e5cc" opacity=".9"/>
+  <rect x="30" y="26" width="6" height="14" rx="3" fill="#00e5cc" opacity=".7"/>
+  <g class="ab">
+    <line x1="27" y1="40" x2="12" y2="54" stroke="#00e5cc" stroke-width="3" stroke-linecap="round"/>
+    <line x1="39" y1="40" x2="54" y2="54" stroke="#00e5cc" stroke-width="3" stroke-linecap="round"/>
+  </g>
+  <text x="33" y="66" text-anchor="middle" font-family="monospace" font-size="7" fill="#ffffff40">ABDUTORA</text>
+</svg></div>
+              <div class="wex-info">
+                <div class="wex-name">Cadeira Abdutora</div>
+                <div class="wex-muscle">Glúteo médio · Abdutor</div>
+                <div class="wex-meta">
+                  <span class="wex-series" style="color:#00e5cc;background:#00e5cc22">3x15</span>
+                  <span class="wex-dica">Movimento controlado, não jogue peso</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="wex">
+            <div class="wex-inner">
+              <div class="wex-svg"><svg viewBox="0 0 66 66" fill="none">
+  <style>
+    .gl{transform-origin:33px 44px;animation:gl 1.5s ease-in-out infinite alternate}
+    @keyframes gl{from{transform:rotate(-15deg)}to{transform:rotate(5deg)}}
+  </style>
+  <rect x="8" y="42" width="50" height="6" rx="3" fill="#ffffff10"/>
+  <circle cx="33" cy="24" r="6" fill="#00e5cc" opacity=".9"/>
+  <rect x="30" y="30" width="6" height="14" rx="3" fill="#00e5cc" opacity=".7"/>
+  <g class="gl">
+    <line x1="30" y1="44" x2="18" y2="58" stroke="#00e5cc" stroke-width="3" stroke-linecap="round"/>
+    <line x1="36" y1="44" x2="48" y2="58" stroke="#00e5cc" stroke-width="3" stroke-linecap="round"/>
+  </g>
+  <line x1="28" y1="32" x2="14" y2="36" stroke="#00e5cc" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="38" y1="32" x2="52" y2="36" stroke="#00e5cc" stroke-width="2.5" stroke-linecap="round"/>
+  <text x="33" y="66" text-anchor="middle" font-family="monospace" font-size="7" fill="#ffffff40">GLÚTEO</text>
+</svg></div>
+              <div class="wex-info">
+                <div class="wex-name">Elevação Pélvica</div>
+                <div class="wex-muscle">Glúteo máximo</div>
+                <div class="wex-meta">
+                  <span class="wex-series" style="color:#00e5cc;background:#00e5cc22">4x12</span>
+                  <span class="wex-dica">Ombros no banco, esprema o glúteo no topo</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="wmodal-overlay" id="wmSA" onclick="closeWorkout(event,'SA')">
+  <div class="wmodal">
+    <div class="wmodal-handle"></div>
+    <div class="wmodal-head">
+      <span class="wmodal-title">Treino A — Superior</span>
+      <button class="wmodal-close" onclick="closeWorkout(null,'SA')">✕</button>
+    </div>
+    <div class="wmodal-body">
+      <div class="wgroup"><div class="wgroup-title" style="color:#39d98a;background:#39d98a22;border:1px solid #39d98a33">PEITO</div><div class="wexercises">
+        <div class="wex"><div class="wex-inner"><div class="wex-svg"><svg viewBox="0 0 66 66" fill="none"><style>.pressS{transform-origin:33px 30px;animation:pressS 1.5s ease-in-out infinite alternate}@keyframes pressS{from{transform:translateY(6px)}to{transform:translateY(-6px)}}</style><circle cx="33" cy="12" r="6" fill="#39d98a" opacity=".9"/><rect x="30" y="18" width="6" height="16" rx="3" fill="#39d98a" opacity=".7"/><line x1="33" y1="34" x2="22" y2="50" stroke="#39d98a" stroke-width="2.5" stroke-linecap="round"/><line x1="33" y1="34" x2="44" y2="50" stroke="#39d98a" stroke-width="2.5" stroke-linecap="round"/><g class="pressS"><line x1="28" y1="22" x2="12" y2="28" stroke="#39d98a" stroke-width="2.5" stroke-linecap="round"/><line x1="38" y1="22" x2="54" y2="28" stroke="#39d98a" stroke-width="2.5" stroke-linecap="round"/><circle cx="9" cy="28" r="4" fill="#ffffff20" stroke="#39d98a" stroke-width="1.5"/><circle cx="57" cy="28" r="4" fill="#ffffff20" stroke="#39d98a" stroke-width="1.5"/></g></svg></div><div class="wex-info"><div class="wex-name">Supino Máquina</div><div class="wex-muscle">Peitoral maior</div><div class="wex-meta"><span class="wex-series" style="color:#39d98a;background:#39d98a22">3x12</span><span class="wex-dica">Ajuste o assento para cotovelos na altura do peito</span></div></div></div></div>
+        <div class="wex"><div class="wex-inner"><div class="wex-svg"><svg viewBox="0 0 66 66" fill="none"><style>.flyS{transform-origin:33px 26px;animation:flyS 1.5s ease-in-out infinite alternate}@keyframes flyS{from{transform:scaleX(.6)}to{transform:scaleX(1)}}</style><circle cx="33" cy="12" r="6" fill="#39d98a" opacity=".9"/><rect x="30" y="18" width="6" height="16" rx="3" fill="#39d98a" opacity=".7"/><line x1="33" y1="34" x2="22" y2="50" stroke="#39d98a" stroke-width="2.5" stroke-linecap="round"/><line x1="33" y1="34" x2="44" y2="50" stroke="#39d98a" stroke-width="2.5" stroke-linecap="round"/><g class="flyS"><line x1="28" y1="24" x2="10" y2="24" stroke="#39d98a" stroke-width="2.5" stroke-linecap="round"/><line x1="38" y1="24" x2="56" y2="24" stroke="#39d98a" stroke-width="2.5" stroke-linecap="round"/><circle cx="8" cy="24" r="4" fill="#ffffff20" stroke="#39d98a" stroke-width="1.5"/><circle cx="58" cy="24" r="4" fill="#ffffff20" stroke="#39d98a" stroke-width="1.5"/></g></svg></div><div class="wex-info"><div class="wex-name">Crossover</div><div class="wex-muscle">Peitoral · Porção interna</div><div class="wex-meta"><span class="wex-series" style="color:#39d98a;background:#39d98a22">3x15</span><span class="wex-dica">Leve inclinação para frente, cruze as mãos na frente</span></div></div></div></div>
+      </div></div>
+      <div class="wgroup"><div class="wgroup-title" style="color:#00e5cc;background:#00e5cc22;border:1px solid #00e5cc33">COSTAS</div><div class="wexercises">
+        <div class="wex"><div class="wex-inner"><div class="wex-svg"><svg viewBox="0 0 66 66" fill="none"><style>.arm{transform-origin:33px 20px;animation:pull 1.5s ease-in-out infinite alternate}@keyframes pull{from{transform:translateY(-8px)}to{transform:translateY(4px)}}</style><circle cx="33" cy="10" r="6" fill="#ff6b9d" opacity=".9"/><rect x="30" y="16" width="6" height="18" rx="3" fill="#ff6b9d" opacity=".7"/><line x1="15" y1="4" x2="51" y2="4" stroke="#ffffff30" stroke-width="2" stroke-linecap="round"/><g class="arm"><line x1="33" y1="16" x2="15" y2="5" stroke="#ff6b9d" stroke-width="2.5" stroke-linecap="round"/><line x1="33" y1="16" x2="51" y2="5" stroke="#ff6b9d" stroke-width="2.5" stroke-linecap="round"/><line x1="28" y1="34" x2="20" y2="50" stroke="#ff6b9d" stroke-width="2.5" stroke-linecap="round"/><line x1="38" y1="34" x2="46" y2="50" stroke="#ff6b9d" stroke-width="2.5" stroke-linecap="round"/></g></svg></div><div class="wex-info"><div class="wex-name">Puxada Frontal</div><div class="wex-muscle">Dorsal · Grande dorsal</div><div class="wex-meta"><span class="wex-series" style="color:#00e5cc;background:#00e5cc22">3x12</span><span class="wex-dica">Puxe até o peito, cotovelos apontando para baixo</span></div></div></div></div>
+      </div></div>
+      <div class="wgroup"><div class="wgroup-title" style="color:#ffd166;background:#ffd16622;border:1px solid #ffd16633">OMBRO</div><div class="wexercises">
+        <div class="wex"><div class="wex-inner"><div class="wex-svg"><svg viewBox="0 0 66 66" fill="none"><style>.elS{transform-origin:33px 26px;animation:elS 1.5s ease-in-out infinite alternate}@keyframes elS{from{transform:rotate(20deg)}to{transform:rotate(-10deg)}}</style><circle cx="33" cy="14" r="6" fill="#ffd166" opacity=".9"/><rect x="30" y="20" width="6" height="16" rx="3" fill="#ffd166" opacity=".7"/><line x1="33" y1="36" x2="24" y2="52" stroke="#ffd166" stroke-width="2.5" stroke-linecap="round"/><line x1="33" y1="36" x2="42" y2="52" stroke="#ffd166" stroke-width="2.5" stroke-linecap="round"/><g class="elS"><line x1="28" y1="24" x2="10" y2="34" stroke="#ffd166" stroke-width="2.5" stroke-linecap="round"/><circle cx="8" cy="35" r="4" fill="#ffffff20" stroke="#ffd166" stroke-width="1.5"/><line x1="38" y1="24" x2="56" y2="34" stroke="#ffd166" stroke-width="2.5" stroke-linecap="round"/><circle cx="58" cy="35" r="4" fill="#ffffff20" stroke="#ffd166" stroke-width="1.5"/></g></svg></div><div class="wex-info"><div class="wex-name">Elevação Lateral Cabo</div><div class="wex-muscle">Deltóide medial</div><div class="wex-meta"><span class="wex-series" style="color:#ffd166;background:#ffd16622">3x15</span><span class="wex-dica">Cotovelo levemente flexionado, suba até a altura do ombro</span></div></div></div></div>
+      </div></div>
+      <div class="wgroup"><div class="wgroup-title" style="color:#4d9fff;background:#4d9fff22;border:1px solid #4d9fff33">BÍCEPS</div><div class="wexercises">
+        <div class="wex"><div class="wex-inner"><div class="wex-svg"><svg viewBox="0 0 66 66" fill="none"><style>.curlS{transform-origin:30px 30px;animation:curlS 1.5s ease-in-out infinite alternate}@keyframes curlS{from{transform:rotate(20deg)}to{transform:rotate(-30deg)}}</style><circle cx="33" cy="10" r="6" fill="#4d9fff" opacity=".9"/><rect x="30" y="16" width="6" height="16" rx="3" fill="#4d9fff" opacity=".7"/><line x1="33" y1="32" x2="22" y2="48" stroke="#4d9fff" stroke-width="2.5" stroke-linecap="round"/><line x1="33" y1="32" x2="44" y2="48" stroke="#4d9fff" stroke-width="2.5" stroke-linecap="round"/><g class="curlS"><line x1="30" y1="24" x2="14" y2="26" stroke="#4d9fff" stroke-width="2.5" stroke-linecap="round"/><line x1="14" y1="26" x2="10" y2="18" stroke="#4d9fff" stroke-width="2.5" stroke-linecap="round"/><circle cx="8" cy="16" r="4" fill="#ffffff20" stroke="#4d9fff" stroke-width="1.5"/></g></svg></div><div class="wex-info"><div class="wex-name">Rosca Direta na Polia</div><div class="wex-muscle">Bíceps braquial</div><div class="wex-meta"><span class="wex-series" style="color:#4d9fff;background:#4d9fff22">3x12</span><span class="wex-dica">Cotovelos fixos, contração máxima no topo</span></div></div></div></div>
+        <div class="wex"><div class="wex-inner"><div class="wex-svg"><svg viewBox="0 0 66 66" fill="none"><style>.curlS{transform-origin:30px 30px;animation:curlS 1.5s ease-in-out infinite alternate}@keyframes curlS{from{transform:rotate(20deg)}to{transform:rotate(-30deg)}}</style><circle cx="33" cy="10" r="6" fill="#4d9fff" opacity=".9"/><rect x="30" y="16" width="6" height="16" rx="3" fill="#4d9fff" opacity=".7"/><line x1="33" y1="32" x2="22" y2="48" stroke="#4d9fff" stroke-width="2.5" stroke-linecap="round"/><line x1="33" y1="32" x2="44" y2="48" stroke="#4d9fff" stroke-width="2.5" stroke-linecap="round"/><g class="curlS"><line x1="30" y1="24" x2="14" y2="26" stroke="#4d9fff" stroke-width="2.5" stroke-linecap="round"/><line x1="14" y1="26" x2="10" y2="18" stroke="#4d9fff" stroke-width="2.5" stroke-linecap="round"/><circle cx="8" cy="16" r="4" fill="#ffffff20" stroke="#4d9fff" stroke-width="1.5"/></g></svg></div><div class="wex-info"><div class="wex-name">Rosca Martelo</div><div class="wex-muscle">Braquial · Braquiorradial</div><div class="wex-meta"><span class="wex-series" style="color:#4d9fff;background:#4d9fff22">3x12</span><span class="wex-dica">Pegada neutra, movimento controlado e lento</span></div></div></div></div>
+      </div></div>
+      <div class="wgroup"><div class="wgroup-title" style="color:#ff7b3d;background:#ff7b3d22;border:1px solid #ff7b3d33">TRÍCEPS</div><div class="wexercises">
+        <div class="wex"><div class="wex-inner"><div class="wex-svg"><svg viewBox="0 0 66 66" fill="none"><style>.triS{transform-origin:36px 26px;animation:triS 1.5s ease-in-out infinite alternate}@keyframes triS{from{transform:rotate(-25deg)}to{transform:rotate(15deg)}}</style><circle cx="33" cy="10" r="6" fill="#ff7b3d" opacity=".9"/><rect x="30" y="16" width="6" height="16" rx="3" fill="#ff7b3d" opacity=".7"/><line x1="33" y1="32" x2="22" y2="48" stroke="#ff7b3d" stroke-width="2.5" stroke-linecap="round"/><line x1="33" y1="32" x2="44" y2="48" stroke="#ff7b3d" stroke-width="2.5" stroke-linecap="round"/><g class="triS"><line x1="36" y1="22" x2="50" y2="20" stroke="#ff7b3d" stroke-width="2.5" stroke-linecap="round"/><line x1="50" y1="20" x2="54" y2="32" stroke="#ff7b3d" stroke-width="2.5" stroke-linecap="round"/><circle cx="55" cy="34" r="4" fill="#ffffff20" stroke="#ff7b3d" stroke-width="1.5"/></g></svg></div><div class="wex-info"><div class="wex-name">Tríceps Pulley</div><div class="wex-muscle">Tríceps · Cabeça lateral</div><div class="wex-meta"><span class="wex-series" style="color:#ff7b3d;background:#ff7b3d22">3x12</span><span class="wex-dica">Cotovelos fixos ao lado do corpo, extensão completa</span></div></div></div></div>
+        <div class="wex"><div class="wex-inner"><div class="wex-svg"><svg viewBox="0 0 66 66" fill="none"><style>.triS{transform-origin:36px 26px;animation:triS 1.5s ease-in-out infinite alternate}@keyframes triS{from{transform:rotate(-25deg)}to{transform:rotate(15deg)}}</style><circle cx="33" cy="10" r="6" fill="#ff7b3d" opacity=".9"/><rect x="30" y="16" width="6" height="16" rx="3" fill="#ff7b3d" opacity=".7"/><line x1="33" y1="32" x2="22" y2="48" stroke="#ff7b3d" stroke-width="2.5" stroke-linecap="round"/><line x1="33" y1="32" x2="44" y2="48" stroke="#ff7b3d" stroke-width="2.5" stroke-linecap="round"/><g class="triS"><line x1="36" y1="22" x2="50" y2="20" stroke="#ff7b3d" stroke-width="2.5" stroke-linecap="round"/><line x1="50" y1="20" x2="54" y2="32" stroke="#ff7b3d" stroke-width="2.5" stroke-linecap="round"/><circle cx="55" cy="34" r="4" fill="#ffffff20" stroke="#ff7b3d" stroke-width="1.5"/></g></svg></div><div class="wex-info"><div class="wex-name">Tríceps Francês Cabo</div><div class="wex-muscle">Tríceps · Cabeça longa</div><div class="wex-meta"><span class="wex-series" style="color:#ff7b3d;background:#ff7b3d22">3x12</span><span class="wex-dica">Corda atrás da cabeça, cotovelos estáticos</span></div></div></div></div>
+      </div></div>
+    </div>
+  </div>
+</div><div class="wmodal-overlay" id="wmSB" onclick="closeWorkout(event,'SB')">
+  <div class="wmodal">
+    <div class="wmodal-handle"></div>
+    <div class="wmodal-head">
+      <span class="wmodal-title">Treino B — Inferior (ênfase glúteo)</span>
+      <button class="wmodal-close" onclick="closeWorkout(null,'SB')">✕</button>
+    </div>
+    <div class="wmodal-body">
+      <div class="wgroup"><div class="wgroup-title" style="color:#ff6b9d;background:#ff6b9d22;border:1px solid #ff6b9d33">GLÚTEO</div><div class="wexercises">
+        <div class="wex"><div class="wex-inner"><div class="wex-svg"><svg viewBox="0 0 66 66" fill="none"><style>.glS{transform-origin:33px 44px;animation:glS 1.5s ease-in-out infinite alternate}@keyframes glS{from{transform:rotate(-15deg)}to{transform:rotate(5deg)}}</style><rect x="8" y="42" width="50" height="6" rx="3" fill="#ffffff10"/><circle cx="33" cy="24" r="6" fill="#ff6b9d" opacity=".9"/><rect x="30" y="30" width="6" height="14" rx="3" fill="#ff6b9d" opacity=".7"/><g class="glS"><line x1="30" y1="44" x2="18" y2="58" stroke="#ff6b9d" stroke-width="3" stroke-linecap="round"/><line x1="36" y1="44" x2="48" y2="58" stroke="#ff6b9d" stroke-width="3" stroke-linecap="round"/></g><line x1="28" y1="32" x2="14" y2="36" stroke="#ff6b9d" stroke-width="2.5" stroke-linecap="round"/><line x1="38" y1="32" x2="52" y2="36" stroke="#ff6b9d" stroke-width="2.5" stroke-linecap="round"/></svg></div><div class="wex-info"><div class="wex-name">Elevação Pélvica</div><div class="wex-muscle">Glúteo máximo</div><div class="wex-meta"><span class="wex-series" style="color:#ff6b9d;background:#ff6b9d22">4x15</span><span class="wex-dica">Ombros no banco, empurre o quadril para cima, esprema no topo</span></div></div></div></div>
+        <div class="wex"><div class="wex-inner"><div class="wex-svg"><svg viewBox="0 0 66 66" fill="none"><style>.abS{transform-origin:33px 40px;animation:abS 1.5s ease-in-out infinite alternate}@keyframes abS{from{transform:scaleX(.65)}to{transform:scaleX(1)}}</style><rect x="10" y="38" width="46" height="8" rx="4" fill="#ffffff10"/><circle cx="33" cy="20" r="6" fill="#ff6b9d" opacity=".9"/><rect x="30" y="26" width="6" height="14" rx="3" fill="#ff6b9d" opacity=".7"/><g class="abS"><line x1="27" y1="40" x2="12" y2="54" stroke="#ff6b9d" stroke-width="3" stroke-linecap="round"/><line x1="39" y1="40" x2="54" y2="54" stroke="#ff6b9d" stroke-width="3" stroke-linecap="round"/></g></svg></div><div class="wex-info"><div class="wex-name">Cadeira Abdutora</div><div class="wex-muscle">Glúteo médio · Abdutor</div><div class="wex-meta"><span class="wex-series" style="color:#ff6b9d;background:#ff6b9d22">4x15</span><span class="wex-dica">Movimento controlado, segure 1s no final — não jogue o peso</span></div></div></div></div>
+      </div></div>
+      <div class="wgroup"><div class="wgroup-title" style="color:#ffd166;background:#ffd16622;border:1px solid #ffd16633">QUADRÍCEPS</div><div class="wexercises">
+        <div class="wex"><div class="wex-inner"><div class="wex-svg"><svg viewBox="0 0 66 66" fill="none"><style>.lpS{transform-origin:20px 40px;animation:lpS 1.5s ease-in-out infinite alternate}@keyframes lpS{from{transform:rotate(-20deg)}to{transform:rotate(10deg)}}</style><rect x="4" y="30" width="28" height="30" rx="4" fill="#ffffff08"/><circle cx="18" cy="16" r="6" fill="#ffd166" opacity=".9"/><g class="lpS"><line x1="20" y1="34" x2="20" y2="52" stroke="#ffd166" stroke-width="3" stroke-linecap="round"/><line x1="20" y1="52" x2="10" y2="60" stroke="#ffd166" stroke-width="3" stroke-linecap="round"/><rect x="32" y="36" width="26" height="18" rx="4" fill="#ffffff10" stroke="#ffd166" stroke-width="1.5"/></g></svg></div><div class="wex-info"><div class="wex-name">Leg Press</div><div class="wex-muscle">Quadríceps · Glúteos</div><div class="wex-meta"><span class="wex-series" style="color:#ffd166;background:#ffd16622">4x12</span><span class="wex-dica">Pés afastados e mais alto na plataforma — mais ênfase no glúteo</span></div></div></div></div>
+        <div class="wex"><div class="wex-inner"><div class="wex-svg"><svg viewBox="0 0 66 66" fill="none"><style>.extS{transform-origin:20px 40px;animation:extS 1.5s ease-in-out infinite alternate}@keyframes extS{from{transform:rotate(30deg)}to{transform:rotate(-5deg)}}</style><rect x="4" y="28" width="28" height="32" rx="4" fill="#ffffff08"/><circle cx="18" cy="14" r="6" fill="#ffd166" opacity=".9"/><rect x="15" y="20" width="6" height="14" rx="3" fill="#ffd166" opacity=".7"/><g class="extS"><line x1="20" y1="34" x2="20" y2="52" stroke="#ffd166" stroke-width="3" stroke-linecap="round"/><line x1="20" y1="52" x2="34" y2="56" stroke="#ffd166" stroke-width="3" stroke-linecap="round"/><circle cx="36" cy="57" r="5" fill="#ffffff15" stroke="#ffd166" stroke-width="1.5"/></g></svg></div><div class="wex-info"><div class="wex-name">Extensora</div><div class="wex-muscle">Quadríceps</div><div class="wex-meta"><span class="wex-series" style="color:#ffd166;background:#ffd16622">3x15</span><span class="wex-dica">Extensão completa, segure 1s no topo, desça lento</span></div></div></div></div>
+      </div></div>
+      <div class="wgroup"><div class="wgroup-title" style="color:#4d9fff;background:#4d9fff22;border:1px solid #4d9fff33">POSTERIOR</div><div class="wexercises">
+        <div class="wex"><div class="wex-inner"><div class="wex-svg"><svg viewBox="0 0 66 66" fill="none"><style>.lcS{transform-origin:20px 32px;animation:lcS 1.5s ease-in-out infinite alternate}@keyframes lcS{from{transform:rotate(0deg)}to{transform:rotate(-40deg)}}</style><rect x="4" y="28" width="38" height="8" rx="4" fill="#ffffff10"/><circle cx="20" cy="20" r="6" fill="#4d9fff" opacity=".9"/><rect x="17" y="26" width="6" height="10" rx="3" fill="#4d9fff" opacity=".7"/><g class="lcS"><line x1="20" y1="36" x2="20" y2="54" stroke="#4d9fff" stroke-width="3" stroke-linecap="round"/><line x1="20" y1="54" x2="28" y2="60" stroke="#4d9fff" stroke-width="3" stroke-linecap="round"/><circle cx="30" cy="61" r="4" fill="#ffffff15" stroke="#4d9fff" stroke-width="1.5"/></g></svg></div><div class="wex-info"><div class="wex-name">Mesa Flexora</div><div class="wex-muscle">Isquiotibiais</div><div class="wex-meta"><span class="wex-series" style="color:#4d9fff;background:#4d9fff22">3x12</span><span class="wex-dica">Quadril fixo na mesa, amplitude total, suba e desça controlado</span></div></div></div></div>
+        <div class="wex"><div class="wex-inner"><div class="wex-svg"><svg viewBox="0 0 66 66" fill="none"><style>.stS{transform-origin:33px 28px;animation:stS 1.5s ease-in-out infinite alternate}@keyframes stS{from{transform:rotate(-20deg)}to{transform:rotate(0deg)}}</style><g class="stS"><circle cx="33" cy="10" r="6" fill="#4d9fff" opacity=".9"/><rect x="30" y="16" width="6" height="16" rx="3" fill="#4d9fff" opacity=".7"/><line x1="28" y1="20" x2="12" y2="22" stroke="#4d9fff" stroke-width="2.5" stroke-linecap="round"/><line x1="38" y1="20" x2="54" y2="22" stroke="#4d9fff" stroke-width="2.5" stroke-linecap="round"/></g><line x1="30" y1="32" x2="26" y2="52" stroke="#4d9fff" stroke-width="2.5" stroke-linecap="round"/><line x1="36" y1="32" x2="40" y2="52" stroke="#4d9fff" stroke-width="2.5" stroke-linecap="round"/><line x1="26" y1="52" x2="20" y2="62" stroke="#4d9fff" stroke-width="2.5" stroke-linecap="round"/><line x1="40" y1="52" x2="46" y2="62" stroke="#4d9fff" stroke-width="2.5" stroke-linecap="round"/></svg></div><div class="wex-info"><div class="wex-name">Stiff</div><div class="wex-muscle">Posterior · Glúteos</div><div class="wex-meta"><span class="wex-series" style="color:#4d9fff;background:#4d9fff22">3x12</span><span class="wex-dica">Joelhos semi-flexionados, empurre o quadril para trás</span></div></div></div></div>
+      </div></div>
+    </div>
+  </div>
+</div>
 </body>
 </html>
