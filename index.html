@@ -362,6 +362,69 @@ footer{border-top:1px solid var(--border2);padding-top:24px;text-align:center;fo
 .groq-close-btn{width:100%;margin-top:12px;padding:10px;border-radius:10px;border:1px solid #ffffff18;background:transparent;color:#7a7a9a;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:1px;text-transform:uppercase;cursor:pointer;transition:all .2s}
 .groq-close-btn:hover{background:#ffffff0a;color:#f2f2f8}
 
+
+/* FAB — Floating Action Button */
+.fab{
+  position:fixed;
+  bottom:28px;
+  right:20px;
+  z-index:300;
+  width:54px;height:54px;
+  border-radius:50%;
+  background:linear-gradient(135deg,#7c3aed,#a855f7);
+  border:none;
+  color:#fff;
+  font-size:22px;
+  cursor:pointer;
+  box-shadow:0 4px 20px #a855f740;
+  display:flex;align-items:center;justify-content:center;
+  transition:transform .2s,box-shadow .2s;
+}
+.fab:hover{transform:scale(1.1);box-shadow:0 6px 28px #a855f760}
+.fab:active{transform:scale(.95)}
+.fab-tooltip{
+  position:fixed;
+  bottom:36px;
+  right:82px;
+  z-index:300;
+  background:#1c1c28;
+  border:1px solid #a855f740;
+  border-radius:8px;
+  padding:6px 12px;
+  font-family:'JetBrains Mono',monospace;
+  font-size:10px;
+  letter-spacing:1px;
+  color:#a855f7;
+  white-space:nowrap;
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .2s;
+}
+.fab:hover + .fab-tooltip{opacity:1}
+
+
+
+/* GROQ RESULT CARDS */
+.gr-wrap{display:grid;gap:10px}
+.gr-card{background:#1c1c2e;border:1px solid #a855f720;border-radius:10px;overflow:hidden}
+.gr-card-head{display:flex;align-items:center;gap:8px;padding:10px 14px;background:#a855f710;border-bottom:1px solid #a855f720}
+.gr-card-icon{font-size:16px;flex-shrink:0}
+.gr-card-label{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:#a855f7;font-weight:600}
+.gr-card-body{padding:12px 14px;font-size:13px;color:#cbd5e1;line-height:1.7}
+.gr-card-body strong{color:#f2f2f8}
+.gr-name{font-family:'Syne',sans-serif;font-size:20px;font-weight:700;color:#f2f2f8;line-height:1.2}
+.gr-muscle-pill{display:inline-block;margin-top:6px;padding:3px 10px;border-radius:100px;background:#a855f715;border:1px solid #a855f740;font-family:'JetBrains Mono',monospace;font-size:10px;color:#a855f7;letter-spacing:1px}
+.gr-steps{display:grid;gap:6px;counter-reset:step}
+.gr-step{display:flex;gap:10px;align-items:flex-start;padding:8px 10px;background:#ffffff06;border-radius:8px;counter-increment:step}
+.gr-step-num{width:20px;height:20px;border-radius:50%;background:linear-gradient(135deg,#7c3aed,#a855f7);color:#fff;font-family:'JetBrains Mono',monospace;font-size:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-weight:600}
+.gr-step-text{font-size:12px;color:#cbd5e1;line-height:1.5;padding-top:2px}
+.gr-tips{display:grid;gap:6px}
+.gr-tip{display:flex;gap:8px;align-items:flex-start;padding:8px 10px;background:#ffffff06;border-radius:8px;border-left:2px solid #a855f750}
+.gr-tip-icon{font-size:13px;flex-shrink:0;margin-top:1px}
+.gr-tip-text{font-size:12px;color:#cbd5e1;line-height:1.5}
+.gr-tip-text strong{color:#e2e8f0}
+.gr-intro{font-size:13px;color:#94a3b8;line-height:1.6;padding:2px 0 4px}
+
 </style>
 </head>
 <body>
@@ -1186,18 +1249,27 @@ function handleGroqImg(input){
 async function analyzeGroq(){
   if(!_groqImg){alert('Selecione uma foto primeiro.');return;}
   var key=GROQ_KEY;
-  if(!key||key==='GROQ_KEY_AQUI'){alert('Configure a chave Groq: substitua GROQ_KEY_AQUI no código.');return;}
+  if(!key){alert('Chave Groq não configurada.');return;}
   document.getElementById('groqLoading').style.display='block';
   document.getElementById('groqResult').style.display='none';
   document.getElementById('groqBtn').disabled=true;
-  var prompt='Você é personal trainer. O usuário fotografou um aparelho de academia. '
-    +(_groqEx!=='este aparelho'?'Quer fazer: '+_groqEx+'. ':'')
-    +'1) Identifique o aparelho. 2) Explique como usar. 3) Dê 2-3 dicas de segurança. Em português, use emojis.';
+  var prompt='Você é um personal trainer especialista em equipamentos de academia. '
+    +'Analise cuidadosamente a FOTO do aparelho enviada pelo usuário. '
+    +'Observe os detalhes físicos: formato do banco, tipo de alavanca, posição dos apoios, cabos ou pesos. '
+    +'IMPORTANTE: não confunda aparelhos parecidos. Exemplos comuns de confusão: '
+    +'extensora de perna ≠ flexora ≠ cadeira abdutora; pulley ≠ remada; supino ≠ desenvolvimento. '
+    +(_groqEx!=='este aparelho'?'O usuário quer usar para: '+_groqEx+'. Verifique se o aparelho da foto serve para esse exercício. ':'')
+    +'Responda em português com: '
+    +'1) 🏋️ Nome exato do aparelho identificado na foto '
+    +'2) 💪 Músculo(s) principal(is) trabalhado(s) '
+    +'3) 📋 Como usar passo a passo (3-4 passos simples) '
+    +'4) ⚠️ 2 dicas importantes de execução e segurança. '
+    +'Se não conseguir identificar com certeza, diga que a imagem não está clara o suficiente.';
   try{
     var res=await fetch('https://api.groq.com/openai/v1/chat/completions',{
       method:'POST',
       headers:{'Content-Type':'application/json','Authorization':'Bearer '+key},
-      body:JSON.stringify({model:'meta-llama/llama-4-scout-17b-16e-instruct',max_tokens:600,
+      body:JSON.stringify({model:'meta-llama/llama-4-scout-17b-16e-instruct',max_tokens:800,
         messages:[{role:'user',content:[
           {type:'image_url',image_url:{url:'data:image/jpeg;base64,'+_groqImg}},
           {type:'text',text:prompt}
@@ -1206,13 +1278,20 @@ async function analyzeGroq(){
     var d=await res.json();
     document.getElementById('groqLoading').style.display='none';
     document.getElementById('groqBtn').disabled=false;
-    var txt=(d.choices&&d.choices[0])?d.choices[0].message.content:'❌ '+(d.error?d.error.message:'Erro');
+    var txt;
+    if(d.choices&&d.choices[0]){
+      txt=d.choices[0].message.content;
+    } else if(d.error){
+      txt='❌ Erro da API: '+d.error.message+'\n\nCódigo: '+(d.error.type||d.error.code||'');
+    } else {
+      txt='❌ Resposta inesperada: '+JSON.stringify(d).substring(0,200);
+    }
     document.getElementById('groqResultText').innerHTML=txt.replace(/\n/g,'<br>');
     document.getElementById('groqResult').style.display='block';
   }catch(err){
     document.getElementById('groqLoading').style.display='none';
     document.getElementById('groqBtn').disabled=false;
-    document.getElementById('groqResultText').innerHTML='❌ '+err.message;
+    document.getElementById('groqResultText').innerHTML='<span style="color:var(--red)">❌ '+err.message+'</span>';
     document.getElementById('groqResult').style.display='block';
   }
 }
@@ -1220,6 +1299,134 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape')closeGroq();
 window.toggleAp=toggleAp;window.filterAp=filterAp;window.searchAp=searchAp;
 window.openAiPhoto=openAiPhoto;window.openGroq=openGroq;window.closeGroq=closeGroq;
 window.handleGroqImg=handleGroqImg;window.analyzeGroq=analyzeGroq;
+
+function formatGroq(raw){
+  // Strip markdown bold for processing
+  var txt = raw.replace(/\*\*([^*]+)\*\*/g,'<strong>$1</strong>');
+  var lines = raw.split('\n').map(function(l){return l.trim()}).filter(function(l){return l});
+
+  // Extract sections by scanning for known patterns
+  var nome='', musculo='', intro='', steps=[], tips=[], outros=[];
+  var mode='intro';
+
+  lines.forEach(function(line){
+    var clean = line.replace(/\*\*/g,'').replace(/\*/g,'').trim();
+    var lc = clean.toLowerCase();
+
+    // Detect section headers
+    if(/nome.{0,20}aparelho|aparelho.{0,5}(é|e|parece|identificado)/i.test(clean)){
+      mode='nome'; return;
+    }
+    if(/músculo|musculo|trabalha|fortalec/i.test(clean) && clean.length < 80){
+      mode='musculo'; return;
+    }
+    if(/como usar|passo a passo|utilizar|usar o/i.test(clean) && clean.length < 60){
+      mode='steps'; return;
+    }
+    if(/dica|segurança|cuidado|atenção|importante/i.test(clean) && clean.length < 60){
+      mode='tips'; return;
+    }
+
+    // Detect step lines: "1. texto" or "* texto" or "- texto"
+    var stepMatch = clean.match(/^[\d]+[.)\s]\s*(.+)/);
+    var bulletMatch = clean.match(/^[\*\-]\s+(.+)/);
+
+    if(mode==='steps' || stepMatch){
+      if(stepMatch) steps.push(stepMatch[1]);
+      else if(bulletMatch && mode==='steps') steps.push(bulletMatch[1]);
+      else if(mode==='steps' && clean.length>10) steps.push(clean);
+      return;
+    }
+    if(mode==='tips'){
+      if(bulletMatch) tips.push(bulletMatch[1]);
+      else if(clean.length>10) tips.push(clean);
+      return;
+    }
+    if(mode==='nome'){
+      if(!nome && clean.length>2) nome=clean;
+      mode='intro'; return;
+    }
+    if(mode==='musculo'){
+      if(!musculo && clean.length>2) musculo=clean;
+      mode='intro'; return;
+    }
+
+    // Detect inline patterns
+    if(!nome){
+      var nm=clean.match(/(?:é uma?|parece ser|identificado como|aparelho[:\s]+)([^.!?,]+)/i);
+      if(nm) nome=nm[1].trim();
+    }
+    if(!musculo){
+      var ms=clean.match(/(?:trabalha[dn]?o?s?|músculo[s]?[:\s]+|fortalece)([^.!?]+)/i);
+      if(ms) musculo=ms[1].trim();
+    }
+
+    // Everything else goes to intro or bullets
+    if(bulletMatch) tips.push(bulletMatch[1]);
+    else if(clean.length>15 && mode==='intro') intro+=clean+' ';
+  });
+
+  // If steps still empty, try to pull numbered items from whole text
+  if(steps.length===0){
+    var numbered = raw.match(/[\d]+[.)][\s]+([^\n]+)/g)||[];
+    numbered.forEach(function(s){ steps.push(s.replace(/^[\d]+[.)][\s]+/,'').trim()); });
+  }
+  if(tips.length===0){
+    var bullets = raw.match(/(?:^|\n)\*\s+([^\n]+)/g)||[];
+    bullets.forEach(function(b){ tips.push(b.replace(/^\n?\*\s+/,'').trim()); });
+  }
+
+  // Build HTML cards
+  var html='<div class="gr-wrap">';
+
+  // Card 1: Aparelho identificado
+  var cardName = nome || 'Aparelho identificado';
+  var cardMuscle = musculo || '';
+  // Clean markdown from name/muscle
+  cardName = cardName.replace(/\*\*/g,'').replace(/[:\-]/g,'').trim();
+  cardMuscle = cardMuscle.replace(/\*\*/g,'').replace(/[:\-]/g,'').trim();
+  if(cardMuscle.length>80) cardMuscle=cardMuscle.substring(0,80)+'...';
+
+  html+='<div class="gr-card">';
+  html+='<div class="gr-card-head"><span class="gr-card-icon">🏋️</span><span class="gr-card-label">Aparelho Identificado</span></div>';
+  html+='<div class="gr-card-body">';
+  html+='<div class="gr-name">'+cardName+'</div>';
+  if(cardMuscle) html+='<div class="gr-muscle-pill">💪 '+cardMuscle+'</div>';
+  if(intro && !nome) html+='<p class="gr-intro" style="margin-top:8px">'+intro.trim()+'</p>';
+  html+='</div></div>';
+
+  // Card 2: Como usar
+  if(steps.length>0){
+    html+='<div class="gr-card">';
+    html+='<div class="gr-card-head"><span class="gr-card-icon">📋</span><span class="gr-card-label">Como Usar</span></div>';
+    html+='<div class="gr-card-body"><div class="gr-steps">';
+    steps.forEach(function(s,i){
+      var sc=s.replace(/\*\*/g,'<strong>').replace(/\*\*/g,'</strong>').replace(/^[\*\-]\s*/,'');
+      html+='<div class="gr-step"><div class="gr-step-num">'+(i+1)+'</div><div class="gr-step-text">'+sc+'</div></div>';
+    });
+    html+='</div></div></div>';
+  }
+
+  // Card 3: Dicas
+  if(tips.length>0){
+    var tipIcons=['⚠️','💡','🎯','✅','🔑'];
+    html+='<div class="gr-card">';
+    html+='<div class="gr-card-head"><span class="gr-card-icon">⚠️</span><span class="gr-card-label">Dicas de Execução</span></div>';
+    html+='<div class="gr-card-body"><div class="gr-tips">';
+    tips.forEach(function(t,i){
+      var tc=t.replace(/\*\*/g,'<strong>').replace(/\*\*/g,'</strong>').replace(/^[\*\-]\s*/,'');
+      html+='<div class="gr-tip"><span class="gr-tip-icon">'+tipIcons[i%tipIcons.length]+'</span><div class="gr-tip-text">'+tc+'</div></div>';
+    });
+    html+='</div></div></div>';
+  }
+
+  html+='</div>';
+  return html;
+}
+window.formatGroq=formatGroq;
+
+
+
 
 </script>
 <div class="wmodal-overlay" id="wmA" onclick="closeWorkout(event,'A')">
@@ -1260,7 +1467,7 @@ window.handleGroqImg=handleGroqImg;window.analyzeGroq=analyzeGroq;
                   <span class="wex-dica">Puxe até o peito, cotovelos apontando para baixo</span>
                 
 </div>
-                <div class="wex-actions"><a class="wex-btn wex-btn-yt" href="https://www.youtube.com/results?search_query=como+fazer+Puxada+Frontal+academia" target="_blank" rel="noopener">▶ YouTube</a><button class="wex-btn wex-btn-ai" onclick="openGroq('Puxada Frontal')">📷 Não sei qual é</button></div>
+                <div class="wex-actions"><a class="wex-btn wex-btn-yt" href="https://www.youtube.com/results?search_query=como+fazer+Puxada+Frontal+academia" target="_blank" rel="noopener">▶ YouTube</a></div>
               </div>
             </div>
           </div>
@@ -1291,7 +1498,7 @@ window.handleGroqImg=handleGroqImg;window.analyzeGroq=analyzeGroq;
                   <span class="wex-dica">Costas retas, puxe até o abdômen</span>
                 
 </div>
-                <div class="wex-actions"><a class="wex-btn wex-btn-yt" href="https://www.youtube.com/results?search_query=como+fazer+Remada+Baixa+academia" target="_blank" rel="noopener">▶ YouTube</a><button class="wex-btn wex-btn-ai" onclick="openGroq('Remada Baixa')">📷 Não sei qual é</button></div>
+                <div class="wex-actions"><a class="wex-btn wex-btn-yt" href="https://www.youtube.com/results?search_query=como+fazer+Remada+Baixa+academia" target="_blank" rel="noopener">▶ YouTube</a></div>
               </div>
             </div>
           </div>
@@ -1322,7 +1529,7 @@ window.handleGroqImg=handleGroqImg;window.analyzeGroq=analyzeGroq;
                   <span class="wex-dica">Amplitude total, contraia na posição final</span>
                 
 </div>
-                <div class="wex-actions"><a class="wex-btn wex-btn-yt" href="https://www.youtube.com/results?search_query=como+fazer+Pulley+Frente+academia" target="_blank" rel="noopener">▶ YouTube</a><button class="wex-btn wex-btn-ai" onclick="openGroq('Pulley Frente')">📷 Não sei qual é</button></div>
+                <div class="wex-actions"><a class="wex-btn wex-btn-yt" href="https://www.youtube.com/results?search_query=como+fazer+Pulley+Frente+academia" target="_blank" rel="noopener">▶ YouTube</a></div>
               </div>
             </div>
           </div>
@@ -1358,7 +1565,7 @@ window.handleGroqImg=handleGroqImg;window.analyzeGroq=analyzeGroq;
                   <span class="wex-dica">Cotovelos fixos, contração máxima no topo</span>
                 
 </div>
-                <div class="wex-actions"><a class="wex-btn wex-btn-yt" href="https://www.youtube.com/results?search_query=como+fazer+Rosca+Direta+na+Polia+academia" target="_blank" rel="noopener">▶ YouTube</a><button class="wex-btn wex-btn-ai" onclick="openGroq('Rosca Direta na Polia')">📷 Não sei qual é</button></div>
+                <div class="wex-actions"><a class="wex-btn wex-btn-yt" href="https://www.youtube.com/results?search_query=como+fazer+Rosca+Direta+na+Polia+academia" target="_blank" rel="noopener">▶ YouTube</a></div>
               </div>
             </div>
           </div>
@@ -1389,7 +1596,7 @@ window.handleGroqImg=handleGroqImg;window.analyzeGroq=analyzeGroq;
                   <span class="wex-dica">Polia baixa, apoie no joelho, isole o movimento</span>
                 
 </div>
-                <div class="wex-actions"><a class="wex-btn wex-btn-yt" href="https://www.youtube.com/results?search_query=como+fazer+Rosca+Concentrada+na+Polia+academia" target="_blank" rel="noopener">▶ YouTube</a><button class="wex-btn wex-btn-ai" onclick="openGroq('Rosca Concentrada na Polia')">📷 Não sei qual é</button></div>
+                <div class="wex-actions"><a class="wex-btn wex-btn-yt" href="https://www.youtube.com/results?search_query=como+fazer+Rosca+Concentrada+na+Polia+academia" target="_blank" rel="noopener">▶ YouTube</a></div>
               </div>
             </div>
           </div>
@@ -1420,7 +1627,7 @@ window.handleGroqImg=handleGroqImg;window.analyzeGroq=analyzeGroq;
                   <span class="wex-dica">Pegada neutra, movimento controlado</span>
                 
 </div>
-                <div class="wex-actions"><a class="wex-btn wex-btn-yt" href="https://www.youtube.com/results?search_query=como+fazer+Rosca+Martelo+academia" target="_blank" rel="noopener">▶ YouTube</a><button class="wex-btn wex-btn-ai" onclick="openGroq('Rosca Martelo')">📷 Não sei qual é</button></div>
+                <div class="wex-actions"><a class="wex-btn wex-btn-yt" href="https://www.youtube.com/results?search_query=como+fazer+Rosca+Martelo+academia" target="_blank" rel="noopener">▶ YouTube</a></div>
               </div>
             </div>
           </div>
@@ -1451,7 +1658,7 @@ window.handleGroqImg=handleGroqImg;window.analyzeGroq=analyzeGroq;
                   <span class="wex-dica">Banco 45°, braços caídos, amplitude total</span>
                 
 </div>
-                <div class="wex-actions"><a class="wex-btn wex-btn-yt" href="https://www.youtube.com/results?search_query=como+fazer+Rosca+Alternada+Inclinada+academia" target="_blank" rel="noopener">▶ YouTube</a><button class="wex-btn wex-btn-ai" onclick="openGroq('Rosca Alternada Inclinada')">📷 Não sei qual é</button></div>
+                <div class="wex-actions"><a class="wex-btn wex-btn-yt" href="https://www.youtube.com/results?search_query=como+fazer+Rosca+Alternada+Inclinada+academia" target="_blank" rel="noopener">▶ YouTube</a></div>
               </div>
             </div>
           </div>
@@ -1487,7 +1694,7 @@ window.handleGroqImg=handleGroqImg;window.analyzeGroq=analyzeGroq;
                   <span class="wex-dica">Cotovelos fixos ao lado do corpo</span>
                 
 </div>
-                <div class="wex-actions"><a class="wex-btn wex-btn-yt" href="https://www.youtube.com/results?search_query=como+fazer+Tríceps+Pulley+academia" target="_blank" rel="noopener">▶ YouTube</a><button class="wex-btn wex-btn-ai" onclick="openGroq('Tríceps Pulley')">📷 Não sei qual é</button></div>
+                <div class="wex-actions"><a class="wex-btn wex-btn-yt" href="https://www.youtube.com/results?search_query=como+fazer+Tríceps+Pulley+academia" target="_blank" rel="noopener">▶ YouTube</a></div>
               </div>
             </div>
           </div>
@@ -1518,7 +1725,7 @@ window.handleGroqImg=handleGroqImg;window.analyzeGroq=analyzeGroq;
                   <span class="wex-dica">Deitado, polia alta, cotovelos estáticos</span>
                 
 </div>
-                <div class="wex-actions"><a class="wex-btn wex-btn-yt" href="https://www.youtube.com/results?search_query=como+fazer+Tríceps+Testa+na+Polia+academia" target="_blank" rel="noopener">▶ YouTube</a><button class="wex-btn wex-btn-ai" onclick="openGroq('Tríceps Testa na Polia')">📷 Não sei qual é</button></div>
+                <div class="wex-actions"><a class="wex-btn wex-btn-yt" href="https://www.youtube.com/results?search_query=como+fazer+Tríceps+Testa+na+Polia+academia" target="_blank" rel="noopener">▶ YouTube</a></div>
               </div>
             </div>
           </div>
@@ -1549,7 +1756,7 @@ window.handleGroqImg=handleGroqImg;window.analyzeGroq=analyzeGroq;
                   <span class="wex-dica">Em pé, corda atrás da cabeça, extensão completa</span>
                 
 </div>
-                <div class="wex-actions"><a class="wex-btn wex-btn-yt" href="https://www.youtube.com/results?search_query=como+fazer+Tríceps+Francês+Cabo+academia" target="_blank" rel="noopener">▶ YouTube</a><button class="wex-btn wex-btn-ai" onclick="openGroq('Tríceps Francês Cabo')">📷 Não sei qual é</button></div>
+                <div class="wex-actions"><a class="wex-btn wex-btn-yt" href="https://www.youtube.com/results?search_query=como+fazer+Tríceps+Francês+Cabo+academia" target="_blank" rel="noopener">▶ YouTube</a></div>
               </div>
             </div>
           </div>
@@ -1596,7 +1803,7 @@ window.handleGroqImg=handleGroqImg;window.analyzeGroq=analyzeGroq;
                   <span class="wex-dica">Ajuste o assento para cotovelos na altura do peito</span>
                 
 </div>
-                <div class="wex-actions"><a class="wex-btn wex-btn-yt" href="https://www.youtube.com/results?search_query=como+fazer+Supino+Máquina+academia" target="_blank" rel="noopener">▶ YouTube</a><button class="wex-btn wex-btn-ai" onclick="openGroq('Supino Máquina')">📷 Não sei qual é</button></div>
+                <div class="wex-actions"><a class="wex-btn wex-btn-yt" href="https://www.youtube.com/results?search_query=como+fazer+Supino+Máquina+academia" target="_blank" rel="noopener">▶ YouTube</a></div>
               </div>
             </div>
           </div>
@@ -1628,7 +1835,7 @@ window.handleGroqImg=handleGroqImg;window.analyzeGroq=analyzeGroq;
                   <span class="wex-dica">Leve inclinação, cruze as mãos na frente</span>
                 
 </div>
-                <div class="wex-actions"><a class="wex-btn wex-btn-yt" href="https://www.youtube.com/results?search_query=como+fazer+Crossover+academia" target="_blank" rel="noopener">▶ YouTube</a><button class="wex-btn wex-btn-ai" onclick="openGroq('Crossover')">📷 Não sei qual é</button></div>
+                <div class="wex-actions"><a class="wex-btn wex-btn-yt" href="https://www.youtube.com/results?search_query=como+fazer+Crossover+academia" target="_blank" rel="noopener">▶ YouTube</a></div>
               </div>
             </div>
           </div>
@@ -1660,7 +1867,7 @@ window.handleGroqImg=handleGroqImg;window.analyzeGroq=analyzeGroq;
                   <span class="wex-dica">Incline o corpo para frente para focar no peito</span>
                 
 </div>
-                <div class="wex-actions"><a class="wex-btn wex-btn-yt" href="https://www.youtube.com/results?search_query=como+fazer+Mergulho+Dips+academia" target="_blank" rel="noopener">▶ YouTube</a><button class="wex-btn wex-btn-ai" onclick="openGroq('Mergulho (Dips)')">📷 Não sei qual é</button></div>
+                <div class="wex-actions"><a class="wex-btn wex-btn-yt" href="https://www.youtube.com/results?search_query=como+fazer+Mergulho+Dips+academia" target="_blank" rel="noopener">▶ YouTube</a></div>
               </div>
             </div>
           </div>
@@ -1697,7 +1904,7 @@ window.handleGroqImg=handleGroqImg;window.analyzeGroq=analyzeGroq;
                   <span class="wex-dica">Empurre até extensão quase completa, não tranque</span>
                 
 </div>
-                <div class="wex-actions"><a class="wex-btn wex-btn-yt" href="https://www.youtube.com/results?search_query=como+fazer+Desenvolvimento+Máquina+academia" target="_blank" rel="noopener">▶ YouTube</a><button class="wex-btn wex-btn-ai" onclick="openGroq('Desenvolvimento Máquina')">📷 Não sei qual é</button></div>
+                <div class="wex-actions"><a class="wex-btn wex-btn-yt" href="https://www.youtube.com/results?search_query=como+fazer+Desenvolvimento+Máquina+academia" target="_blank" rel="noopener">▶ YouTube</a></div>
               </div>
             </div>
           </div>
@@ -1729,7 +1936,7 @@ window.handleGroqImg=handleGroqImg;window.analyzeGroq=analyzeGroq;
                   <span class="wex-dica">Cabo na cintura, cotovelo levemente flexionado</span>
                 
 </div>
-                <div class="wex-actions"><a class="wex-btn wex-btn-yt" href="https://www.youtube.com/results?search_query=como+fazer+Elevação+Lateral+Cabo+academia" target="_blank" rel="noopener">▶ YouTube</a><button class="wex-btn wex-btn-ai" onclick="openGroq('Elevação Lateral Cabo')">📷 Não sei qual é</button></div>
+                <div class="wex-actions"><a class="wex-btn wex-btn-yt" href="https://www.youtube.com/results?search_query=como+fazer+Elevação+Lateral+Cabo+academia" target="_blank" rel="noopener">▶ YouTube</a></div>
               </div>
             </div>
           </div>
@@ -1760,7 +1967,7 @@ window.handleGroqImg=handleGroqImg;window.analyzeGroq=analyzeGroq;
                   <span class="wex-dica">Corda na altura da cabeça, puxe para o rosto</span>
                 
 </div>
-                <div class="wex-actions"><a class="wex-btn wex-btn-yt" href="https://www.youtube.com/results?search_query=como+fazer+Face+Pull+academia" target="_blank" rel="noopener">▶ YouTube</a><button class="wex-btn wex-btn-ai" onclick="openGroq('Face Pull')">📷 Não sei qual é</button></div>
+                <div class="wex-actions"><a class="wex-btn wex-btn-yt" href="https://www.youtube.com/results?search_query=como+fazer+Face+Pull+academia" target="_blank" rel="noopener">▶ YouTube</a></div>
               </div>
             </div>
           </div>
@@ -1796,7 +2003,7 @@ window.handleGroqImg=handleGroqImg;window.analyzeGroq=analyzeGroq;
                   <span class="wex-dica">Suba os ombros em direção às orelhas, sem girar</span>
                 
 </div>
-                <div class="wex-actions"><a class="wex-btn wex-btn-yt" href="https://www.youtube.com/results?search_query=como+fazer+Encolhimento+Barra+academia" target="_blank" rel="noopener">▶ YouTube</a><button class="wex-btn wex-btn-ai" onclick="openGroq('Encolhimento Barra')">📷 Não sei qual é</button></div>
+                <div class="wex-actions"><a class="wex-btn wex-btn-yt" href="https://www.youtube.com/results?search_query=como+fazer+Encolhimento+Barra+academia" target="_blank" rel="noopener">▶ YouTube</a></div>
               </div>
             </div>
           </div>
@@ -1841,7 +2048,7 @@ window.handleGroqImg=handleGroqImg;window.analyzeGroq=analyzeGroq;
                   <span class="wex-dica">Pés na largura dos ombros, desça até 90°</span>
                 
 </div>
-                <div class="wex-actions"><a class="wex-btn wex-btn-yt" href="https://www.youtube.com/results?search_query=como+fazer+Leg+Press+academia" target="_blank" rel="noopener">▶ YouTube</a><button class="wex-btn wex-btn-ai" onclick="openGroq('Leg Press')">📷 Não sei qual é</button></div>
+                <div class="wex-actions"><a class="wex-btn wex-btn-yt" href="https://www.youtube.com/results?search_query=como+fazer+Leg+Press+academia" target="_blank" rel="noopener">▶ YouTube</a></div>
               </div>
             </div>
           </div>
@@ -1871,7 +2078,7 @@ window.handleGroqImg=handleGroqImg;window.analyzeGroq=analyzeGroq;
                   <span class="wex-dica">Extensão completa, segure 1s no topo</span>
                 
 </div>
-                <div class="wex-actions"><a class="wex-btn wex-btn-yt" href="https://www.youtube.com/results?search_query=como+fazer+Extensora+academia" target="_blank" rel="noopener">▶ YouTube</a><button class="wex-btn wex-btn-ai" onclick="openGroq('Extensora')">📷 Não sei qual é</button></div>
+                <div class="wex-actions"><a class="wex-btn wex-btn-yt" href="https://www.youtube.com/results?search_query=como+fazer+Extensora+academia" target="_blank" rel="noopener">▶ YouTube</a></div>
               </div>
             </div>
           </div>
@@ -1903,7 +2110,7 @@ window.handleGroqImg=handleGroqImg;window.analyzeGroq=analyzeGroq;
                   <span class="wex-dica">Coluna reta, joelhos alinhados com os pés</span>
                 
 </div>
-                <div class="wex-actions"><a class="wex-btn wex-btn-yt" href="https://www.youtube.com/results?search_query=como+fazer+Agachamento+academia" target="_blank" rel="noopener">▶ YouTube</a><button class="wex-btn wex-btn-ai" onclick="openGroq('Agachamento')">📷 Não sei qual é</button></div>
+                <div class="wex-actions"><a class="wex-btn wex-btn-yt" href="https://www.youtube.com/results?search_query=como+fazer+Agachamento+academia" target="_blank" rel="noopener">▶ YouTube</a></div>
               </div>
             </div>
           </div>
@@ -1938,7 +2145,7 @@ window.handleGroqImg=handleGroqImg;window.analyzeGroq=analyzeGroq;
                   <span class="wex-dica">Quadril fixo na mesa, amplitude total</span>
                 
 </div>
-                <div class="wex-actions"><a class="wex-btn wex-btn-yt" href="https://www.youtube.com/results?search_query=como+fazer+Mesa+Flexora+academia" target="_blank" rel="noopener">▶ YouTube</a><button class="wex-btn wex-btn-ai" onclick="openGroq('Mesa Flexora')">📷 Não sei qual é</button></div>
+                <div class="wex-actions"><a class="wex-btn wex-btn-yt" href="https://www.youtube.com/results?search_query=como+fazer+Mesa+Flexora+academia" target="_blank" rel="noopener">▶ YouTube</a></div>
               </div>
             </div>
           </div>
@@ -1971,7 +2178,7 @@ window.handleGroqImg=handleGroqImg;window.analyzeGroq=analyzeGroq;
                   <span class="wex-dica">Joelhos semi-flexionados, empurre o quadril para trás</span>
                 
 </div>
-                <div class="wex-actions"><a class="wex-btn wex-btn-yt" href="https://www.youtube.com/results?search_query=como+fazer+Stiff+academia" target="_blank" rel="noopener">▶ YouTube</a><button class="wex-btn wex-btn-ai" onclick="openGroq('Stiff')">📷 Não sei qual é</button></div>
+                <div class="wex-actions"><a class="wex-btn wex-btn-yt" href="https://www.youtube.com/results?search_query=como+fazer+Stiff+academia" target="_blank" rel="noopener">▶ YouTube</a></div>
               </div>
             </div>
           </div>
@@ -2005,7 +2212,7 @@ window.handleGroqImg=handleGroqImg;window.analyzeGroq=analyzeGroq;
                   <span class="wex-dica">Movimento controlado, não jogue peso</span>
                 
 </div>
-                <div class="wex-actions"><a class="wex-btn wex-btn-yt" href="https://www.youtube.com/results?search_query=como+fazer+Cadeira+Abdutora+academia" target="_blank" rel="noopener">▶ YouTube</a><button class="wex-btn wex-btn-ai" onclick="openGroq('Cadeira Abdutora')">📷 Não sei qual é</button></div>
+                <div class="wex-actions"><a class="wex-btn wex-btn-yt" href="https://www.youtube.com/results?search_query=como+fazer+Cadeira+Abdutora+academia" target="_blank" rel="noopener">▶ YouTube</a></div>
               </div>
             </div>
           </div>
@@ -2036,7 +2243,7 @@ window.handleGroqImg=handleGroqImg;window.analyzeGroq=analyzeGroq;
                   <span class="wex-dica">Ombros no banco, esprema o glúteo no topo</span>
                 
 </div>
-                <div class="wex-actions"><a class="wex-btn wex-btn-yt" href="https://www.youtube.com/results?search_query=como+fazer+Elevação+Pélvica+academia" target="_blank" rel="noopener">▶ YouTube</a><button class="wex-btn wex-btn-ai" onclick="openGroq('Elevação Pélvica')">📷 Não sei qual é</button></div>
+                <div class="wex-actions"><a class="wex-btn wex-btn-yt" href="https://www.youtube.com/results?search_query=como+fazer+Elevação+Pélvica+academia" target="_blank" rel="noopener">▶ YouTube</a></div>
               </div>
             </div>
           </div>
@@ -2056,36 +2263,36 @@ window.handleGroqImg=handleGroqImg;window.analyzeGroq=analyzeGroq;
       <div class="wgroup"><div class="wgroup-title" style="color:#39d98a;background:#39d98a22;border:1px solid #39d98a33">PEITO</div><div class="wexercises">
         <div class="wex"><div class="wex-inner"><div class="wex-svg"><svg viewBox="0 0 66 66" fill="none"><style>.pressS{transform-origin:33px 30px;animation:pressS 1.5s ease-in-out infinite alternate}@keyframes pressS{from{transform:translateY(6px)}to{transform:translateY(-6px)}}
 </style><circle cx="33" cy="12" r="6" fill="#39d98a" opacity=".9"/><rect x="30" y="18" width="6" height="16" rx="3" fill="#39d98a" opacity=".7"/><line x1="33" y1="34" x2="22" y2="50" stroke="#39d98a" stroke-width="2.5" stroke-linecap="round"/><line x1="33" y1="34" x2="44" y2="50" stroke="#39d98a" stroke-width="2.5" stroke-linecap="round"/><g class="pressS"><line x1="28" y1="22" x2="12" y2="28" stroke="#39d98a" stroke-width="2.5" stroke-linecap="round"/><line x1="38" y1="22" x2="54" y2="28" stroke="#39d98a" stroke-width="2.5" stroke-linecap="round"/><circle cx="9" cy="28" r="4" fill="#ffffff20" stroke="#39d98a" stroke-width="1.5"/><circle cx="57" cy="28" r="4" fill="#ffffff20" stroke="#39d98a" stroke-width="1.5"/></g></svg></div><div class="wex-info"><div class="wex-name">Supino Máquina</div><div class="wex-muscle">Peitoral maior</div><div class="wex-meta"><span class="wex-series" style="color:#39d98a;background:#39d98a22">3x12</span><span class="wex-dica">Ajuste o assento para cotovelos na altura do peito</span></div>
-                <div class="wex-actions"><a class="wex-btn wex-btn-yt" href="https://www.youtube.com/results?search_query=como+fazer+Supino+Máquina+academia" target="_blank" rel="noopener">▶ YouTube</a><button class="wex-btn wex-btn-ai" onclick="openGroq('Supino Máquina')">📷 Não sei qual é</button></div></div></div></div>
+                <div class="wex-actions"><a class="wex-btn wex-btn-yt" href="https://www.youtube.com/results?search_query=como+fazer+Supino+Máquina+academia" target="_blank" rel="noopener">▶ YouTube</a></div></div></div></div>
         <div class="wex"><div class="wex-inner"><div class="wex-svg"><svg viewBox="0 0 66 66" fill="none"><style>.flyS{transform-origin:33px 26px;animation:flyS 1.5s ease-in-out infinite alternate}@keyframes flyS{from{transform:scaleX(.6)}to{transform:scaleX(1)}}
 </style><circle cx="33" cy="12" r="6" fill="#39d98a" opacity=".9"/><rect x="30" y="18" width="6" height="16" rx="3" fill="#39d98a" opacity=".7"/><line x1="33" y1="34" x2="22" y2="50" stroke="#39d98a" stroke-width="2.5" stroke-linecap="round"/><line x1="33" y1="34" x2="44" y2="50" stroke="#39d98a" stroke-width="2.5" stroke-linecap="round"/><g class="flyS"><line x1="28" y1="24" x2="10" y2="24" stroke="#39d98a" stroke-width="2.5" stroke-linecap="round"/><line x1="38" y1="24" x2="56" y2="24" stroke="#39d98a" stroke-width="2.5" stroke-linecap="round"/><circle cx="8" cy="24" r="4" fill="#ffffff20" stroke="#39d98a" stroke-width="1.5"/><circle cx="58" cy="24" r="4" fill="#ffffff20" stroke="#39d98a" stroke-width="1.5"/></g></svg></div><div class="wex-info"><div class="wex-name">Crossover</div><div class="wex-muscle">Peitoral · Porção interna</div><div class="wex-meta"><span class="wex-series" style="color:#39d98a;background:#39d98a22">3x15</span><span class="wex-dica">Leve inclinação para frente, cruze as mãos na frente</span></div>
-                <div class="wex-actions"><a class="wex-btn wex-btn-yt" href="https://www.youtube.com/results?search_query=como+fazer+Crossover+academia" target="_blank" rel="noopener">▶ YouTube</a><button class="wex-btn wex-btn-ai" onclick="openGroq('Crossover')">📷 Não sei qual é</button></div></div></div></div>
+                <div class="wex-actions"><a class="wex-btn wex-btn-yt" href="https://www.youtube.com/results?search_query=como+fazer+Crossover+academia" target="_blank" rel="noopener">▶ YouTube</a></div></div></div></div>
       </div></div>
       <div class="wgroup"><div class="wgroup-title" style="color:#00e5cc;background:#00e5cc22;border:1px solid #00e5cc33">COSTAS</div><div class="wexercises">
         <div class="wex"><div class="wex-inner"><div class="wex-svg"><svg viewBox="0 0 66 66" fill="none"><style>.arm{transform-origin:33px 20px;animation:pull 1.5s ease-in-out infinite alternate}@keyframes pull{from{transform:translateY(-8px)}to{transform:translateY(4px)}}
 </style><circle cx="33" cy="10" r="6" fill="#ff6b9d" opacity=".9"/><rect x="30" y="16" width="6" height="18" rx="3" fill="#ff6b9d" opacity=".7"/><line x1="15" y1="4" x2="51" y2="4" stroke="#ffffff30" stroke-width="2" stroke-linecap="round"/><g class="arm"><line x1="33" y1="16" x2="15" y2="5" stroke="#ff6b9d" stroke-width="2.5" stroke-linecap="round"/><line x1="33" y1="16" x2="51" y2="5" stroke="#ff6b9d" stroke-width="2.5" stroke-linecap="round"/><line x1="28" y1="34" x2="20" y2="50" stroke="#ff6b9d" stroke-width="2.5" stroke-linecap="round"/><line x1="38" y1="34" x2="46" y2="50" stroke="#ff6b9d" stroke-width="2.5" stroke-linecap="round"/></g></svg></div><div class="wex-info"><div class="wex-name">Puxada Frontal</div><div class="wex-muscle">Dorsal · Grande dorsal</div><div class="wex-meta"><span class="wex-series" style="color:#00e5cc;background:#00e5cc22">3x12</span><span class="wex-dica">Puxe até o peito, cotovelos apontando para baixo</span></div>
-                <div class="wex-actions"><a class="wex-btn wex-btn-yt" href="https://www.youtube.com/results?search_query=como+fazer+Puxada+Frontal+academia" target="_blank" rel="noopener">▶ YouTube</a><button class="wex-btn wex-btn-ai" onclick="openGroq('Puxada Frontal')">📷 Não sei qual é</button></div></div></div></div>
+                <div class="wex-actions"><a class="wex-btn wex-btn-yt" href="https://www.youtube.com/results?search_query=como+fazer+Puxada+Frontal+academia" target="_blank" rel="noopener">▶ YouTube</a></div></div></div></div>
       </div></div>
       <div class="wgroup"><div class="wgroup-title" style="color:#ffd166;background:#ffd16622;border:1px solid #ffd16633">OMBRO</div><div class="wexercises">
         <div class="wex"><div class="wex-inner"><div class="wex-svg"><svg viewBox="0 0 66 66" fill="none"><style>.elS{transform-origin:33px 26px;animation:elS 1.5s ease-in-out infinite alternate}@keyframes elS{from{transform:rotate(20deg)}to{transform:rotate(-10deg)}}
 </style><circle cx="33" cy="14" r="6" fill="#ffd166" opacity=".9"/><rect x="30" y="20" width="6" height="16" rx="3" fill="#ffd166" opacity=".7"/><line x1="33" y1="36" x2="24" y2="52" stroke="#ffd166" stroke-width="2.5" stroke-linecap="round"/><line x1="33" y1="36" x2="42" y2="52" stroke="#ffd166" stroke-width="2.5" stroke-linecap="round"/><g class="elS"><line x1="28" y1="24" x2="10" y2="34" stroke="#ffd166" stroke-width="2.5" stroke-linecap="round"/><circle cx="8" cy="35" r="4" fill="#ffffff20" stroke="#ffd166" stroke-width="1.5"/><line x1="38" y1="24" x2="56" y2="34" stroke="#ffd166" stroke-width="2.5" stroke-linecap="round"/><circle cx="58" cy="35" r="4" fill="#ffffff20" stroke="#ffd166" stroke-width="1.5"/></g></svg></div><div class="wex-info"><div class="wex-name">Elevação Lateral Cabo</div><div class="wex-muscle">Deltóide medial</div><div class="wex-meta"><span class="wex-series" style="color:#ffd166;background:#ffd16622">3x15</span><span class="wex-dica">Cotovelo levemente flexionado, suba até a altura do ombro</span></div>
-                <div class="wex-actions"><a class="wex-btn wex-btn-yt" href="https://www.youtube.com/results?search_query=como+fazer+Elevação+Lateral+Cabo+academia" target="_blank" rel="noopener">▶ YouTube</a><button class="wex-btn wex-btn-ai" onclick="openGroq('Elevação Lateral Cabo')">📷 Não sei qual é</button></div></div></div></div>
+                <div class="wex-actions"><a class="wex-btn wex-btn-yt" href="https://www.youtube.com/results?search_query=como+fazer+Elevação+Lateral+Cabo+academia" target="_blank" rel="noopener">▶ YouTube</a></div></div></div></div>
       </div></div>
       <div class="wgroup"><div class="wgroup-title" style="color:#4d9fff;background:#4d9fff22;border:1px solid #4d9fff33">BÍCEPS</div><div class="wexercises">
         <div class="wex"><div class="wex-inner"><div class="wex-svg"><svg viewBox="0 0 66 66" fill="none"><style>.curlS{transform-origin:30px 30px;animation:curlS 1.5s ease-in-out infinite alternate}@keyframes curlS{from{transform:rotate(20deg)}to{transform:rotate(-30deg)}}
 </style><circle cx="33" cy="10" r="6" fill="#4d9fff" opacity=".9"/><rect x="30" y="16" width="6" height="16" rx="3" fill="#4d9fff" opacity=".7"/><line x1="33" y1="32" x2="22" y2="48" stroke="#4d9fff" stroke-width="2.5" stroke-linecap="round"/><line x1="33" y1="32" x2="44" y2="48" stroke="#4d9fff" stroke-width="2.5" stroke-linecap="round"/><g class="curlS"><line x1="30" y1="24" x2="14" y2="26" stroke="#4d9fff" stroke-width="2.5" stroke-linecap="round"/><line x1="14" y1="26" x2="10" y2="18" stroke="#4d9fff" stroke-width="2.5" stroke-linecap="round"/><circle cx="8" cy="16" r="4" fill="#ffffff20" stroke="#4d9fff" stroke-width="1.5"/></g></svg></div><div class="wex-info"><div class="wex-name">Rosca Direta na Polia</div><div class="wex-muscle">Bíceps braquial</div><div class="wex-meta"><span class="wex-series" style="color:#4d9fff;background:#4d9fff22">3x12</span><span class="wex-dica">Cotovelos fixos, contração máxima no topo</span></div>
-                <div class="wex-actions"><a class="wex-btn wex-btn-yt" href="https://www.youtube.com/results?search_query=como+fazer+Rosca+Direta+na+Polia+academia" target="_blank" rel="noopener">▶ YouTube</a><button class="wex-btn wex-btn-ai" onclick="openGroq('Rosca Direta na Polia')">📷 Não sei qual é</button></div></div></div></div>
+                <div class="wex-actions"><a class="wex-btn wex-btn-yt" href="https://www.youtube.com/results?search_query=como+fazer+Rosca+Direta+na+Polia+academia" target="_blank" rel="noopener">▶ YouTube</a></div></div></div></div>
         <div class="wex"><div class="wex-inner"><div class="wex-svg"><svg viewBox="0 0 66 66" fill="none"><style>.curlS{transform-origin:30px 30px;animation:curlS 1.5s ease-in-out infinite alternate}@keyframes curlS{from{transform:rotate(20deg)}to{transform:rotate(-30deg)}}
 </style><circle cx="33" cy="10" r="6" fill="#4d9fff" opacity=".9"/><rect x="30" y="16" width="6" height="16" rx="3" fill="#4d9fff" opacity=".7"/><line x1="33" y1="32" x2="22" y2="48" stroke="#4d9fff" stroke-width="2.5" stroke-linecap="round"/><line x1="33" y1="32" x2="44" y2="48" stroke="#4d9fff" stroke-width="2.5" stroke-linecap="round"/><g class="curlS"><line x1="30" y1="24" x2="14" y2="26" stroke="#4d9fff" stroke-width="2.5" stroke-linecap="round"/><line x1="14" y1="26" x2="10" y2="18" stroke="#4d9fff" stroke-width="2.5" stroke-linecap="round"/><circle cx="8" cy="16" r="4" fill="#ffffff20" stroke="#4d9fff" stroke-width="1.5"/></g></svg></div><div class="wex-info"><div class="wex-name">Rosca Martelo</div><div class="wex-muscle">Braquial · Braquiorradial</div><div class="wex-meta"><span class="wex-series" style="color:#4d9fff;background:#4d9fff22">3x12</span><span class="wex-dica">Pegada neutra, movimento controlado e lento</span></div>
-                <div class="wex-actions"><a class="wex-btn wex-btn-yt" href="https://www.youtube.com/results?search_query=como+fazer+Rosca+Martelo+academia" target="_blank" rel="noopener">▶ YouTube</a><button class="wex-btn wex-btn-ai" onclick="openGroq('Rosca Martelo')">📷 Não sei qual é</button></div></div></div></div>
+                <div class="wex-actions"><a class="wex-btn wex-btn-yt" href="https://www.youtube.com/results?search_query=como+fazer+Rosca+Martelo+academia" target="_blank" rel="noopener">▶ YouTube</a></div></div></div></div>
       </div></div>
       <div class="wgroup"><div class="wgroup-title" style="color:#ff7b3d;background:#ff7b3d22;border:1px solid #ff7b3d33">TRÍCEPS</div><div class="wexercises">
         <div class="wex"><div class="wex-inner"><div class="wex-svg"><svg viewBox="0 0 66 66" fill="none"><style>.triS{transform-origin:36px 26px;animation:triS 1.5s ease-in-out infinite alternate}@keyframes triS{from{transform:rotate(-25deg)}to{transform:rotate(15deg)}}
 </style><circle cx="33" cy="10" r="6" fill="#ff7b3d" opacity=".9"/><rect x="30" y="16" width="6" height="16" rx="3" fill="#ff7b3d" opacity=".7"/><line x1="33" y1="32" x2="22" y2="48" stroke="#ff7b3d" stroke-width="2.5" stroke-linecap="round"/><line x1="33" y1="32" x2="44" y2="48" stroke="#ff7b3d" stroke-width="2.5" stroke-linecap="round"/><g class="triS"><line x1="36" y1="22" x2="50" y2="20" stroke="#ff7b3d" stroke-width="2.5" stroke-linecap="round"/><line x1="50" y1="20" x2="54" y2="32" stroke="#ff7b3d" stroke-width="2.5" stroke-linecap="round"/><circle cx="55" cy="34" r="4" fill="#ffffff20" stroke="#ff7b3d" stroke-width="1.5"/></g></svg></div><div class="wex-info"><div class="wex-name">Tríceps Pulley</div><div class="wex-muscle">Tríceps · Cabeça lateral</div><div class="wex-meta"><span class="wex-series" style="color:#ff7b3d;background:#ff7b3d22">3x12</span><span class="wex-dica">Cotovelos fixos ao lado do corpo, extensão completa</span></div>
-                <div class="wex-actions"><a class="wex-btn wex-btn-yt" href="https://www.youtube.com/results?search_query=como+fazer+Tríceps+Pulley+academia" target="_blank" rel="noopener">▶ YouTube</a><button class="wex-btn wex-btn-ai" onclick="openGroq('Tríceps Pulley')">📷 Não sei qual é</button></div></div></div></div>
+                <div class="wex-actions"><a class="wex-btn wex-btn-yt" href="https://www.youtube.com/results?search_query=como+fazer+Tríceps+Pulley+academia" target="_blank" rel="noopener">▶ YouTube</a></div></div></div></div>
         <div class="wex"><div class="wex-inner"><div class="wex-svg"><svg viewBox="0 0 66 66" fill="none"><style>.triS{transform-origin:36px 26px;animation:triS 1.5s ease-in-out infinite alternate}@keyframes triS{from{transform:rotate(-25deg)}to{transform:rotate(15deg)}}
 </style><circle cx="33" cy="10" r="6" fill="#ff7b3d" opacity=".9"/><rect x="30" y="16" width="6" height="16" rx="3" fill="#ff7b3d" opacity=".7"/><line x1="33" y1="32" x2="22" y2="48" stroke="#ff7b3d" stroke-width="2.5" stroke-linecap="round"/><line x1="33" y1="32" x2="44" y2="48" stroke="#ff7b3d" stroke-width="2.5" stroke-linecap="round"/><g class="triS"><line x1="36" y1="22" x2="50" y2="20" stroke="#ff7b3d" stroke-width="2.5" stroke-linecap="round"/><line x1="50" y1="20" x2="54" y2="32" stroke="#ff7b3d" stroke-width="2.5" stroke-linecap="round"/><circle cx="55" cy="34" r="4" fill="#ffffff20" stroke="#ff7b3d" stroke-width="1.5"/></g></svg></div><div class="wex-info"><div class="wex-name">Tríceps Francês Cabo</div><div class="wex-muscle">Tríceps · Cabeça longa</div><div class="wex-meta"><span class="wex-series" style="color:#ff7b3d;background:#ff7b3d22">3x12</span><span class="wex-dica">Corda atrás da cabeça, cotovelos estáticos</span></div>
-                <div class="wex-actions"><a class="wex-btn wex-btn-yt" href="https://www.youtube.com/results?search_query=como+fazer+Tríceps+Francês+Cabo+academia" target="_blank" rel="noopener">▶ YouTube</a><button class="wex-btn wex-btn-ai" onclick="openGroq('Tríceps Francês Cabo')">📷 Não sei qual é</button></div></div></div></div>
+                <div class="wex-actions"><a class="wex-btn wex-btn-yt" href="https://www.youtube.com/results?search_query=como+fazer+Tríceps+Francês+Cabo+academia" target="_blank" rel="noopener">▶ YouTube</a></div></div></div></div>
       </div></div>
     </div>
   </div>
@@ -2100,26 +2307,26 @@ window.handleGroqImg=handleGroqImg;window.analyzeGroq=analyzeGroq;
       <div class="wgroup"><div class="wgroup-title" style="color:#ff6b9d;background:#ff6b9d22;border:1px solid #ff6b9d33">GLÚTEO</div><div class="wexercises">
         <div class="wex"><div class="wex-inner"><div class="wex-svg"><svg viewBox="0 0 66 66" fill="none"><style>.glS{transform-origin:33px 44px;animation:glS 1.5s ease-in-out infinite alternate}@keyframes glS{from{transform:rotate(-15deg)}to{transform:rotate(5deg)}}
 </style><rect x="8" y="42" width="50" height="6" rx="3" fill="#ffffff10"/><circle cx="33" cy="24" r="6" fill="#ff6b9d" opacity=".9"/><rect x="30" y="30" width="6" height="14" rx="3" fill="#ff6b9d" opacity=".7"/><g class="glS"><line x1="30" y1="44" x2="18" y2="58" stroke="#ff6b9d" stroke-width="3" stroke-linecap="round"/><line x1="36" y1="44" x2="48" y2="58" stroke="#ff6b9d" stroke-width="3" stroke-linecap="round"/></g><line x1="28" y1="32" x2="14" y2="36" stroke="#ff6b9d" stroke-width="2.5" stroke-linecap="round"/><line x1="38" y1="32" x2="52" y2="36" stroke="#ff6b9d" stroke-width="2.5" stroke-linecap="round"/></svg></div><div class="wex-info"><div class="wex-name">Elevação Pélvica</div><div class="wex-muscle">Glúteo máximo</div><div class="wex-meta"><span class="wex-series" style="color:#ff6b9d;background:#ff6b9d22">4x15</span><span class="wex-dica">Ombros no banco, empurre o quadril para cima, esprema no topo</span></div>
-                <div class="wex-actions"><a class="wex-btn wex-btn-yt" href="https://www.youtube.com/results?search_query=como+fazer+Elevação+Pélvica+academia" target="_blank" rel="noopener">▶ YouTube</a><button class="wex-btn wex-btn-ai" onclick="openGroq('Elevação Pélvica')">📷 Não sei qual é</button></div></div></div></div>
+                <div class="wex-actions"><a class="wex-btn wex-btn-yt" href="https://www.youtube.com/results?search_query=como+fazer+Elevação+Pélvica+academia" target="_blank" rel="noopener">▶ YouTube</a></div></div></div></div>
         <div class="wex"><div class="wex-inner"><div class="wex-svg"><svg viewBox="0 0 66 66" fill="none"><style>.abS{transform-origin:33px 40px;animation:abS 1.5s ease-in-out infinite alternate}@keyframes abS{from{transform:scaleX(.65)}to{transform:scaleX(1)}}
 </style><rect x="10" y="38" width="46" height="8" rx="4" fill="#ffffff10"/><circle cx="33" cy="20" r="6" fill="#ff6b9d" opacity=".9"/><rect x="30" y="26" width="6" height="14" rx="3" fill="#ff6b9d" opacity=".7"/><g class="abS"><line x1="27" y1="40" x2="12" y2="54" stroke="#ff6b9d" stroke-width="3" stroke-linecap="round"/><line x1="39" y1="40" x2="54" y2="54" stroke="#ff6b9d" stroke-width="3" stroke-linecap="round"/></g></svg></div><div class="wex-info"><div class="wex-name">Cadeira Abdutora</div><div class="wex-muscle">Glúteo médio · Abdutor</div><div class="wex-meta"><span class="wex-series" style="color:#ff6b9d;background:#ff6b9d22">4x15</span><span class="wex-dica">Movimento controlado, segure 1s no final — não jogue o peso</span></div>
-                <div class="wex-actions"><a class="wex-btn wex-btn-yt" href="https://www.youtube.com/results?search_query=como+fazer+Cadeira+Abdutora+academia" target="_blank" rel="noopener">▶ YouTube</a><button class="wex-btn wex-btn-ai" onclick="openGroq('Cadeira Abdutora')">📷 Não sei qual é</button></div></div></div></div>
+                <div class="wex-actions"><a class="wex-btn wex-btn-yt" href="https://www.youtube.com/results?search_query=como+fazer+Cadeira+Abdutora+academia" target="_blank" rel="noopener">▶ YouTube</a></div></div></div></div>
       </div></div>
       <div class="wgroup"><div class="wgroup-title" style="color:#ffd166;background:#ffd16622;border:1px solid #ffd16633">QUADRÍCEPS</div><div class="wexercises">
         <div class="wex"><div class="wex-inner"><div class="wex-svg"><svg viewBox="0 0 66 66" fill="none"><style>.lpS{transform-origin:20px 40px;animation:lpS 1.5s ease-in-out infinite alternate}@keyframes lpS{from{transform:rotate(-20deg)}to{transform:rotate(10deg)}}
 </style><rect x="4" y="30" width="28" height="30" rx="4" fill="#ffffff08"/><circle cx="18" cy="16" r="6" fill="#ffd166" opacity=".9"/><g class="lpS"><line x1="20" y1="34" x2="20" y2="52" stroke="#ffd166" stroke-width="3" stroke-linecap="round"/><line x1="20" y1="52" x2="10" y2="60" stroke="#ffd166" stroke-width="3" stroke-linecap="round"/><rect x="32" y="36" width="26" height="18" rx="4" fill="#ffffff10" stroke="#ffd166" stroke-width="1.5"/></g></svg></div><div class="wex-info"><div class="wex-name">Leg Press</div><div class="wex-muscle">Quadríceps · Glúteos</div><div class="wex-meta"><span class="wex-series" style="color:#ffd166;background:#ffd16622">4x12</span><span class="wex-dica">Pés afastados e mais alto na plataforma — mais ênfase no glúteo</span></div>
-                <div class="wex-actions"><a class="wex-btn wex-btn-yt" href="https://www.youtube.com/results?search_query=como+fazer+Leg+Press+academia" target="_blank" rel="noopener">▶ YouTube</a><button class="wex-btn wex-btn-ai" onclick="openGroq('Leg Press')">📷 Não sei qual é</button></div></div></div></div>
+                <div class="wex-actions"><a class="wex-btn wex-btn-yt" href="https://www.youtube.com/results?search_query=como+fazer+Leg+Press+academia" target="_blank" rel="noopener">▶ YouTube</a></div></div></div></div>
         <div class="wex"><div class="wex-inner"><div class="wex-svg"><svg viewBox="0 0 66 66" fill="none"><style>.extS{transform-origin:20px 40px;animation:extS 1.5s ease-in-out infinite alternate}@keyframes extS{from{transform:rotate(30deg)}to{transform:rotate(-5deg)}}
 </style><rect x="4" y="28" width="28" height="32" rx="4" fill="#ffffff08"/><circle cx="18" cy="14" r="6" fill="#ffd166" opacity=".9"/><rect x="15" y="20" width="6" height="14" rx="3" fill="#ffd166" opacity=".7"/><g class="extS"><line x1="20" y1="34" x2="20" y2="52" stroke="#ffd166" stroke-width="3" stroke-linecap="round"/><line x1="20" y1="52" x2="34" y2="56" stroke="#ffd166" stroke-width="3" stroke-linecap="round"/><circle cx="36" cy="57" r="5" fill="#ffffff15" stroke="#ffd166" stroke-width="1.5"/></g></svg></div><div class="wex-info"><div class="wex-name">Extensora</div><div class="wex-muscle">Quadríceps</div><div class="wex-meta"><span class="wex-series" style="color:#ffd166;background:#ffd16622">3x15</span><span class="wex-dica">Extensão completa, segure 1s no topo, desça lento</span></div>
-                <div class="wex-actions"><a class="wex-btn wex-btn-yt" href="https://www.youtube.com/results?search_query=como+fazer+Extensora+academia" target="_blank" rel="noopener">▶ YouTube</a><button class="wex-btn wex-btn-ai" onclick="openGroq('Extensora')">📷 Não sei qual é</button></div></div></div></div>
+                <div class="wex-actions"><a class="wex-btn wex-btn-yt" href="https://www.youtube.com/results?search_query=como+fazer+Extensora+academia" target="_blank" rel="noopener">▶ YouTube</a></div></div></div></div>
       </div></div>
       <div class="wgroup"><div class="wgroup-title" style="color:#4d9fff;background:#4d9fff22;border:1px solid #4d9fff33">POSTERIOR</div><div class="wexercises">
         <div class="wex"><div class="wex-inner"><div class="wex-svg"><svg viewBox="0 0 66 66" fill="none"><style>.lcS{transform-origin:20px 32px;animation:lcS 1.5s ease-in-out infinite alternate}@keyframes lcS{from{transform:rotate(0deg)}to{transform:rotate(-40deg)}}
 </style><rect x="4" y="28" width="38" height="8" rx="4" fill="#ffffff10"/><circle cx="20" cy="20" r="6" fill="#4d9fff" opacity=".9"/><rect x="17" y="26" width="6" height="10" rx="3" fill="#4d9fff" opacity=".7"/><g class="lcS"><line x1="20" y1="36" x2="20" y2="54" stroke="#4d9fff" stroke-width="3" stroke-linecap="round"/><line x1="20" y1="54" x2="28" y2="60" stroke="#4d9fff" stroke-width="3" stroke-linecap="round"/><circle cx="30" cy="61" r="4" fill="#ffffff15" stroke="#4d9fff" stroke-width="1.5"/></g></svg></div><div class="wex-info"><div class="wex-name">Mesa Flexora</div><div class="wex-muscle">Isquiotibiais</div><div class="wex-meta"><span class="wex-series" style="color:#4d9fff;background:#4d9fff22">3x12</span><span class="wex-dica">Quadril fixo na mesa, amplitude total, suba e desça controlado</span></div>
-                <div class="wex-actions"><a class="wex-btn wex-btn-yt" href="https://www.youtube.com/results?search_query=como+fazer+Mesa+Flexora+academia" target="_blank" rel="noopener">▶ YouTube</a><button class="wex-btn wex-btn-ai" onclick="openGroq('Mesa Flexora')">📷 Não sei qual é</button></div></div></div></div>
+                <div class="wex-actions"><a class="wex-btn wex-btn-yt" href="https://www.youtube.com/results?search_query=como+fazer+Mesa+Flexora+academia" target="_blank" rel="noopener">▶ YouTube</a></div></div></div></div>
         <div class="wex"><div class="wex-inner"><div class="wex-svg"><svg viewBox="0 0 66 66" fill="none"><style>.stS{transform-origin:33px 28px;animation:stS 1.5s ease-in-out infinite alternate}@keyframes stS{from{transform:rotate(-20deg)}to{transform:rotate(0deg)}}
 </style><g class="stS"><circle cx="33" cy="10" r="6" fill="#4d9fff" opacity=".9"/><rect x="30" y="16" width="6" height="16" rx="3" fill="#4d9fff" opacity=".7"/><line x1="28" y1="20" x2="12" y2="22" stroke="#4d9fff" stroke-width="2.5" stroke-linecap="round"/><line x1="38" y1="20" x2="54" y2="22" stroke="#4d9fff" stroke-width="2.5" stroke-linecap="round"/></g><line x1="30" y1="32" x2="26" y2="52" stroke="#4d9fff" stroke-width="2.5" stroke-linecap="round"/><line x1="36" y1="32" x2="40" y2="52" stroke="#4d9fff" stroke-width="2.5" stroke-linecap="round"/><line x1="26" y1="52" x2="20" y2="62" stroke="#4d9fff" stroke-width="2.5" stroke-linecap="round"/><line x1="40" y1="52" x2="46" y2="62" stroke="#4d9fff" stroke-width="2.5" stroke-linecap="round"/></svg></div><div class="wex-info"><div class="wex-name">Stiff</div><div class="wex-muscle">Posterior · Glúteos</div><div class="wex-meta"><span class="wex-series" style="color:#4d9fff;background:#4d9fff22">3x12</span><span class="wex-dica">Joelhos semi-flexionados, empurre o quadril para trás</span></div>
-                <div class="wex-actions"><a class="wex-btn wex-btn-yt" href="https://www.youtube.com/results?search_query=como+fazer+Stiff+academia" target="_blank" rel="noopener">▶ YouTube</a><button class="wex-btn wex-btn-ai" onclick="openGroq('Stiff')">📷 Não sei qual é</button></div></div></div></div>
+                <div class="wex-actions"><a class="wex-btn wex-btn-yt" href="https://www.youtube.com/results?search_query=como+fazer+Stiff+academia" target="_blank" rel="noopener">▶ YouTube</a></div></div></div></div>
       </div></div>
     </div>
   </div>
@@ -2158,7 +2365,7 @@ window.handleGroqImg=handleGroqImg;window.analyzeGroq=analyzeGroq;
     <ul class="ap-dicas"><li>Não incline o tronco demais — o movimento vem do dorsal, não do corpo</li><li>Expire ao puxar, inspire ao subir</li><li>Segure 1 segundo na posição contraída</li></ul>
     <div class="ap-actions">
       <a class="ap-yt-btn" href="https://www.youtube.com/results?search_query=puxada+frontal+como+fazer+academia" target="_blank" rel="noopener">▶ Ver no YouTube</a>
-      <button class="ap-photo-btn" onclick="openAiPhoto('Puxada Frontal')">📷 Não achei — tirar foto</button>
+      
     </div>
   </div>
 </div><div class="ap-card" data-cat="Costas" data-name="remada baixa (polia)">
@@ -2177,7 +2384,7 @@ window.handleGroqImg=handleGroqImg;window.analyzeGroq=analyzeGroq;
     <ul class="ap-dicas"><li>Não curve as costas — mantenha a coluna neutra</li><li>Cotovelos passam rente ao corpo</li><li>Não balance o tronco para trás</li></ul>
     <div class="ap-actions">
       <a class="ap-yt-btn" href="https://www.youtube.com/results?search_query=remada+baixa+polia+como+fazer" target="_blank" rel="noopener">▶ Ver no YouTube</a>
-      <button class="ap-photo-btn" onclick="openAiPhoto('Remada Baixa (Polia)')">📷 Não achei — tirar foto</button>
+      
     </div>
   </div>
 </div><div class="ap-card" data-cat="Costas" data-name="pulley / crossover costas">
@@ -2196,7 +2403,7 @@ window.handleGroqImg=handleGroqImg;window.analyzeGroq=analyzeGroq;
     <ul class="ap-dicas"><li>Mantenha o peito alto e aberto</li><li>Pense em 'juntar os cotovelos abaixo das costelas'</li><li>Controle o peso na subida</li></ul>
     <div class="ap-actions">
       <a class="ap-yt-btn" href="https://www.youtube.com/results?search_query=pulley+costas+como+fazer+academia" target="_blank" rel="noopener">▶ Ver no YouTube</a>
-      <button class="ap-photo-btn" onclick="openAiPhoto('Pulley / Crossover Costas')">📷 Não achei — tirar foto</button>
+      
     </div>
   </div>
 </div><div class="ap-card" data-cat="Peito" data-name="supino máquina">
@@ -2215,7 +2422,7 @@ window.handleGroqImg=handleGroqImg;window.analyzeGroq=analyzeGroq;
     <ul class="ap-dicas"><li>Cotovelos na altura dos ombros ou levemente abaixo</li><li>Não trave o cotovelo no final</li><li>Peito expandido durante todo o movimento</li></ul>
     <div class="ap-actions">
       <a class="ap-yt-btn" href="https://www.youtube.com/results?search_query=supino+maquina+como+usar+academia" target="_blank" rel="noopener">▶ Ver no YouTube</a>
-      <button class="ap-photo-btn" onclick="openAiPhoto('Supino Máquina')">📷 Não achei — tirar foto</button>
+      
     </div>
   </div>
 </div><div class="ap-card" data-cat="Peito" data-name="crossover (polia alta)">
@@ -2234,7 +2441,7 @@ window.handleGroqImg=handleGroqImg;window.analyzeGroq=analyzeGroq;
     <ul class="ap-dicas"><li>Pense em 'abraçar uma árvore'</li><li>Não dobre mais o cotovelo durante o movimento</li><li>A força vem do peito, não dos braços</li></ul>
     <div class="ap-actions">
       <a class="ap-yt-btn" href="https://www.youtube.com/results?search_query=crossover+peitoral+como+fazer" target="_blank" rel="noopener">▶ Ver no YouTube</a>
-      <button class="ap-photo-btn" onclick="openAiPhoto('Crossover (Polia Alta)')">📷 Não achei — tirar foto</button>
+      
     </div>
   </div>
 </div><div class="ap-card" data-cat="Peito" data-name="mergulho / dips">
@@ -2253,7 +2460,7 @@ window.handleGroqImg=handleGroqImg;window.analyzeGroq=analyzeGroq;
     <ul class="ap-dicas"><li>Inclinação do tronco determina o foco: mais à frente = mais peito</li><li>Desça controlado, sem pular</li><li>Não desça além de 90° para proteger o ombro</li></ul>
     <div class="ap-actions">
       <a class="ap-yt-btn" href="https://www.youtube.com/results?search_query=mergulho+dips+peito+como+fazer" target="_blank" rel="noopener">▶ Ver no YouTube</a>
-      <button class="ap-photo-btn" onclick="openAiPhoto('Mergulho / Dips')">📷 Não achei — tirar foto</button>
+      
     </div>
   </div>
 </div><div class="ap-card" data-cat="Ombro" data-name="desenvolvimento máquina">
@@ -2272,7 +2479,7 @@ window.handleGroqImg=handleGroqImg;window.analyzeGroq=analyzeGroq;
     <ul class="ap-dicas"><li>Não arqueje a lombar — use o encosto</li><li>Não trave o cotovelo no topo</li><li>Expire ao empurrar</li></ul>
     <div class="ap-actions">
       <a class="ap-yt-btn" href="https://www.youtube.com/results?search_query=desenvolvimento+maquina+ombro+como+usar" target="_blank" rel="noopener">▶ Ver no YouTube</a>
-      <button class="ap-photo-btn" onclick="openAiPhoto('Desenvolvimento Máquina')">📷 Não achei — tirar foto</button>
+      
     </div>
   </div>
 </div><div class="ap-card" data-cat="Ombro" data-name="elevação lateral (cabo)">
@@ -2291,7 +2498,7 @@ window.handleGroqImg=handleGroqImg;window.analyzeGroq=analyzeGroq;
     <ul class="ap-dicas"><li>O cotovelo deve subir mais alto que o pulso</li><li>Não balance o corpo para ganhar impulso</li><li>Prefira peso menor com execução perfeita</li></ul>
     <div class="ap-actions">
       <a class="ap-yt-btn" href="https://www.youtube.com/results?search_query=elevacao+lateral+cabo+como+fazer" target="_blank" rel="noopener">▶ Ver no YouTube</a>
-      <button class="ap-photo-btn" onclick="openAiPhoto('Elevação Lateral (Cabo)')">📷 Não achei — tirar foto</button>
+      
     </div>
   </div>
 </div><div class="ap-card" data-cat="Ombro" data-name="face pull">
@@ -2310,7 +2517,7 @@ window.handleGroqImg=handleGroqImg;window.analyzeGroq=analyzeGroq;
     <ul class="ap-dicas"><li>Cotovelos acima dos pulsos durante o movimento</li><li>Puxe até as mãos ficarem ao lado das orelhas</li><li>Essencial para saúde do ombro a longo prazo</li></ul>
     <div class="ap-actions">
       <a class="ap-yt-btn" href="https://www.youtube.com/results?search_query=face+pull+como+fazer+academia" target="_blank" rel="noopener">▶ Ver no YouTube</a>
-      <button class="ap-photo-btn" onclick="openAiPhoto('Face Pull')">📷 Não achei — tirar foto</button>
+      
     </div>
   </div>
 </div><div class="ap-card" data-cat="Bíceps" data-name="rosca direta na polia">
@@ -2329,7 +2536,7 @@ window.handleGroqImg=handleGroqImg;window.analyzeGroq=analyzeGroq;
     <ul class="ap-dicas"><li>Cotovelos não devem se mover — são o ponto fixo</li><li>Contração máxima no topo</li><li>A tensão constante do cabo é uma vantagem sobre o halter</li></ul>
     <div class="ap-actions">
       <a class="ap-yt-btn" href="https://www.youtube.com/results?search_query=rosca+direta+polia+como+fazer" target="_blank" rel="noopener">▶ Ver no YouTube</a>
-      <button class="ap-photo-btn" onclick="openAiPhoto('Rosca Direta na Polia')">📷 Não achei — tirar foto</button>
+      
     </div>
   </div>
 </div><div class="ap-card" data-cat="Bíceps" data-name="rosca martelo">
@@ -2348,7 +2555,7 @@ window.handleGroqImg=handleGroqImg;window.analyzeGroq=analyzeGroq;
     <ul class="ap-dicas"><li>Trabalha o braquial que fica 'embaixo' do bíceps — dá mais volume</li><li>Movimento lento e controlado</li><li>Pode ser feito alternado ou simultâneo</li></ul>
     <div class="ap-actions">
       <a class="ap-yt-btn" href="https://www.youtube.com/results?search_query=rosca+martelo+halteres+como+fazer" target="_blank" rel="noopener">▶ Ver no YouTube</a>
-      <button class="ap-photo-btn" onclick="openAiPhoto('Rosca Martelo')">📷 Não achei — tirar foto</button>
+      
     </div>
   </div>
 </div><div class="ap-card" data-cat="Bíceps" data-name="rosca concentrada (polia)">
@@ -2367,7 +2574,7 @@ window.handleGroqImg=handleGroqImg;window.analyzeGroq=analyzeGroq;
     <ul class="ap-dicas"><li>Cotovelo fixo na coxa — sem movimento</li><li>Contração máxima e pausa de 1s no topo</li><li>Foca no pico do bíceps</li></ul>
     <div class="ap-actions">
       <a class="ap-yt-btn" href="https://www.youtube.com/results?search_query=rosca+concentrada+polia+baixa+como+fazer" target="_blank" rel="noopener">▶ Ver no YouTube</a>
-      <button class="ap-photo-btn" onclick="openAiPhoto('Rosca Concentrada (Polia)')">📷 Não achei — tirar foto</button>
+      
     </div>
   </div>
 </div><div class="ap-card" data-cat="Bíceps" data-name="rosca alternada inclinada">
@@ -2386,7 +2593,7 @@ window.handleGroqImg=handleGroqImg;window.analyzeGroq=analyzeGroq;
     <ul class="ap-dicas"><li>Não balance o corpo para levantar o peso</li><li>A posição inclinada é o diferencial — não perca essa amplitude</li><li>Excelente para hipertrofia da cabeça longa</li></ul>
     <div class="ap-actions">
       <a class="ap-yt-btn" href="https://www.youtube.com/results?search_query=rosca+alternada+banco+inclinado+como+fazer" target="_blank" rel="noopener">▶ Ver no YouTube</a>
-      <button class="ap-photo-btn" onclick="openAiPhoto('Rosca Alternada Inclinada')">📷 Não achei — tirar foto</button>
+      
     </div>
   </div>
 </div><div class="ap-card" data-cat="Tríceps" data-name="tríceps pulley (polia)">
@@ -2405,7 +2612,7 @@ window.handleGroqImg=handleGroqImg;window.analyzeGroq=analyzeGroq;
     <ul class="ap-dicas"><li>Cotovelos fixos — são o ponto de pivô</li><li>Extensão completa é fundamental</li><li>Com a corda, abra as mãos no final para maior contração</li></ul>
     <div class="ap-actions">
       <a class="ap-yt-btn" href="https://www.youtube.com/results?search_query=triceps+pulley+como+fazer" target="_blank" rel="noopener">▶ Ver no YouTube</a>
-      <button class="ap-photo-btn" onclick="openAiPhoto('Tríceps Pulley (Polia)')">📷 Não achei — tirar foto</button>
+      
     </div>
   </div>
 </div><div class="ap-card" data-cat="Tríceps" data-name="tríceps testa (polia)">
@@ -2424,7 +2631,7 @@ window.handleGroqImg=handleGroqImg;window.analyzeGroq=analyzeGroq;
     <ul class="ap-dicas"><li>Cotovelos não devem abrir para os lados</li><li>Movimento só nos antebraços</li><li>Ótimo para cabeça longa do tríceps</li></ul>
     <div class="ap-actions">
       <a class="ap-yt-btn" href="https://www.youtube.com/results?search_query=triceps+testa+polia+como+fazer" target="_blank" rel="noopener">▶ Ver no YouTube</a>
-      <button class="ap-photo-btn" onclick="openAiPhoto('Tríceps Testa (Polia)')">📷 Não achei — tirar foto</button>
+      
     </div>
   </div>
 </div><div class="ap-card" data-cat="Tríceps" data-name="tríceps francês (cabo)">
@@ -2443,7 +2650,7 @@ window.handleGroqImg=handleGroqImg;window.analyzeGroq=analyzeGroq;
     <ul class="ap-dicas"><li>Cotovelos não devem se abrir — aponte para o teto</li><li>Extensão completa no topo</li><li>Ótimo para dar volume e comprimento ao tríceps</li></ul>
     <div class="ap-actions">
       <a class="ap-yt-btn" href="https://www.youtube.com/results?search_query=triceps+frances+cabo+como+fazer" target="_blank" rel="noopener">▶ Ver no YouTube</a>
-      <button class="ap-photo-btn" onclick="openAiPhoto('Tríceps Francês (Cabo)')">📷 Não achei — tirar foto</button>
+      
     </div>
   </div>
 </div><div class="ap-card" data-cat="Quadríceps" data-name="leg press">
@@ -2462,7 +2669,7 @@ window.handleGroqImg=handleGroqImg;window.analyzeGroq=analyzeGroq;
     <ul class="ap-dicas"><li>Pés mais altos e afastados = mais glúteo</li><li>Pés mais baixos e próximos = mais quadríceps</li><li>Nunca trave o joelho no final da extensão</li></ul>
     <div class="ap-actions">
       <a class="ap-yt-btn" href="https://www.youtube.com/results?search_query=leg+press+como+usar+academia" target="_blank" rel="noopener">▶ Ver no YouTube</a>
-      <button class="ap-photo-btn" onclick="openAiPhoto('Leg Press')">📷 Não achei — tirar foto</button>
+      
     </div>
   </div>
 </div><div class="ap-card" data-cat="Quadríceps" data-name="extensora">
@@ -2481,7 +2688,7 @@ window.handleGroqImg=handleGroqImg;window.analyzeGroq=analyzeGroq;
     <ul class="ap-dicas"><li>Extensão completa para trabalhar todo o músculo</li><li>Segure 1s no topo para maior ativação</li><li>Desça devagar — a fase excêntrica é essencial</li></ul>
     <div class="ap-actions">
       <a class="ap-yt-btn" href="https://www.youtube.com/results?search_query=cadeira+extensora+como+usar" target="_blank" rel="noopener">▶ Ver no YouTube</a>
-      <button class="ap-photo-btn" onclick="openAiPhoto('Extensora')">📷 Não achei — tirar foto</button>
+      
     </div>
   </div>
 </div><div class="ap-card" data-cat="Quadríceps" data-name="agachamento livre / smith">
@@ -2500,7 +2707,7 @@ window.handleGroqImg=handleGroqImg;window.analyzeGroq=analyzeGroq;
     <ul class="ap-dicas"><li>Não deixe os joelhos caírem para dentro</li><li>O peso fica no meio do pé — não na ponta</li><li>Agachamento no Smith é mais seguro para iniciantes</li></ul>
     <div class="ap-actions">
       <a class="ap-yt-btn" href="https://www.youtube.com/results?search_query=agachamento+como+fazer+academia+iniciante" target="_blank" rel="noopener">▶ Ver no YouTube</a>
-      <button class="ap-photo-btn" onclick="openAiPhoto('Agachamento Livre / Smith')">📷 Não achei — tirar foto</button>
+      
     </div>
   </div>
 </div><div class="ap-card" data-cat="Posterior" data-name="mesa flexora">
@@ -2519,7 +2726,7 @@ window.handleGroqImg=handleGroqImg;window.analyzeGroq=analyzeGroq;
     <ul class="ap-dicas"><li>Quadril fixo na mesa — não levante</li><li>Amplitude total para máxima eficiência</li><li>Desça devagar para maior ativação</li></ul>
     <div class="ap-actions">
       <a class="ap-yt-btn" href="https://www.youtube.com/results?search_query=mesa+flexora+como+usar" target="_blank" rel="noopener">▶ Ver no YouTube</a>
-      <button class="ap-photo-btn" onclick="openAiPhoto('Mesa Flexora')">📷 Não achei — tirar foto</button>
+      
     </div>
   </div>
 </div><div class="ap-card" data-cat="Posterior" data-name="stiff (terra romeno)">
@@ -2538,7 +2745,7 @@ window.handleGroqImg=handleGroqImg;window.analyzeGroq=analyzeGroq;
     <ul class="ap-dicas"><li>O movimento vem do quadril, não da coluna</li><li>Mantenha a coluna neutra (sem curvar)</li><li>Sinta o alongamento na parte de trás da coxa</li></ul>
     <div class="ap-actions">
       <a class="ap-yt-btn" href="https://www.youtube.com/results?search_query=stiff+terra+romeno+como+fazer" target="_blank" rel="noopener">▶ Ver no YouTube</a>
-      <button class="ap-photo-btn" onclick="openAiPhoto('Stiff (Terra Romeno)')">📷 Não achei — tirar foto</button>
+      
     </div>
   </div>
 </div><div class="ap-card" data-cat="Glúteo" data-name="cadeira abdutora">
@@ -2557,7 +2764,7 @@ window.handleGroqImg=handleGroqImg;window.analyzeGroq=analyzeGroq;
     <ul class="ap-dicas"><li>Mantenha as costas apoiadas no banco</li><li>Segure 1s na posição aberta</li><li>Movimento controlado — não deixe bater</li></ul>
     <div class="ap-actions">
       <a class="ap-yt-btn" href="https://www.youtube.com/results?search_query=cadeira+abdutora+como+usar" target="_blank" rel="noopener">▶ Ver no YouTube</a>
-      <button class="ap-photo-btn" onclick="openAiPhoto('Cadeira Abdutora')">📷 Não achei — tirar foto</button>
+      
     </div>
   </div>
 </div><div class="ap-card" data-cat="Glúteo" data-name="elevação pélvica / hip thrust">
@@ -2576,7 +2783,7 @@ window.handleGroqImg=handleGroqImg;window.analyzeGroq=analyzeGroq;
     <ul class="ap-dicas"><li>Esprema o glúteo com força no topo — não acelere</li><li>Queixo no peito — não jogue a cabeça para trás</li><li>Pés afastados na largura dos ombros ou um pouco mais</li></ul>
     <div class="ap-actions">
       <a class="ap-yt-btn" href="https://www.youtube.com/results?search_query=hip+thrust+elevacao+pelvica+como+fazer" target="_blank" rel="noopener">▶ Ver no YouTube</a>
-      <button class="ap-photo-btn" onclick="openAiPhoto('Elevação Pélvica / Hip Thrust')">📷 Não achei — tirar foto</button>
+      
     </div>
   </div>
 </div><div class="ap-card" data-cat="Trapézio" data-name="encolhimento de ombros">
@@ -2595,16 +2802,10 @@ window.handleGroqImg=handleGroqImg;window.analyzeGroq=analyzeGroq;
     <ul class="ap-dicas"><li>Não gire os ombros — movimento vertical puro</li><li>Não dobre os cotovelos</li><li>Controle a descida — fase excêntrica importante</li></ul>
     <div class="ap-actions">
       <a class="ap-yt-btn" href="https://www.youtube.com/results?search_query=encolhimento+ombros+barra+halteres+como+fazer" target="_blank" rel="noopener">▶ Ver no YouTube</a>
-      <button class="ap-photo-btn" onclick="openAiPhoto('Encolhimento de Ombros')">📷 Não achei — tirar foto</button>
+      
     </div>
   </div>
 </div></div>
-  <div class="ap-not-found" id="apNotFound" style="display:none">
-    <div class="ap-nf-icon">🤔</div>
-    <div class="ap-nf-title">Não encontrou o aparelho?</div>
-    <p class="ap-nf-sub">Tire uma foto e a IA identifica e explica como usar</p>
-    <button class="ap-nf-btn" onclick="openAiPhoto('este aparelho')">📷 Fotografar aparelho</button>
-  </div>
   <footer>Guia de Aparelhos · Academia · 2026</footer>
 </div>
 </div>
@@ -2628,6 +2829,10 @@ window.handleGroqImg=handleGroqImg;window.analyzeGroq=analyzeGroq;
     <button class="groq-close-btn" onclick="closeGroq()">Fechar</button>
   </div>
 </div>
+
+
+<button class="fab" onclick="openAiPhoto('este aparelho')" title="Identificar aparelho">📷</button>
+<div class="fab-tooltip">Identificar aparelho</div>
 
 </body>
 </html>
