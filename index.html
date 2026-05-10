@@ -268,6 +268,100 @@ footer{border-top:1px solid var(--border2);padding-top:24px;text-align:center;fo
 .day-treino-btn{font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:1px;text-transform:uppercase;margin-top:8px;padding:4px 8px;border-radius:6px;border:1px solid #ffffff18;background:#ffffff08;color:#7a7a9a;cursor:pointer;display:inline-block;transition:all .2s}
 .day-card.clickable:hover .day-treino-btn{background:#ffffff12;color:#f2f2f8}
 
+
+
+
+
+/* APARELHOS SCREEN */
+.screen-ap::before{background:radial-gradient(ellipse 70% 50% at 85% 5%,#ffd16609 0%,transparent 55%),radial-gradient(ellipse 60% 60% at 5% 90%,#ff7b3d07 0%,transparent 55%)}
+.htag.ap{color:var(--yellow)}.htag.ap::before{background:var(--yellow)}
+.screen-ap h1 em{color:var(--yellow)}
+
+.ap-search-wrap{margin-bottom:16px}
+.ap-search{width:100%;background:var(--card);border:1px solid var(--border2);border-radius:var(--r);padding:12px 16px;color:var(--text);font-family:'Outfit',sans-serif;font-size:14px;outline:none;transition:border-color .2s}
+.ap-search:focus{border-color:var(--yellow)}
+.ap-search::placeholder{color:var(--muted)}
+
+.ap-tabs{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;margin-bottom:20px;padding-bottom:2px}
+.ap-tabs::-webkit-scrollbar{display:none}
+.ap-tab{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:1px;text-transform:uppercase;padding:6px 12px;border-radius:100px;border:1px solid var(--border2);background:var(--card);color:var(--muted);cursor:pointer;transition:all .2s;white-space:nowrap;flex-shrink:0}
+.ap-tab:hover{background:var(--border2);color:var(--text)}
+.ap-tab.active{background:var(--yellow-d);border-color:var(--yellow);color:var(--yellow)}
+.ap-tab[style]{}.ap-tab.active[style]{background:color-mix(in srgb,var(--cat-color) 15%,transparent);border-color:var(--cat-color);color:var(--cat-color)}
+
+.ap-grid{display:grid;gap:8px;margin-bottom:32px}
+.ap-card{background:var(--card);border:1px solid var(--border2);border-radius:var(--r);overflow:hidden;transition:border-color .2s}
+.ap-card.hidden{display:none}
+.ap-card-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 16px;cursor:pointer;transition:background .2s;border-left:3px solid var(--ac,var(--yellow))}
+.ap-card-head:hover{background:var(--card2)}
+.ap-cat-pill{font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:1.5px;text-transform:uppercase;padding:2px 7px;border-radius:100px;border:1px solid;display:inline-block;margin-bottom:5px}
+.ap-name{font-size:15px;font-weight:600;color:var(--text);margin-bottom:2px}
+.ap-muscle{font-size:11px;color:var(--muted)}
+.ap-chevron{color:var(--muted);font-size:13px;transition:transform .25s;flex-shrink:0}
+.ap-card.open .ap-chevron{transform:rotate(180deg)}
+.ap-card-body{display:none;padding:16px;border-top:1px solid var(--border)}
+.ap-card.open .ap-card-body{display:block}
+.ap-como-title,.ap-dicas-title{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--yellow);margin-bottom:8px}
+.ap-dicas-title{margin-top:14px}
+.ap-como-text{font-size:13px;color:var(--text);line-height:1.7}
+.ap-dicas{list-style:none;display:grid;gap:5px}
+.ap-dicas li{font-size:12px;color:var(--muted);padding:5px 10px;background:var(--card2);border-radius:var(--rs);display:flex;align-items:flex-start;gap:6px}
+.ap-dicas li::before{content:'→';color:var(--yellow);flex-shrink:0}
+.ap-actions{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap}
+.ap-yt-btn{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:1px;text-transform:uppercase;padding:7px 14px;border-radius:8px;border:1px solid #ff444433;background:#ff444410;color:#ff6666;cursor:pointer;transition:all .2s;text-decoration:none;display:inline-flex;align-items:center;gap:5px}
+.ap-yt-btn:hover{background:#ff444422;border-color:#ff4444}
+.ap-photo-btn{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:1px;text-transform:uppercase;padding:7px 14px;border-radius:8px;border:1px solid #a855f733;background:#a855f710;color:#a855f7;cursor:pointer;transition:all .2s}
+.ap-photo-btn:hover{background:#a855f722;border-color:#a855f7}
+
+.ap-not-found{text-align:center;padding:40px 20px;background:var(--card);border:1px solid var(--border2);border-radius:var(--r)}
+.ap-nf-icon{font-size:36px;margin-bottom:12px}
+.ap-nf-title{font-family:'Syne',sans-serif;font-size:18px;font-weight:700;margin-bottom:6px}
+.ap-nf-sub{font-size:13px;color:var(--muted);margin-bottom:16px}
+.ap-nf-btn{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;padding:10px 20px;border-radius:10px;border:1px solid #a855f7;background:#a855f710;color:#a855f7;cursor:pointer;transition:all .2s}
+.ap-nf-btn:hover{background:#a855f722}
+
+/* SELECTOR — adiciona botão aparelhos */
+.sc.ap{background:var(--card);border:1px solid var(--border2)}
+.sc.ap::after{background:radial-gradient(circle at 50% 0%,var(--yellow-d) 0%,transparent 70%)}
+.sc.ap:hover{border-color:var(--yellow);box-shadow:0 16px 48px #ffd16612}
+.sc.ap:hover::after{opacity:1}
+.sc.ap .sc-name{color:var(--yellow)}
+.sc.ap .sc-pill{color:var(--yellow);border-color:var(--yellow);background:var(--yellow-d)}
+
+/* EXERCISE BUTTONS (in workout modals) */
+.wex-actions{display:flex;gap:6px;margin-top:10px;flex-wrap:wrap}
+.wex-btn{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:1px;text-transform:uppercase;padding:5px 10px;border-radius:6px;border:1px solid;cursor:pointer;transition:all .2s;display:inline-flex;align-items:center;gap:4px;text-decoration:none;white-space:nowrap}
+.wex-btn-yt{color:#ff6666;border-color:#ff444433;background:#ff444410}
+.wex-btn-yt:hover{background:#ff444422;border-color:#ff4444}
+.wex-btn-ai{color:#a855f7;border-color:#a855f733;background:#a855f710}
+.wex-btn-ai:hover{background:#a855f722;border-color:#a855f7}
+
+/* GROQ MODAL */
+.groq-overlay{position:fixed;inset:0;z-index:600;background:#000000dd;display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;pointer-events:none;transition:opacity .3s}
+.groq-overlay.open{opacity:1;pointer-events:all}
+.groq-modal{background:#0f0f18;border:1px solid #ffffff1a;border-radius:20px;width:100%;max-width:480px;max-height:88vh;overflow-y:auto;padding:24px}
+.groq-title{font-family:'Syne',sans-serif;font-size:18px;font-weight:700;color:#f2f2f8;margin-bottom:4px}
+.groq-sub{font-size:12px;color:#7a7a9a;margin-bottom:20px;line-height:1.6}
+.groq-upload-area{border:2px dashed #ffffff18;border-radius:12px;padding:28px 20px;text-align:center;cursor:pointer;transition:all .2s;margin-bottom:14px;position:relative}
+.groq-upload-area:hover{border-color:#a855f740;background:#a855f708}
+.groq-upload-area.has-img{border-color:#a855f7;border-style:solid}
+.groq-upload-icon{font-size:32px;margin-bottom:8px}
+.groq-upload-text{font-size:13px;color:#7a7a9a}
+.groq-upload-text strong{color:#f2f2f8;display:block;margin-bottom:4px}
+.groq-upload-input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
+.groq-preview{width:100%;border-radius:10px;margin-bottom:14px;display:none;max-height:200px;object-fit:cover}
+.groq-analyze-btn{width:100%;padding:12px;border-radius:10px;border:none;background:linear-gradient(135deg,#7c3aed,#a855f7);color:#fff;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:all .2s;margin-bottom:14px}
+.groq-analyze-btn:hover:not(:disabled){opacity:.9;transform:translateY(-1px)}
+.groq-analyze-btn:disabled{opacity:.4;cursor:default}
+.groq-result{background:#1c1c28;border:1px solid #a855f730;border-radius:10px;padding:16px;display:none}
+.groq-result-title{font-family:'JetBrains Mono',monospace;font-size:10px;color:#a855f7;letter-spacing:2px;text-transform:uppercase;margin-bottom:10px}
+.groq-result-text{font-size:13px;color:#cbd5e1;line-height:1.7}
+.groq-loading{display:none;text-align:center;padding:16px;color:#a855f7;font-size:13px}
+.groq-spinner{display:inline-block;width:18px;height:18px;border:2px solid #a855f730;border-top-color:#a855f7;border-radius:50%;animation:gsp .8s linear infinite;margin-right:8px;vertical-align:middle}
+@keyframes gsp{to{transform:rotate(360deg)}}
+.groq-close-btn{width:100%;margin-top:12px;padding:10px;border-radius:10px;border:1px solid #ffffff18;background:transparent;color:#7a7a9a;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:1px;text-transform:uppercase;cursor:pointer;transition:all .2s}
+.groq-close-btn:hover{background:#ffffff0a;color:#f2f2f8}
+
 </style>
 </head>
 <body>
@@ -289,6 +383,12 @@ footer{border-top:1px solid var(--border2);padding-top:24px;text-align:center;fo
       <div class="sc-name">STEPHANY</div>
       <div class="sc-info">35 anos · 58kg · 163cm<br>Meta: 53kg com 13% BF</div>
       <div class="sc-pill">MUSCULAÇÃO + JIU-JÍTSU</div>
+    </div>
+    <div class="sc ap" onclick="go('ap')">
+      <span class="sc-ava">🏋️</span>
+      <div class="sc-name">APARELHOS</div>
+      <div class="sc-info">Guia completo de todos<br>os aparelhos da academia</div>
+      <div class="sc-pill">VER COMO USAR + FOTO IA</div>
     </div>
   </div>
 </div>
@@ -859,11 +959,11 @@ var cur='sel';
 
 function go(id){
   document.querySelectorAll('.screen').forEach(function(s){s.classList.remove('active')});
-  var el=document.getElementById(id==='l'?'screen-l':id==='s'?'screen-s':'sel');
-  el.classList.add('active');
+  var screenId = id==='l'?'screen-l':id==='s'?'screen-s':id==='ap'?'screen-ap':'sel';
+  document.getElementById(screenId).classList.add('active');
   window.scrollTo({top:0,behavior:'instant'});
   cur=id;
-  if(id!=='sel') updateNav(id);
+  if(id!=='sel'&&id!=='ap') updateNav(id);
 }
 window.go=go;
 
@@ -1006,6 +1106,8 @@ function closeWorkout(e,id){
   }
 }
 window.openWorkout=openWorkout;
+
+
 window.closeWorkout=closeWorkout;
 // Close on ESC
 document.addEventListener('keydown',function(e){
@@ -1016,6 +1118,108 @@ document.addEventListener('keydown',function(e){
     });
   }
 });
+
+
+// ── APARELHOS ──────────────────────────────────────────────────────────────
+function toggleAp(head){
+  head.closest('.ap-card').classList.toggle('open');
+}
+function filterAp(cat,btn){
+  document.querySelectorAll('.ap-tab').forEach(function(b){b.classList.remove('active')});
+  btn.classList.add('active');
+  var vis=0;
+  document.querySelectorAll('.ap-card').forEach(function(c){
+    var show=cat==='all'||c.dataset.cat===cat;
+    c.classList.toggle('hidden',!show);
+    if(show)vis++;
+  });
+  document.getElementById('apNotFound').style.display=vis===0?'block':'none';
+}
+function searchAp(q){
+  var lo=q.toLowerCase().trim();
+  var vis=0;
+  document.querySelectorAll('.ap-card').forEach(function(c){
+    var m=!lo||c.dataset.name.includes(lo)||c.dataset.cat.toLowerCase().includes(lo);
+    c.classList.toggle('hidden',!m);
+    if(m)vis++;
+  });
+  document.getElementById('apNotFound').style.display=vis===0?'block':'none';
+}
+
+// ── GROQ VISION ────────────────────────────────────────────────────────────
+var GROQ_KEY='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';
+var _groqImg=null,_groqEx='';
+
+function openAiPhoto(exName){
+  _groqEx=exName;_groqImg=null;
+  document.getElementById('groqSubText').textContent=exName!=='este aparelho'?'Exercício: '+exName:'Tire uma foto e a IA identifica o aparelho';
+  document.getElementById('groqResult').style.display='none';
+  document.getElementById('groqLoading').style.display='none';
+  document.getElementById('groqPreview').style.display='none';
+  document.getElementById('groqPreview').src='';
+  document.getElementById('groqBtn').disabled=true;
+  document.getElementById('groqFileInput').value='';
+  document.getElementById('groqUploadArea').classList.remove('has-img');
+  document.getElementById('groqOverlay').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function openGroq(n){openAiPhoto(n);}
+function closeGroq(e){
+  if(e&&e.target!==e.currentTarget)return;
+  document.getElementById('groqOverlay').classList.remove('open');
+  document.body.style.overflow='';
+}
+function handleGroqImg(input){
+  var f=input.files[0];if(!f)return;
+  var r=new FileReader();
+  r.onload=function(e){
+    var url=e.target.result;
+    _groqImg=url.split(',')[1];
+    var p=document.getElementById('groqPreview');
+    p.src=url;p.style.display='block';
+    document.getElementById('groqUploadArea').classList.add('has-img');
+    document.getElementById('groqBtn').disabled=false;
+    document.getElementById('groqResult').style.display='none';
+  };
+  r.readAsDataURL(f);
+}
+async function analyzeGroq(){
+  if(!_groqImg){alert('Selecione uma foto primeiro.');return;}
+  var key=GROQ_KEY;
+  if(!key||key==='GROQ_KEY_AQUI'){alert('Configure a chave Groq: substitua GROQ_KEY_AQUI no código.');return;}
+  document.getElementById('groqLoading').style.display='block';
+  document.getElementById('groqResult').style.display='none';
+  document.getElementById('groqBtn').disabled=true;
+  var prompt='Você é personal trainer. O usuário fotografou um aparelho de academia. '
+    +(_groqEx!=='este aparelho'?'Quer fazer: '+_groqEx+'. ':'')
+    +'1) Identifique o aparelho. 2) Explique como usar. 3) Dê 2-3 dicas de segurança. Em português, use emojis.';
+  try{
+    var res=await fetch('https://api.groq.com/openai/v1/chat/completions',{
+      method:'POST',
+      headers:{'Content-Type':'application/json','Authorization':'Bearer '+key},
+      body:JSON.stringify({model:'meta-llama/llama-4-scout-17b-16e-instruct',max_tokens:600,
+        messages:[{role:'user',content:[
+          {type:'image_url',image_url:{url:'data:image/jpeg;base64,'+_groqImg}},
+          {type:'text',text:prompt}
+        ]}]})
+    });
+    var d=await res.json();
+    document.getElementById('groqLoading').style.display='none';
+    document.getElementById('groqBtn').disabled=false;
+    var txt=(d.choices&&d.choices[0])?d.choices[0].message.content:'❌ '+(d.error?d.error.message:'Erro');
+    document.getElementById('groqResultText').innerHTML=txt.replace(/\n/g,'<br>');
+    document.getElementById('groqResult').style.display='block';
+  }catch(err){
+    document.getElementById('groqLoading').style.display='none';
+    document.getElementById('groqBtn').disabled=false;
+    document.getElementById('groqResultText').innerHTML='❌ '+err.message;
+    document.getElementById('groqResult').style.display='block';
+  }
+}
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeGroq();});
+window.toggleAp=toggleAp;window.filterAp=filterAp;window.searchAp=searchAp;
+window.openAiPhoto=openAiPhoto;window.openGroq=openGroq;window.closeGroq=closeGroq;
+window.handleGroqImg=handleGroqImg;window.analyzeGroq=analyzeGroq;
 
 </script>
 <div class="wmodal-overlay" id="wmA" onclick="closeWorkout(event,'A')">
@@ -1035,7 +1239,8 @@ document.addEventListener('keydown',function(e){
   <style>
     .arm{transform-origin:33px 20px;animation:pull 1.5s ease-in-out infinite alternate}
     @keyframes pull{from{transform:translateY(-8px)}to{transform:translateY(4px)}}
-  </style>
+  
+</style>
   <circle cx="33" cy="10" r="6" fill="#00e5cc" opacity=".9"/>
   <rect x="30" y="16" width="6" height="18" rx="3" fill="#00e5cc" opacity=".7"/>
   <line x1="15" y1="4" x2="51" y2="4" stroke="#ffffff30" stroke-width="2" stroke-linecap="round"/>
@@ -1053,7 +1258,9 @@ document.addEventListener('keydown',function(e){
                 <div class="wex-meta">
                   <span class="wex-series" style="color:#00e5cc;background:#00e5cc22">4x10–12</span>
                   <span class="wex-dica">Puxe até o peito, cotovelos apontando para baixo</span>
-                </div>
+                
+</div>
+                <div class="wex-actions"><a class="wex-btn wex-btn-yt" href="https://www.youtube.com/results?search_query=como+fazer+Puxada+Frontal+academia" target="_blank" rel="noopener">▶ YouTube</a><button class="wex-btn wex-btn-ai" onclick="openGroq('Puxada Frontal')">📷 Não sei qual é</button></div>
               </div>
             </div>
           </div>
@@ -1063,7 +1270,8 @@ document.addEventListener('keydown',function(e){
   <style>
     .rarm{animation:row 1.5s ease-in-out infinite alternate;transform-origin:20px 30px}
     @keyframes row{from{transform:translateX(8px)}to{transform:translateX(-4px)}}
-  </style>
+  
+</style>
   <rect x="5" y="38" width="56" height="4" rx="2" fill="#ffffff15"/>
   <circle cx="20" cy="26" r="6" fill="#00e5cc" opacity=".9"/>
   <rect x="17" y="32" width="6" height="14" rx="3" fill="#00e5cc" opacity=".7"/>
@@ -1081,7 +1289,9 @@ document.addEventListener('keydown',function(e){
                 <div class="wex-meta">
                   <span class="wex-series" style="color:#00e5cc;background:#00e5cc22">4x10–12</span>
                   <span class="wex-dica">Costas retas, puxe até o abdômen</span>
-                </div>
+                
+</div>
+                <div class="wex-actions"><a class="wex-btn wex-btn-yt" href="https://www.youtube.com/results?search_query=como+fazer+Remada+Baixa+academia" target="_blank" rel="noopener">▶ YouTube</a><button class="wex-btn wex-btn-ai" onclick="openGroq('Remada Baixa')">📷 Não sei qual é</button></div>
               </div>
             </div>
           </div>
@@ -1091,7 +1301,8 @@ document.addEventListener('keydown',function(e){
   <style>
     .arm{transform-origin:33px 20px;animation:pull 1.5s ease-in-out infinite alternate}
     @keyframes pull{from{transform:translateY(-8px)}to{transform:translateY(4px)}}
-  </style>
+  
+</style>
   <circle cx="33" cy="10" r="6" fill="#00e5cc" opacity=".9"/>
   <rect x="30" y="16" width="6" height="18" rx="3" fill="#00e5cc" opacity=".7"/>
   <line x1="15" y1="4" x2="51" y2="4" stroke="#ffffff30" stroke-width="2" stroke-linecap="round"/>
@@ -1109,7 +1320,9 @@ document.addEventListener('keydown',function(e){
                 <div class="wex-meta">
                   <span class="wex-series" style="color:#00e5cc;background:#00e5cc22">3x12–15</span>
                   <span class="wex-dica">Amplitude total, contraia na posição final</span>
-                </div>
+                
+</div>
+                <div class="wex-actions"><a class="wex-btn wex-btn-yt" href="https://www.youtube.com/results?search_query=como+fazer+Pulley+Frente+academia" target="_blank" rel="noopener">▶ YouTube</a><button class="wex-btn wex-btn-ai" onclick="openGroq('Pulley Frente')">📷 Não sei qual é</button></div>
               </div>
             </div>
           </div>
@@ -1124,7 +1337,8 @@ document.addEventListener('keydown',function(e){
   <style>
     .curl{transform-origin:30px 30px;animation:curl 1.5s ease-in-out infinite alternate}
     @keyframes curl{from{transform:rotate(20deg)}to{transform:rotate(-30deg)}}
-  </style>
+  
+</style>
   <circle cx="33" cy="10" r="6" fill="#4d9fff" opacity=".9"/>
   <rect x="30" y="16" width="6" height="16" rx="3" fill="#4d9fff" opacity=".7"/>
   <line x1="33" y1="32" x2="22" y2="48" stroke="#4d9fff" stroke-width="2.5" stroke-linecap="round"/>
@@ -1142,7 +1356,9 @@ document.addEventListener('keydown',function(e){
                 <div class="wex-meta">
                   <span class="wex-series" style="color:#4d9fff;background:#4d9fff22">3x12</span>
                   <span class="wex-dica">Cotovelos fixos, contração máxima no topo</span>
-                </div>
+                
+</div>
+                <div class="wex-actions"><a class="wex-btn wex-btn-yt" href="https://www.youtube.com/results?search_query=como+fazer+Rosca+Direta+na+Polia+academia" target="_blank" rel="noopener">▶ YouTube</a><button class="wex-btn wex-btn-ai" onclick="openGroq('Rosca Direta na Polia')">📷 Não sei qual é</button></div>
               </div>
             </div>
           </div>
@@ -1152,7 +1368,8 @@ document.addEventListener('keydown',function(e){
   <style>
     .curl{transform-origin:30px 30px;animation:curl 1.5s ease-in-out infinite alternate}
     @keyframes curl{from{transform:rotate(20deg)}to{transform:rotate(-30deg)}}
-  </style>
+  
+</style>
   <circle cx="33" cy="10" r="6" fill="#4d9fff" opacity=".9"/>
   <rect x="30" y="16" width="6" height="16" rx="3" fill="#4d9fff" opacity=".7"/>
   <line x1="33" y1="32" x2="22" y2="48" stroke="#4d9fff" stroke-width="2.5" stroke-linecap="round"/>
@@ -1170,7 +1387,9 @@ document.addEventListener('keydown',function(e){
                 <div class="wex-meta">
                   <span class="wex-series" style="color:#4d9fff;background:#4d9fff22">3x12</span>
                   <span class="wex-dica">Polia baixa, apoie no joelho, isole o movimento</span>
-                </div>
+                
+</div>
+                <div class="wex-actions"><a class="wex-btn wex-btn-yt" href="https://www.youtube.com/results?search_query=como+fazer+Rosca+Concentrada+na+Polia+academia" target="_blank" rel="noopener">▶ YouTube</a><button class="wex-btn wex-btn-ai" onclick="openGroq('Rosca Concentrada na Polia')">📷 Não sei qual é</button></div>
               </div>
             </div>
           </div>
@@ -1180,7 +1399,8 @@ document.addEventListener('keydown',function(e){
   <style>
     .curl{transform-origin:30px 30px;animation:curl 1.5s ease-in-out infinite alternate}
     @keyframes curl{from{transform:rotate(20deg)}to{transform:rotate(-30deg)}}
-  </style>
+  
+</style>
   <circle cx="33" cy="10" r="6" fill="#4d9fff" opacity=".9"/>
   <rect x="30" y="16" width="6" height="16" rx="3" fill="#4d9fff" opacity=".7"/>
   <line x1="33" y1="32" x2="22" y2="48" stroke="#4d9fff" stroke-width="2.5" stroke-linecap="round"/>
@@ -1198,7 +1418,9 @@ document.addEventListener('keydown',function(e){
                 <div class="wex-meta">
                   <span class="wex-series" style="color:#4d9fff;background:#4d9fff22">3x12</span>
                   <span class="wex-dica">Pegada neutra, movimento controlado</span>
-                </div>
+                
+</div>
+                <div class="wex-actions"><a class="wex-btn wex-btn-yt" href="https://www.youtube.com/results?search_query=como+fazer+Rosca+Martelo+academia" target="_blank" rel="noopener">▶ YouTube</a><button class="wex-btn wex-btn-ai" onclick="openGroq('Rosca Martelo')">📷 Não sei qual é</button></div>
               </div>
             </div>
           </div>
@@ -1208,7 +1430,8 @@ document.addEventListener('keydown',function(e){
   <style>
     .curl{transform-origin:30px 30px;animation:curl 1.5s ease-in-out infinite alternate}
     @keyframes curl{from{transform:rotate(20deg)}to{transform:rotate(-30deg)}}
-  </style>
+  
+</style>
   <circle cx="33" cy="10" r="6" fill="#4d9fff" opacity=".9"/>
   <rect x="30" y="16" width="6" height="16" rx="3" fill="#4d9fff" opacity=".7"/>
   <line x1="33" y1="32" x2="22" y2="48" stroke="#4d9fff" stroke-width="2.5" stroke-linecap="round"/>
@@ -1226,7 +1449,9 @@ document.addEventListener('keydown',function(e){
                 <div class="wex-meta">
                   <span class="wex-series" style="color:#4d9fff;background:#4d9fff22">3x10</span>
                   <span class="wex-dica">Banco 45°, braços caídos, amplitude total</span>
-                </div>
+                
+</div>
+                <div class="wex-actions"><a class="wex-btn wex-btn-yt" href="https://www.youtube.com/results?search_query=como+fazer+Rosca+Alternada+Inclinada+academia" target="_blank" rel="noopener">▶ YouTube</a><button class="wex-btn wex-btn-ai" onclick="openGroq('Rosca Alternada Inclinada')">📷 Não sei qual é</button></div>
               </div>
             </div>
           </div>
@@ -1241,7 +1466,8 @@ document.addEventListener('keydown',function(e){
   <style>
     .tri{transform-origin:36px 26px;animation:tri 1.5s ease-in-out infinite alternate}
     @keyframes tri{from{transform:rotate(-25deg)}to{transform:rotate(15deg)}}
-  </style>
+  
+</style>
   <circle cx="33" cy="10" r="6" fill="#ff7b3d" opacity=".9"/>
   <rect x="30" y="16" width="6" height="16" rx="3" fill="#ff7b3d" opacity=".7"/>
   <line x1="33" y1="32" x2="22" y2="48" stroke="#ff7b3d" stroke-width="2.5" stroke-linecap="round"/>
@@ -1259,7 +1485,9 @@ document.addEventListener('keydown',function(e){
                 <div class="wex-meta">
                   <span class="wex-series" style="color:#ff7b3d;background:#ff7b3d22">4x12</span>
                   <span class="wex-dica">Cotovelos fixos ao lado do corpo</span>
-                </div>
+                
+</div>
+                <div class="wex-actions"><a class="wex-btn wex-btn-yt" href="https://www.youtube.com/results?search_query=como+fazer+Tríceps+Pulley+academia" target="_blank" rel="noopener">▶ YouTube</a><button class="wex-btn wex-btn-ai" onclick="openGroq('Tríceps Pulley')">📷 Não sei qual é</button></div>
               </div>
             </div>
           </div>
@@ -1269,7 +1497,8 @@ document.addEventListener('keydown',function(e){
   <style>
     .tri{transform-origin:36px 26px;animation:tri 1.5s ease-in-out infinite alternate}
     @keyframes tri{from{transform:rotate(-25deg)}to{transform:rotate(15deg)}}
-  </style>
+  
+</style>
   <circle cx="33" cy="10" r="6" fill="#ff7b3d" opacity=".9"/>
   <rect x="30" y="16" width="6" height="16" rx="3" fill="#ff7b3d" opacity=".7"/>
   <line x1="33" y1="32" x2="22" y2="48" stroke="#ff7b3d" stroke-width="2.5" stroke-linecap="round"/>
@@ -1287,7 +1516,9 @@ document.addEventListener('keydown',function(e){
                 <div class="wex-meta">
                   <span class="wex-series" style="color:#ff7b3d;background:#ff7b3d22">3x12</span>
                   <span class="wex-dica">Deitado, polia alta, cotovelos estáticos</span>
-                </div>
+                
+</div>
+                <div class="wex-actions"><a class="wex-btn wex-btn-yt" href="https://www.youtube.com/results?search_query=como+fazer+Tríceps+Testa+na+Polia+academia" target="_blank" rel="noopener">▶ YouTube</a><button class="wex-btn wex-btn-ai" onclick="openGroq('Tríceps Testa na Polia')">📷 Não sei qual é</button></div>
               </div>
             </div>
           </div>
@@ -1297,7 +1528,8 @@ document.addEventListener('keydown',function(e){
   <style>
     .tri{transform-origin:36px 26px;animation:tri 1.5s ease-in-out infinite alternate}
     @keyframes tri{from{transform:rotate(-25deg)}to{transform:rotate(15deg)}}
-  </style>
+  
+</style>
   <circle cx="33" cy="10" r="6" fill="#ff7b3d" opacity=".9"/>
   <rect x="30" y="16" width="6" height="16" rx="3" fill="#ff7b3d" opacity=".7"/>
   <line x1="33" y1="32" x2="22" y2="48" stroke="#ff7b3d" stroke-width="2.5" stroke-linecap="round"/>
@@ -1315,7 +1547,9 @@ document.addEventListener('keydown',function(e){
                 <div class="wex-meta">
                   <span class="wex-series" style="color:#ff7b3d;background:#ff7b3d22">3x12</span>
                   <span class="wex-dica">Em pé, corda atrás da cabeça, extensão completa</span>
-                </div>
+                
+</div>
+                <div class="wex-actions"><a class="wex-btn wex-btn-yt" href="https://www.youtube.com/results?search_query=como+fazer+Tríceps+Francês+Cabo+academia" target="_blank" rel="noopener">▶ YouTube</a><button class="wex-btn wex-btn-ai" onclick="openGroq('Tríceps Francês Cabo')">📷 Não sei qual é</button></div>
               </div>
             </div>
           </div>
@@ -1340,7 +1574,8 @@ document.addEventListener('keydown',function(e){
   <style>
     .press{transform-origin:33px 30px;animation:press 1.5s ease-in-out infinite alternate}
     @keyframes press{from{transform:translateY(6px)}to{transform:translateY(-6px)}}
-  </style>
+  
+</style>
   <circle cx="33" cy="12" r="6" fill="#39d98a" opacity=".9"/>
   <rect x="30" y="18" width="6" height="16" rx="3" fill="#39d98a" opacity=".7"/>
   <line x1="33" y1="34" x2="22" y2="50" stroke="#39d98a" stroke-width="2.5" stroke-linecap="round"/>
@@ -1359,7 +1594,9 @@ document.addEventListener('keydown',function(e){
                 <div class="wex-meta">
                   <span class="wex-series" style="color:#39d98a;background:#39d98a22">4x10–12</span>
                   <span class="wex-dica">Ajuste o assento para cotovelos na altura do peito</span>
-                </div>
+                
+</div>
+                <div class="wex-actions"><a class="wex-btn wex-btn-yt" href="https://www.youtube.com/results?search_query=como+fazer+Supino+Máquina+academia" target="_blank" rel="noopener">▶ YouTube</a><button class="wex-btn wex-btn-ai" onclick="openGroq('Supino Máquina')">📷 Não sei qual é</button></div>
               </div>
             </div>
           </div>
@@ -1369,7 +1606,8 @@ document.addEventListener('keydown',function(e){
   <style>
     .fly{transform-origin:33px 26px;animation:fly 1.5s ease-in-out infinite alternate}
     @keyframes fly{from{transform:scaleX(.6)}to{transform:scaleX(1)}}
-  </style>
+  
+</style>
   <circle cx="33" cy="12" r="6" fill="#39d98a" opacity=".9"/>
   <rect x="30" y="18" width="6" height="16" rx="3" fill="#39d98a" opacity=".7"/>
   <line x1="33" y1="34" x2="22" y2="50" stroke="#39d98a" stroke-width="2.5" stroke-linecap="round"/>
@@ -1388,7 +1626,9 @@ document.addEventListener('keydown',function(e){
                 <div class="wex-meta">
                   <span class="wex-series" style="color:#39d98a;background:#39d98a22">3x12–15</span>
                   <span class="wex-dica">Leve inclinação, cruze as mãos na frente</span>
-                </div>
+                
+</div>
+                <div class="wex-actions"><a class="wex-btn wex-btn-yt" href="https://www.youtube.com/results?search_query=como+fazer+Crossover+academia" target="_blank" rel="noopener">▶ YouTube</a><button class="wex-btn wex-btn-ai" onclick="openGroq('Crossover')">📷 Não sei qual é</button></div>
               </div>
             </div>
           </div>
@@ -1398,7 +1638,8 @@ document.addEventListener('keydown',function(e){
   <style>
     .dip{transform-origin:33px 30px;animation:dip 1.5s ease-in-out infinite alternate}
     @keyframes dip{from{transform:translateY(8px)}to{transform:translateY(-4px)}}
-  </style>
+  
+</style>
   <line x1="10" y1="20" x2="10" y2="50" stroke="#ffffff25" stroke-width="3" stroke-linecap="round"/>
   <line x1="56" y1="20" x2="56" y2="50" stroke="#ffffff25" stroke-width="3" stroke-linecap="round"/>
   <g class="dip">
@@ -1417,7 +1658,9 @@ document.addEventListener('keydown',function(e){
                 <div class="wex-meta">
                   <span class="wex-series" style="color:#39d98a;background:#39d98a22">3x10–12</span>
                   <span class="wex-dica">Incline o corpo para frente para focar no peito</span>
-                </div>
+                
+</div>
+                <div class="wex-actions"><a class="wex-btn wex-btn-yt" href="https://www.youtube.com/results?search_query=como+fazer+Mergulho+Dips+academia" target="_blank" rel="noopener">▶ YouTube</a><button class="wex-btn wex-btn-ai" onclick="openGroq('Mergulho (Dips)')">📷 Não sei qual é</button></div>
               </div>
             </div>
           </div>
@@ -1432,7 +1675,8 @@ document.addEventListener('keydown',function(e){
   <style>
     .sh{transform-origin:33px 26px;animation:sh 1.5s ease-in-out infinite alternate}
     @keyframes sh{from{transform:translateY(4px)}to{transform:translateY(-8px)}}
-  </style>
+  
+</style>
   <circle cx="33" cy="12" r="6" fill="#ffd166" opacity=".9"/>
   <rect x="30" y="18" width="6" height="16" rx="3" fill="#ffd166" opacity=".7"/>
   <line x1="33" y1="34" x2="22" y2="50" stroke="#ffd166" stroke-width="2.5" stroke-linecap="round"/>
@@ -1451,7 +1695,9 @@ document.addEventListener('keydown',function(e){
                 <div class="wex-meta">
                   <span class="wex-series" style="color:#ffd166;background:#ffd16622">4x10–12</span>
                   <span class="wex-dica">Empurre até extensão quase completa, não tranque</span>
-                </div>
+                
+</div>
+                <div class="wex-actions"><a class="wex-btn wex-btn-yt" href="https://www.youtube.com/results?search_query=como+fazer+Desenvolvimento+Máquina+academia" target="_blank" rel="noopener">▶ YouTube</a><button class="wex-btn wex-btn-ai" onclick="openGroq('Desenvolvimento Máquina')">📷 Não sei qual é</button></div>
               </div>
             </div>
           </div>
@@ -1461,7 +1707,8 @@ document.addEventListener('keydown',function(e){
   <style>
     .el{transform-origin:33px 26px;animation:el 1.5s ease-in-out infinite alternate}
     @keyframes el{from{transform:rotate(20deg)}to{transform:rotate(-10deg)}}
-  </style>
+  
+</style>
   <circle cx="33" cy="14" r="6" fill="#ffd166" opacity=".9"/>
   <rect x="30" y="20" width="6" height="16" rx="3" fill="#ffd166" opacity=".7"/>
   <line x1="33" y1="36" x2="24" y2="52" stroke="#ffd166" stroke-width="2.5" stroke-linecap="round"/>
@@ -1480,7 +1727,9 @@ document.addEventListener('keydown',function(e){
                 <div class="wex-meta">
                   <span class="wex-series" style="color:#ffd166;background:#ffd16622">3x15</span>
                   <span class="wex-dica">Cabo na cintura, cotovelo levemente flexionado</span>
-                </div>
+                
+</div>
+                <div class="wex-actions"><a class="wex-btn wex-btn-yt" href="https://www.youtube.com/results?search_query=como+fazer+Elevação+Lateral+Cabo+academia" target="_blank" rel="noopener">▶ YouTube</a><button class="wex-btn wex-btn-ai" onclick="openGroq('Elevação Lateral Cabo')">📷 Não sei qual é</button></div>
               </div>
             </div>
           </div>
@@ -1490,7 +1739,8 @@ document.addEventListener('keydown',function(e){
   <style>
     .fp{transform-origin:46px 28px;animation:fp 1.5s ease-in-out infinite alternate}
     @keyframes fp{from{transform:translateX(8px)}to{transform:translateX(-6px)}}
-  </style>
+  
+</style>
   <circle cx="22" cy="14" r="6" fill="#ffd166" opacity=".9"/>
   <rect x="19" y="20" width="6" height="16" rx="3" fill="#ffd166" opacity=".7"/>
   <line x1="22" y1="36" x2="14" y2="52" stroke="#ffd166" stroke-width="2.5" stroke-linecap="round"/>
@@ -1508,7 +1758,9 @@ document.addEventListener('keydown',function(e){
                 <div class="wex-meta">
                   <span class="wex-series" style="color:#ffd166;background:#ffd16622">3x15</span>
                   <span class="wex-dica">Corda na altura da cabeça, puxe para o rosto</span>
-                </div>
+                
+</div>
+                <div class="wex-actions"><a class="wex-btn wex-btn-yt" href="https://www.youtube.com/results?search_query=como+fazer+Face+Pull+academia" target="_blank" rel="noopener">▶ YouTube</a><button class="wex-btn wex-btn-ai" onclick="openGroq('Face Pull')">📷 Não sei qual é</button></div>
               </div>
             </div>
           </div>
@@ -1523,7 +1775,8 @@ document.addEventListener('keydown',function(e){
   <style>
     .shrug{animation:shrug 1.5s ease-in-out infinite alternate;transform-origin:33px 22px}
     @keyframes shrug{from{transform:translateY(0)}to{transform:translateY(-8px)}}
-  </style>
+  
+</style>
   <g class="shrug">
     <circle cx="33" cy="12" r="6" fill="#e040fb" opacity=".9"/>
     <rect x="30" y="18" width="6" height="10" rx="3" fill="#e040fb" opacity=".7"/>
@@ -1541,7 +1794,9 @@ document.addEventListener('keydown',function(e){
                 <div class="wex-meta">
                   <span class="wex-series" style="color:#e040fb;background:#e040fb22">4x12</span>
                   <span class="wex-dica">Suba os ombros em direção às orelhas, sem girar</span>
-                </div>
+                
+</div>
+                <div class="wex-actions"><a class="wex-btn wex-btn-yt" href="https://www.youtube.com/results?search_query=como+fazer+Encolhimento+Barra+academia" target="_blank" rel="noopener">▶ YouTube</a><button class="wex-btn wex-btn-ai" onclick="openGroq('Encolhimento Barra')">📷 Não sei qual é</button></div>
               </div>
             </div>
           </div>
@@ -1566,7 +1821,8 @@ document.addEventListener('keydown',function(e){
   <style>
     .lp{transform-origin:20px 40px;animation:lp 1.5s ease-in-out infinite alternate}
     @keyframes lp{from{transform:rotate(-20deg)}to{transform:rotate(10deg)}}
-  </style>
+  
+</style>
   <rect x="4" y="30" width="28" height="30" rx="4" fill="#ffffff08"/>
   <circle cx="18" cy="16" r="6" fill="#ff6b9d" opacity=".9"/>
   <rect x="14" y="22" width="6" height="12" rx="3" fill="#ff6b9d" opacity=".7" transform="rotate(-30,17,28)"/>
@@ -1583,7 +1839,9 @@ document.addEventListener('keydown',function(e){
                 <div class="wex-meta">
                   <span class="wex-series" style="color:#ff6b9d;background:#ff6b9d22">4x10–12</span>
                   <span class="wex-dica">Pés na largura dos ombros, desça até 90°</span>
-                </div>
+                
+</div>
+                <div class="wex-actions"><a class="wex-btn wex-btn-yt" href="https://www.youtube.com/results?search_query=como+fazer+Leg+Press+academia" target="_blank" rel="noopener">▶ YouTube</a><button class="wex-btn wex-btn-ai" onclick="openGroq('Leg Press')">📷 Não sei qual é</button></div>
               </div>
             </div>
           </div>
@@ -1593,7 +1851,8 @@ document.addEventListener('keydown',function(e){
   <style>
     .ext{transform-origin:20px 40px;animation:ext 1.5s ease-in-out infinite alternate}
     @keyframes ext{from{transform:rotate(30deg)}to{transform:rotate(-5deg)}}
-  </style>
+  
+</style>
   <rect x="4" y="28" width="28" height="32" rx="4" fill="#ffffff08"/>
   <circle cx="18" cy="14" r="6" fill="#ff6b9d" opacity=".9"/>
   <rect x="15" y="20" width="6" height="14" rx="3" fill="#ff6b9d" opacity=".7"/>
@@ -1610,7 +1869,9 @@ document.addEventListener('keydown',function(e){
                 <div class="wex-meta">
                   <span class="wex-series" style="color:#ff6b9d;background:#ff6b9d22">3x12–15</span>
                   <span class="wex-dica">Extensão completa, segure 1s no topo</span>
-                </div>
+                
+</div>
+                <div class="wex-actions"><a class="wex-btn wex-btn-yt" href="https://www.youtube.com/results?search_query=como+fazer+Extensora+academia" target="_blank" rel="noopener">▶ YouTube</a><button class="wex-btn wex-btn-ai" onclick="openGroq('Extensora')">📷 Não sei qual é</button></div>
               </div>
             </div>
           </div>
@@ -1620,7 +1881,8 @@ document.addEventListener('keydown',function(e){
   <style>
     .sq{transform-origin:33px 30px;animation:sq 1.5s ease-in-out infinite alternate}
     @keyframes sq{from{transform:scaleY(.75) translateY(8px)}to{transform:scaleY(1) translateY(0)}}
-  </style>
+  
+</style>
   <circle cx="33" cy="10" r="6" fill="#ff6b9d" opacity=".9"/>
   <g class="sq">
     <rect x="30" y="16" width="6" height="16" rx="3" fill="#ff6b9d" opacity=".7"/>
@@ -1639,7 +1901,9 @@ document.addEventListener('keydown',function(e){
                 <div class="wex-meta">
                   <span class="wex-series" style="color:#ff6b9d;background:#ff6b9d22">4x10</span>
                   <span class="wex-dica">Coluna reta, joelhos alinhados com os pés</span>
-                </div>
+                
+</div>
+                <div class="wex-actions"><a class="wex-btn wex-btn-yt" href="https://www.youtube.com/results?search_query=como+fazer+Agachamento+academia" target="_blank" rel="noopener">▶ YouTube</a><button class="wex-btn wex-btn-ai" onclick="openGroq('Agachamento')">📷 Não sei qual é</button></div>
               </div>
             </div>
           </div>
@@ -1654,7 +1918,8 @@ document.addEventListener('keydown',function(e){
   <style>
     .lc{transform-origin:20px 32px;animation:lc 1.5s ease-in-out infinite alternate}
     @keyframes lc{from{transform:rotate(0deg)}to{transform:rotate(-40deg)}}
-  </style>
+  
+</style>
   <rect x="4" y="28" width="38" height="8" rx="4" fill="#ffffff10"/>
   <circle cx="20" cy="20" r="6" fill="#4d9fff" opacity=".9"/>
   <rect x="17" y="26" width="6" height="10" rx="3" fill="#4d9fff" opacity=".7"/>
@@ -1671,7 +1936,9 @@ document.addEventListener('keydown',function(e){
                 <div class="wex-meta">
                   <span class="wex-series" style="color:#4d9fff;background:#4d9fff22">3x12</span>
                   <span class="wex-dica">Quadril fixo na mesa, amplitude total</span>
-                </div>
+                
+</div>
+                <div class="wex-actions"><a class="wex-btn wex-btn-yt" href="https://www.youtube.com/results?search_query=como+fazer+Mesa+Flexora+academia" target="_blank" rel="noopener">▶ YouTube</a><button class="wex-btn wex-btn-ai" onclick="openGroq('Mesa Flexora')">📷 Não sei qual é</button></div>
               </div>
             </div>
           </div>
@@ -1681,7 +1948,8 @@ document.addEventListener('keydown',function(e){
   <style>
     .st{transform-origin:33px 28px;animation:st 1.5s ease-in-out infinite alternate}
     @keyframes st{from{transform:rotate(-20deg)}to{transform:rotate(0deg)}}
-  </style>
+  
+</style>
   <g class="st">
     <circle cx="33" cy="10" r="6" fill="#4d9fff" opacity=".9"/>
     <rect x="30" y="16" width="6" height="16" rx="3" fill="#4d9fff" opacity=".7"/>
@@ -1701,7 +1969,9 @@ document.addEventListener('keydown',function(e){
                 <div class="wex-meta">
                   <span class="wex-series" style="color:#4d9fff;background:#4d9fff22">3x12</span>
                   <span class="wex-dica">Joelhos semi-flexionados, empurre o quadril para trás</span>
-                </div>
+                
+</div>
+                <div class="wex-actions"><a class="wex-btn wex-btn-yt" href="https://www.youtube.com/results?search_query=como+fazer+Stiff+academia" target="_blank" rel="noopener">▶ YouTube</a><button class="wex-btn wex-btn-ai" onclick="openGroq('Stiff')">📷 Não sei qual é</button></div>
               </div>
             </div>
           </div>
@@ -1716,7 +1986,8 @@ document.addEventListener('keydown',function(e){
   <style>
     .ab{transform-origin:33px 40px;animation:ab 1.5s ease-in-out infinite alternate}
     @keyframes ab{from{transform:scaleX(.7)}to{transform:scaleX(1)}}
-  </style>
+  
+</style>
   <rect x="10" y="38" width="46" height="8" rx="4" fill="#ffffff10"/>
   <circle cx="33" cy="20" r="6" fill="#00e5cc" opacity=".9"/>
   <rect x="30" y="26" width="6" height="14" rx="3" fill="#00e5cc" opacity=".7"/>
@@ -1732,7 +2003,9 @@ document.addEventListener('keydown',function(e){
                 <div class="wex-meta">
                   <span class="wex-series" style="color:#00e5cc;background:#00e5cc22">3x15</span>
                   <span class="wex-dica">Movimento controlado, não jogue peso</span>
-                </div>
+                
+</div>
+                <div class="wex-actions"><a class="wex-btn wex-btn-yt" href="https://www.youtube.com/results?search_query=como+fazer+Cadeira+Abdutora+academia" target="_blank" rel="noopener">▶ YouTube</a><button class="wex-btn wex-btn-ai" onclick="openGroq('Cadeira Abdutora')">📷 Não sei qual é</button></div>
               </div>
             </div>
           </div>
@@ -1742,7 +2015,8 @@ document.addEventListener('keydown',function(e){
   <style>
     .gl{transform-origin:33px 44px;animation:gl 1.5s ease-in-out infinite alternate}
     @keyframes gl{from{transform:rotate(-15deg)}to{transform:rotate(5deg)}}
-  </style>
+  
+</style>
   <rect x="8" y="42" width="50" height="6" rx="3" fill="#ffffff10"/>
   <circle cx="33" cy="24" r="6" fill="#00e5cc" opacity=".9"/>
   <rect x="30" y="30" width="6" height="14" rx="3" fill="#00e5cc" opacity=".7"/>
@@ -1760,7 +2034,9 @@ document.addEventListener('keydown',function(e){
                 <div class="wex-meta">
                   <span class="wex-series" style="color:#00e5cc;background:#00e5cc22">4x12</span>
                   <span class="wex-dica">Ombros no banco, esprema o glúteo no topo</span>
-                </div>
+                
+</div>
+                <div class="wex-actions"><a class="wex-btn wex-btn-yt" href="https://www.youtube.com/results?search_query=como+fazer+Elevação+Pélvica+academia" target="_blank" rel="noopener">▶ YouTube</a><button class="wex-btn wex-btn-ai" onclick="openGroq('Elevação Pélvica')">📷 Não sei qual é</button></div>
               </div>
             </div>
           </div>
@@ -1778,22 +2054,38 @@ document.addEventListener('keydown',function(e){
     </div>
     <div class="wmodal-body">
       <div class="wgroup"><div class="wgroup-title" style="color:#39d98a;background:#39d98a22;border:1px solid #39d98a33">PEITO</div><div class="wexercises">
-        <div class="wex"><div class="wex-inner"><div class="wex-svg"><svg viewBox="0 0 66 66" fill="none"><style>.pressS{transform-origin:33px 30px;animation:pressS 1.5s ease-in-out infinite alternate}@keyframes pressS{from{transform:translateY(6px)}to{transform:translateY(-6px)}}</style><circle cx="33" cy="12" r="6" fill="#39d98a" opacity=".9"/><rect x="30" y="18" width="6" height="16" rx="3" fill="#39d98a" opacity=".7"/><line x1="33" y1="34" x2="22" y2="50" stroke="#39d98a" stroke-width="2.5" stroke-linecap="round"/><line x1="33" y1="34" x2="44" y2="50" stroke="#39d98a" stroke-width="2.5" stroke-linecap="round"/><g class="pressS"><line x1="28" y1="22" x2="12" y2="28" stroke="#39d98a" stroke-width="2.5" stroke-linecap="round"/><line x1="38" y1="22" x2="54" y2="28" stroke="#39d98a" stroke-width="2.5" stroke-linecap="round"/><circle cx="9" cy="28" r="4" fill="#ffffff20" stroke="#39d98a" stroke-width="1.5"/><circle cx="57" cy="28" r="4" fill="#ffffff20" stroke="#39d98a" stroke-width="1.5"/></g></svg></div><div class="wex-info"><div class="wex-name">Supino Máquina</div><div class="wex-muscle">Peitoral maior</div><div class="wex-meta"><span class="wex-series" style="color:#39d98a;background:#39d98a22">3x12</span><span class="wex-dica">Ajuste o assento para cotovelos na altura do peito</span></div></div></div></div>
-        <div class="wex"><div class="wex-inner"><div class="wex-svg"><svg viewBox="0 0 66 66" fill="none"><style>.flyS{transform-origin:33px 26px;animation:flyS 1.5s ease-in-out infinite alternate}@keyframes flyS{from{transform:scaleX(.6)}to{transform:scaleX(1)}}</style><circle cx="33" cy="12" r="6" fill="#39d98a" opacity=".9"/><rect x="30" y="18" width="6" height="16" rx="3" fill="#39d98a" opacity=".7"/><line x1="33" y1="34" x2="22" y2="50" stroke="#39d98a" stroke-width="2.5" stroke-linecap="round"/><line x1="33" y1="34" x2="44" y2="50" stroke="#39d98a" stroke-width="2.5" stroke-linecap="round"/><g class="flyS"><line x1="28" y1="24" x2="10" y2="24" stroke="#39d98a" stroke-width="2.5" stroke-linecap="round"/><line x1="38" y1="24" x2="56" y2="24" stroke="#39d98a" stroke-width="2.5" stroke-linecap="round"/><circle cx="8" cy="24" r="4" fill="#ffffff20" stroke="#39d98a" stroke-width="1.5"/><circle cx="58" cy="24" r="4" fill="#ffffff20" stroke="#39d98a" stroke-width="1.5"/></g></svg></div><div class="wex-info"><div class="wex-name">Crossover</div><div class="wex-muscle">Peitoral · Porção interna</div><div class="wex-meta"><span class="wex-series" style="color:#39d98a;background:#39d98a22">3x15</span><span class="wex-dica">Leve inclinação para frente, cruze as mãos na frente</span></div></div></div></div>
+        <div class="wex"><div class="wex-inner"><div class="wex-svg"><svg viewBox="0 0 66 66" fill="none"><style>.pressS{transform-origin:33px 30px;animation:pressS 1.5s ease-in-out infinite alternate}@keyframes pressS{from{transform:translateY(6px)}to{transform:translateY(-6px)}}
+</style><circle cx="33" cy="12" r="6" fill="#39d98a" opacity=".9"/><rect x="30" y="18" width="6" height="16" rx="3" fill="#39d98a" opacity=".7"/><line x1="33" y1="34" x2="22" y2="50" stroke="#39d98a" stroke-width="2.5" stroke-linecap="round"/><line x1="33" y1="34" x2="44" y2="50" stroke="#39d98a" stroke-width="2.5" stroke-linecap="round"/><g class="pressS"><line x1="28" y1="22" x2="12" y2="28" stroke="#39d98a" stroke-width="2.5" stroke-linecap="round"/><line x1="38" y1="22" x2="54" y2="28" stroke="#39d98a" stroke-width="2.5" stroke-linecap="round"/><circle cx="9" cy="28" r="4" fill="#ffffff20" stroke="#39d98a" stroke-width="1.5"/><circle cx="57" cy="28" r="4" fill="#ffffff20" stroke="#39d98a" stroke-width="1.5"/></g></svg></div><div class="wex-info"><div class="wex-name">Supino Máquina</div><div class="wex-muscle">Peitoral maior</div><div class="wex-meta"><span class="wex-series" style="color:#39d98a;background:#39d98a22">3x12</span><span class="wex-dica">Ajuste o assento para cotovelos na altura do peito</span></div>
+                <div class="wex-actions"><a class="wex-btn wex-btn-yt" href="https://www.youtube.com/results?search_query=como+fazer+Supino+Máquina+academia" target="_blank" rel="noopener">▶ YouTube</a><button class="wex-btn wex-btn-ai" onclick="openGroq('Supino Máquina')">📷 Não sei qual é</button></div></div></div></div>
+        <div class="wex"><div class="wex-inner"><div class="wex-svg"><svg viewBox="0 0 66 66" fill="none"><style>.flyS{transform-origin:33px 26px;animation:flyS 1.5s ease-in-out infinite alternate}@keyframes flyS{from{transform:scaleX(.6)}to{transform:scaleX(1)}}
+</style><circle cx="33" cy="12" r="6" fill="#39d98a" opacity=".9"/><rect x="30" y="18" width="6" height="16" rx="3" fill="#39d98a" opacity=".7"/><line x1="33" y1="34" x2="22" y2="50" stroke="#39d98a" stroke-width="2.5" stroke-linecap="round"/><line x1="33" y1="34" x2="44" y2="50" stroke="#39d98a" stroke-width="2.5" stroke-linecap="round"/><g class="flyS"><line x1="28" y1="24" x2="10" y2="24" stroke="#39d98a" stroke-width="2.5" stroke-linecap="round"/><line x1="38" y1="24" x2="56" y2="24" stroke="#39d98a" stroke-width="2.5" stroke-linecap="round"/><circle cx="8" cy="24" r="4" fill="#ffffff20" stroke="#39d98a" stroke-width="1.5"/><circle cx="58" cy="24" r="4" fill="#ffffff20" stroke="#39d98a" stroke-width="1.5"/></g></svg></div><div class="wex-info"><div class="wex-name">Crossover</div><div class="wex-muscle">Peitoral · Porção interna</div><div class="wex-meta"><span class="wex-series" style="color:#39d98a;background:#39d98a22">3x15</span><span class="wex-dica">Leve inclinação para frente, cruze as mãos na frente</span></div>
+                <div class="wex-actions"><a class="wex-btn wex-btn-yt" href="https://www.youtube.com/results?search_query=como+fazer+Crossover+academia" target="_blank" rel="noopener">▶ YouTube</a><button class="wex-btn wex-btn-ai" onclick="openGroq('Crossover')">📷 Não sei qual é</button></div></div></div></div>
       </div></div>
       <div class="wgroup"><div class="wgroup-title" style="color:#00e5cc;background:#00e5cc22;border:1px solid #00e5cc33">COSTAS</div><div class="wexercises">
-        <div class="wex"><div class="wex-inner"><div class="wex-svg"><svg viewBox="0 0 66 66" fill="none"><style>.arm{transform-origin:33px 20px;animation:pull 1.5s ease-in-out infinite alternate}@keyframes pull{from{transform:translateY(-8px)}to{transform:translateY(4px)}}</style><circle cx="33" cy="10" r="6" fill="#ff6b9d" opacity=".9"/><rect x="30" y="16" width="6" height="18" rx="3" fill="#ff6b9d" opacity=".7"/><line x1="15" y1="4" x2="51" y2="4" stroke="#ffffff30" stroke-width="2" stroke-linecap="round"/><g class="arm"><line x1="33" y1="16" x2="15" y2="5" stroke="#ff6b9d" stroke-width="2.5" stroke-linecap="round"/><line x1="33" y1="16" x2="51" y2="5" stroke="#ff6b9d" stroke-width="2.5" stroke-linecap="round"/><line x1="28" y1="34" x2="20" y2="50" stroke="#ff6b9d" stroke-width="2.5" stroke-linecap="round"/><line x1="38" y1="34" x2="46" y2="50" stroke="#ff6b9d" stroke-width="2.5" stroke-linecap="round"/></g></svg></div><div class="wex-info"><div class="wex-name">Puxada Frontal</div><div class="wex-muscle">Dorsal · Grande dorsal</div><div class="wex-meta"><span class="wex-series" style="color:#00e5cc;background:#00e5cc22">3x12</span><span class="wex-dica">Puxe até o peito, cotovelos apontando para baixo</span></div></div></div></div>
+        <div class="wex"><div class="wex-inner"><div class="wex-svg"><svg viewBox="0 0 66 66" fill="none"><style>.arm{transform-origin:33px 20px;animation:pull 1.5s ease-in-out infinite alternate}@keyframes pull{from{transform:translateY(-8px)}to{transform:translateY(4px)}}
+</style><circle cx="33" cy="10" r="6" fill="#ff6b9d" opacity=".9"/><rect x="30" y="16" width="6" height="18" rx="3" fill="#ff6b9d" opacity=".7"/><line x1="15" y1="4" x2="51" y2="4" stroke="#ffffff30" stroke-width="2" stroke-linecap="round"/><g class="arm"><line x1="33" y1="16" x2="15" y2="5" stroke="#ff6b9d" stroke-width="2.5" stroke-linecap="round"/><line x1="33" y1="16" x2="51" y2="5" stroke="#ff6b9d" stroke-width="2.5" stroke-linecap="round"/><line x1="28" y1="34" x2="20" y2="50" stroke="#ff6b9d" stroke-width="2.5" stroke-linecap="round"/><line x1="38" y1="34" x2="46" y2="50" stroke="#ff6b9d" stroke-width="2.5" stroke-linecap="round"/></g></svg></div><div class="wex-info"><div class="wex-name">Puxada Frontal</div><div class="wex-muscle">Dorsal · Grande dorsal</div><div class="wex-meta"><span class="wex-series" style="color:#00e5cc;background:#00e5cc22">3x12</span><span class="wex-dica">Puxe até o peito, cotovelos apontando para baixo</span></div>
+                <div class="wex-actions"><a class="wex-btn wex-btn-yt" href="https://www.youtube.com/results?search_query=como+fazer+Puxada+Frontal+academia" target="_blank" rel="noopener">▶ YouTube</a><button class="wex-btn wex-btn-ai" onclick="openGroq('Puxada Frontal')">📷 Não sei qual é</button></div></div></div></div>
       </div></div>
       <div class="wgroup"><div class="wgroup-title" style="color:#ffd166;background:#ffd16622;border:1px solid #ffd16633">OMBRO</div><div class="wexercises">
-        <div class="wex"><div class="wex-inner"><div class="wex-svg"><svg viewBox="0 0 66 66" fill="none"><style>.elS{transform-origin:33px 26px;animation:elS 1.5s ease-in-out infinite alternate}@keyframes elS{from{transform:rotate(20deg)}to{transform:rotate(-10deg)}}</style><circle cx="33" cy="14" r="6" fill="#ffd166" opacity=".9"/><rect x="30" y="20" width="6" height="16" rx="3" fill="#ffd166" opacity=".7"/><line x1="33" y1="36" x2="24" y2="52" stroke="#ffd166" stroke-width="2.5" stroke-linecap="round"/><line x1="33" y1="36" x2="42" y2="52" stroke="#ffd166" stroke-width="2.5" stroke-linecap="round"/><g class="elS"><line x1="28" y1="24" x2="10" y2="34" stroke="#ffd166" stroke-width="2.5" stroke-linecap="round"/><circle cx="8" cy="35" r="4" fill="#ffffff20" stroke="#ffd166" stroke-width="1.5"/><line x1="38" y1="24" x2="56" y2="34" stroke="#ffd166" stroke-width="2.5" stroke-linecap="round"/><circle cx="58" cy="35" r="4" fill="#ffffff20" stroke="#ffd166" stroke-width="1.5"/></g></svg></div><div class="wex-info"><div class="wex-name">Elevação Lateral Cabo</div><div class="wex-muscle">Deltóide medial</div><div class="wex-meta"><span class="wex-series" style="color:#ffd166;background:#ffd16622">3x15</span><span class="wex-dica">Cotovelo levemente flexionado, suba até a altura do ombro</span></div></div></div></div>
+        <div class="wex"><div class="wex-inner"><div class="wex-svg"><svg viewBox="0 0 66 66" fill="none"><style>.elS{transform-origin:33px 26px;animation:elS 1.5s ease-in-out infinite alternate}@keyframes elS{from{transform:rotate(20deg)}to{transform:rotate(-10deg)}}
+</style><circle cx="33" cy="14" r="6" fill="#ffd166" opacity=".9"/><rect x="30" y="20" width="6" height="16" rx="3" fill="#ffd166" opacity=".7"/><line x1="33" y1="36" x2="24" y2="52" stroke="#ffd166" stroke-width="2.5" stroke-linecap="round"/><line x1="33" y1="36" x2="42" y2="52" stroke="#ffd166" stroke-width="2.5" stroke-linecap="round"/><g class="elS"><line x1="28" y1="24" x2="10" y2="34" stroke="#ffd166" stroke-width="2.5" stroke-linecap="round"/><circle cx="8" cy="35" r="4" fill="#ffffff20" stroke="#ffd166" stroke-width="1.5"/><line x1="38" y1="24" x2="56" y2="34" stroke="#ffd166" stroke-width="2.5" stroke-linecap="round"/><circle cx="58" cy="35" r="4" fill="#ffffff20" stroke="#ffd166" stroke-width="1.5"/></g></svg></div><div class="wex-info"><div class="wex-name">Elevação Lateral Cabo</div><div class="wex-muscle">Deltóide medial</div><div class="wex-meta"><span class="wex-series" style="color:#ffd166;background:#ffd16622">3x15</span><span class="wex-dica">Cotovelo levemente flexionado, suba até a altura do ombro</span></div>
+                <div class="wex-actions"><a class="wex-btn wex-btn-yt" href="https://www.youtube.com/results?search_query=como+fazer+Elevação+Lateral+Cabo+academia" target="_blank" rel="noopener">▶ YouTube</a><button class="wex-btn wex-btn-ai" onclick="openGroq('Elevação Lateral Cabo')">📷 Não sei qual é</button></div></div></div></div>
       </div></div>
       <div class="wgroup"><div class="wgroup-title" style="color:#4d9fff;background:#4d9fff22;border:1px solid #4d9fff33">BÍCEPS</div><div class="wexercises">
-        <div class="wex"><div class="wex-inner"><div class="wex-svg"><svg viewBox="0 0 66 66" fill="none"><style>.curlS{transform-origin:30px 30px;animation:curlS 1.5s ease-in-out infinite alternate}@keyframes curlS{from{transform:rotate(20deg)}to{transform:rotate(-30deg)}}</style><circle cx="33" cy="10" r="6" fill="#4d9fff" opacity=".9"/><rect x="30" y="16" width="6" height="16" rx="3" fill="#4d9fff" opacity=".7"/><line x1="33" y1="32" x2="22" y2="48" stroke="#4d9fff" stroke-width="2.5" stroke-linecap="round"/><line x1="33" y1="32" x2="44" y2="48" stroke="#4d9fff" stroke-width="2.5" stroke-linecap="round"/><g class="curlS"><line x1="30" y1="24" x2="14" y2="26" stroke="#4d9fff" stroke-width="2.5" stroke-linecap="round"/><line x1="14" y1="26" x2="10" y2="18" stroke="#4d9fff" stroke-width="2.5" stroke-linecap="round"/><circle cx="8" cy="16" r="4" fill="#ffffff20" stroke="#4d9fff" stroke-width="1.5"/></g></svg></div><div class="wex-info"><div class="wex-name">Rosca Direta na Polia</div><div class="wex-muscle">Bíceps braquial</div><div class="wex-meta"><span class="wex-series" style="color:#4d9fff;background:#4d9fff22">3x12</span><span class="wex-dica">Cotovelos fixos, contração máxima no topo</span></div></div></div></div>
-        <div class="wex"><div class="wex-inner"><div class="wex-svg"><svg viewBox="0 0 66 66" fill="none"><style>.curlS{transform-origin:30px 30px;animation:curlS 1.5s ease-in-out infinite alternate}@keyframes curlS{from{transform:rotate(20deg)}to{transform:rotate(-30deg)}}</style><circle cx="33" cy="10" r="6" fill="#4d9fff" opacity=".9"/><rect x="30" y="16" width="6" height="16" rx="3" fill="#4d9fff" opacity=".7"/><line x1="33" y1="32" x2="22" y2="48" stroke="#4d9fff" stroke-width="2.5" stroke-linecap="round"/><line x1="33" y1="32" x2="44" y2="48" stroke="#4d9fff" stroke-width="2.5" stroke-linecap="round"/><g class="curlS"><line x1="30" y1="24" x2="14" y2="26" stroke="#4d9fff" stroke-width="2.5" stroke-linecap="round"/><line x1="14" y1="26" x2="10" y2="18" stroke="#4d9fff" stroke-width="2.5" stroke-linecap="round"/><circle cx="8" cy="16" r="4" fill="#ffffff20" stroke="#4d9fff" stroke-width="1.5"/></g></svg></div><div class="wex-info"><div class="wex-name">Rosca Martelo</div><div class="wex-muscle">Braquial · Braquiorradial</div><div class="wex-meta"><span class="wex-series" style="color:#4d9fff;background:#4d9fff22">3x12</span><span class="wex-dica">Pegada neutra, movimento controlado e lento</span></div></div></div></div>
+        <div class="wex"><div class="wex-inner"><div class="wex-svg"><svg viewBox="0 0 66 66" fill="none"><style>.curlS{transform-origin:30px 30px;animation:curlS 1.5s ease-in-out infinite alternate}@keyframes curlS{from{transform:rotate(20deg)}to{transform:rotate(-30deg)}}
+</style><circle cx="33" cy="10" r="6" fill="#4d9fff" opacity=".9"/><rect x="30" y="16" width="6" height="16" rx="3" fill="#4d9fff" opacity=".7"/><line x1="33" y1="32" x2="22" y2="48" stroke="#4d9fff" stroke-width="2.5" stroke-linecap="round"/><line x1="33" y1="32" x2="44" y2="48" stroke="#4d9fff" stroke-width="2.5" stroke-linecap="round"/><g class="curlS"><line x1="30" y1="24" x2="14" y2="26" stroke="#4d9fff" stroke-width="2.5" stroke-linecap="round"/><line x1="14" y1="26" x2="10" y2="18" stroke="#4d9fff" stroke-width="2.5" stroke-linecap="round"/><circle cx="8" cy="16" r="4" fill="#ffffff20" stroke="#4d9fff" stroke-width="1.5"/></g></svg></div><div class="wex-info"><div class="wex-name">Rosca Direta na Polia</div><div class="wex-muscle">Bíceps braquial</div><div class="wex-meta"><span class="wex-series" style="color:#4d9fff;background:#4d9fff22">3x12</span><span class="wex-dica">Cotovelos fixos, contração máxima no topo</span></div>
+                <div class="wex-actions"><a class="wex-btn wex-btn-yt" href="https://www.youtube.com/results?search_query=como+fazer+Rosca+Direta+na+Polia+academia" target="_blank" rel="noopener">▶ YouTube</a><button class="wex-btn wex-btn-ai" onclick="openGroq('Rosca Direta na Polia')">📷 Não sei qual é</button></div></div></div></div>
+        <div class="wex"><div class="wex-inner"><div class="wex-svg"><svg viewBox="0 0 66 66" fill="none"><style>.curlS{transform-origin:30px 30px;animation:curlS 1.5s ease-in-out infinite alternate}@keyframes curlS{from{transform:rotate(20deg)}to{transform:rotate(-30deg)}}
+</style><circle cx="33" cy="10" r="6" fill="#4d9fff" opacity=".9"/><rect x="30" y="16" width="6" height="16" rx="3" fill="#4d9fff" opacity=".7"/><line x1="33" y1="32" x2="22" y2="48" stroke="#4d9fff" stroke-width="2.5" stroke-linecap="round"/><line x1="33" y1="32" x2="44" y2="48" stroke="#4d9fff" stroke-width="2.5" stroke-linecap="round"/><g class="curlS"><line x1="30" y1="24" x2="14" y2="26" stroke="#4d9fff" stroke-width="2.5" stroke-linecap="round"/><line x1="14" y1="26" x2="10" y2="18" stroke="#4d9fff" stroke-width="2.5" stroke-linecap="round"/><circle cx="8" cy="16" r="4" fill="#ffffff20" stroke="#4d9fff" stroke-width="1.5"/></g></svg></div><div class="wex-info"><div class="wex-name">Rosca Martelo</div><div class="wex-muscle">Braquial · Braquiorradial</div><div class="wex-meta"><span class="wex-series" style="color:#4d9fff;background:#4d9fff22">3x12</span><span class="wex-dica">Pegada neutra, movimento controlado e lento</span></div>
+                <div class="wex-actions"><a class="wex-btn wex-btn-yt" href="https://www.youtube.com/results?search_query=como+fazer+Rosca+Martelo+academia" target="_blank" rel="noopener">▶ YouTube</a><button class="wex-btn wex-btn-ai" onclick="openGroq('Rosca Martelo')">📷 Não sei qual é</button></div></div></div></div>
       </div></div>
       <div class="wgroup"><div class="wgroup-title" style="color:#ff7b3d;background:#ff7b3d22;border:1px solid #ff7b3d33">TRÍCEPS</div><div class="wexercises">
-        <div class="wex"><div class="wex-inner"><div class="wex-svg"><svg viewBox="0 0 66 66" fill="none"><style>.triS{transform-origin:36px 26px;animation:triS 1.5s ease-in-out infinite alternate}@keyframes triS{from{transform:rotate(-25deg)}to{transform:rotate(15deg)}}</style><circle cx="33" cy="10" r="6" fill="#ff7b3d" opacity=".9"/><rect x="30" y="16" width="6" height="16" rx="3" fill="#ff7b3d" opacity=".7"/><line x1="33" y1="32" x2="22" y2="48" stroke="#ff7b3d" stroke-width="2.5" stroke-linecap="round"/><line x1="33" y1="32" x2="44" y2="48" stroke="#ff7b3d" stroke-width="2.5" stroke-linecap="round"/><g class="triS"><line x1="36" y1="22" x2="50" y2="20" stroke="#ff7b3d" stroke-width="2.5" stroke-linecap="round"/><line x1="50" y1="20" x2="54" y2="32" stroke="#ff7b3d" stroke-width="2.5" stroke-linecap="round"/><circle cx="55" cy="34" r="4" fill="#ffffff20" stroke="#ff7b3d" stroke-width="1.5"/></g></svg></div><div class="wex-info"><div class="wex-name">Tríceps Pulley</div><div class="wex-muscle">Tríceps · Cabeça lateral</div><div class="wex-meta"><span class="wex-series" style="color:#ff7b3d;background:#ff7b3d22">3x12</span><span class="wex-dica">Cotovelos fixos ao lado do corpo, extensão completa</span></div></div></div></div>
-        <div class="wex"><div class="wex-inner"><div class="wex-svg"><svg viewBox="0 0 66 66" fill="none"><style>.triS{transform-origin:36px 26px;animation:triS 1.5s ease-in-out infinite alternate}@keyframes triS{from{transform:rotate(-25deg)}to{transform:rotate(15deg)}}</style><circle cx="33" cy="10" r="6" fill="#ff7b3d" opacity=".9"/><rect x="30" y="16" width="6" height="16" rx="3" fill="#ff7b3d" opacity=".7"/><line x1="33" y1="32" x2="22" y2="48" stroke="#ff7b3d" stroke-width="2.5" stroke-linecap="round"/><line x1="33" y1="32" x2="44" y2="48" stroke="#ff7b3d" stroke-width="2.5" stroke-linecap="round"/><g class="triS"><line x1="36" y1="22" x2="50" y2="20" stroke="#ff7b3d" stroke-width="2.5" stroke-linecap="round"/><line x1="50" y1="20" x2="54" y2="32" stroke="#ff7b3d" stroke-width="2.5" stroke-linecap="round"/><circle cx="55" cy="34" r="4" fill="#ffffff20" stroke="#ff7b3d" stroke-width="1.5"/></g></svg></div><div class="wex-info"><div class="wex-name">Tríceps Francês Cabo</div><div class="wex-muscle">Tríceps · Cabeça longa</div><div class="wex-meta"><span class="wex-series" style="color:#ff7b3d;background:#ff7b3d22">3x12</span><span class="wex-dica">Corda atrás da cabeça, cotovelos estáticos</span></div></div></div></div>
+        <div class="wex"><div class="wex-inner"><div class="wex-svg"><svg viewBox="0 0 66 66" fill="none"><style>.triS{transform-origin:36px 26px;animation:triS 1.5s ease-in-out infinite alternate}@keyframes triS{from{transform:rotate(-25deg)}to{transform:rotate(15deg)}}
+</style><circle cx="33" cy="10" r="6" fill="#ff7b3d" opacity=".9"/><rect x="30" y="16" width="6" height="16" rx="3" fill="#ff7b3d" opacity=".7"/><line x1="33" y1="32" x2="22" y2="48" stroke="#ff7b3d" stroke-width="2.5" stroke-linecap="round"/><line x1="33" y1="32" x2="44" y2="48" stroke="#ff7b3d" stroke-width="2.5" stroke-linecap="round"/><g class="triS"><line x1="36" y1="22" x2="50" y2="20" stroke="#ff7b3d" stroke-width="2.5" stroke-linecap="round"/><line x1="50" y1="20" x2="54" y2="32" stroke="#ff7b3d" stroke-width="2.5" stroke-linecap="round"/><circle cx="55" cy="34" r="4" fill="#ffffff20" stroke="#ff7b3d" stroke-width="1.5"/></g></svg></div><div class="wex-info"><div class="wex-name">Tríceps Pulley</div><div class="wex-muscle">Tríceps · Cabeça lateral</div><div class="wex-meta"><span class="wex-series" style="color:#ff7b3d;background:#ff7b3d22">3x12</span><span class="wex-dica">Cotovelos fixos ao lado do corpo, extensão completa</span></div>
+                <div class="wex-actions"><a class="wex-btn wex-btn-yt" href="https://www.youtube.com/results?search_query=como+fazer+Tríceps+Pulley+academia" target="_blank" rel="noopener">▶ YouTube</a><button class="wex-btn wex-btn-ai" onclick="openGroq('Tríceps Pulley')">📷 Não sei qual é</button></div></div></div></div>
+        <div class="wex"><div class="wex-inner"><div class="wex-svg"><svg viewBox="0 0 66 66" fill="none"><style>.triS{transform-origin:36px 26px;animation:triS 1.5s ease-in-out infinite alternate}@keyframes triS{from{transform:rotate(-25deg)}to{transform:rotate(15deg)}}
+</style><circle cx="33" cy="10" r="6" fill="#ff7b3d" opacity=".9"/><rect x="30" y="16" width="6" height="16" rx="3" fill="#ff7b3d" opacity=".7"/><line x1="33" y1="32" x2="22" y2="48" stroke="#ff7b3d" stroke-width="2.5" stroke-linecap="round"/><line x1="33" y1="32" x2="44" y2="48" stroke="#ff7b3d" stroke-width="2.5" stroke-linecap="round"/><g class="triS"><line x1="36" y1="22" x2="50" y2="20" stroke="#ff7b3d" stroke-width="2.5" stroke-linecap="round"/><line x1="50" y1="20" x2="54" y2="32" stroke="#ff7b3d" stroke-width="2.5" stroke-linecap="round"/><circle cx="55" cy="34" r="4" fill="#ffffff20" stroke="#ff7b3d" stroke-width="1.5"/></g></svg></div><div class="wex-info"><div class="wex-name">Tríceps Francês Cabo</div><div class="wex-muscle">Tríceps · Cabeça longa</div><div class="wex-meta"><span class="wex-series" style="color:#ff7b3d;background:#ff7b3d22">3x12</span><span class="wex-dica">Corda atrás da cabeça, cotovelos estáticos</span></div>
+                <div class="wex-actions"><a class="wex-btn wex-btn-yt" href="https://www.youtube.com/results?search_query=como+fazer+Tríceps+Francês+Cabo+academia" target="_blank" rel="noopener">▶ YouTube</a><button class="wex-btn wex-btn-ai" onclick="openGroq('Tríceps Francês Cabo')">📷 Não sei qual é</button></div></div></div></div>
       </div></div>
     </div>
   </div>
@@ -1806,19 +2098,536 @@ document.addEventListener('keydown',function(e){
     </div>
     <div class="wmodal-body">
       <div class="wgroup"><div class="wgroup-title" style="color:#ff6b9d;background:#ff6b9d22;border:1px solid #ff6b9d33">GLÚTEO</div><div class="wexercises">
-        <div class="wex"><div class="wex-inner"><div class="wex-svg"><svg viewBox="0 0 66 66" fill="none"><style>.glS{transform-origin:33px 44px;animation:glS 1.5s ease-in-out infinite alternate}@keyframes glS{from{transform:rotate(-15deg)}to{transform:rotate(5deg)}}</style><rect x="8" y="42" width="50" height="6" rx="3" fill="#ffffff10"/><circle cx="33" cy="24" r="6" fill="#ff6b9d" opacity=".9"/><rect x="30" y="30" width="6" height="14" rx="3" fill="#ff6b9d" opacity=".7"/><g class="glS"><line x1="30" y1="44" x2="18" y2="58" stroke="#ff6b9d" stroke-width="3" stroke-linecap="round"/><line x1="36" y1="44" x2="48" y2="58" stroke="#ff6b9d" stroke-width="3" stroke-linecap="round"/></g><line x1="28" y1="32" x2="14" y2="36" stroke="#ff6b9d" stroke-width="2.5" stroke-linecap="round"/><line x1="38" y1="32" x2="52" y2="36" stroke="#ff6b9d" stroke-width="2.5" stroke-linecap="round"/></svg></div><div class="wex-info"><div class="wex-name">Elevação Pélvica</div><div class="wex-muscle">Glúteo máximo</div><div class="wex-meta"><span class="wex-series" style="color:#ff6b9d;background:#ff6b9d22">4x15</span><span class="wex-dica">Ombros no banco, empurre o quadril para cima, esprema no topo</span></div></div></div></div>
-        <div class="wex"><div class="wex-inner"><div class="wex-svg"><svg viewBox="0 0 66 66" fill="none"><style>.abS{transform-origin:33px 40px;animation:abS 1.5s ease-in-out infinite alternate}@keyframes abS{from{transform:scaleX(.65)}to{transform:scaleX(1)}}</style><rect x="10" y="38" width="46" height="8" rx="4" fill="#ffffff10"/><circle cx="33" cy="20" r="6" fill="#ff6b9d" opacity=".9"/><rect x="30" y="26" width="6" height="14" rx="3" fill="#ff6b9d" opacity=".7"/><g class="abS"><line x1="27" y1="40" x2="12" y2="54" stroke="#ff6b9d" stroke-width="3" stroke-linecap="round"/><line x1="39" y1="40" x2="54" y2="54" stroke="#ff6b9d" stroke-width="3" stroke-linecap="round"/></g></svg></div><div class="wex-info"><div class="wex-name">Cadeira Abdutora</div><div class="wex-muscle">Glúteo médio · Abdutor</div><div class="wex-meta"><span class="wex-series" style="color:#ff6b9d;background:#ff6b9d22">4x15</span><span class="wex-dica">Movimento controlado, segure 1s no final — não jogue o peso</span></div></div></div></div>
+        <div class="wex"><div class="wex-inner"><div class="wex-svg"><svg viewBox="0 0 66 66" fill="none"><style>.glS{transform-origin:33px 44px;animation:glS 1.5s ease-in-out infinite alternate}@keyframes glS{from{transform:rotate(-15deg)}to{transform:rotate(5deg)}}
+</style><rect x="8" y="42" width="50" height="6" rx="3" fill="#ffffff10"/><circle cx="33" cy="24" r="6" fill="#ff6b9d" opacity=".9"/><rect x="30" y="30" width="6" height="14" rx="3" fill="#ff6b9d" opacity=".7"/><g class="glS"><line x1="30" y1="44" x2="18" y2="58" stroke="#ff6b9d" stroke-width="3" stroke-linecap="round"/><line x1="36" y1="44" x2="48" y2="58" stroke="#ff6b9d" stroke-width="3" stroke-linecap="round"/></g><line x1="28" y1="32" x2="14" y2="36" stroke="#ff6b9d" stroke-width="2.5" stroke-linecap="round"/><line x1="38" y1="32" x2="52" y2="36" stroke="#ff6b9d" stroke-width="2.5" stroke-linecap="round"/></svg></div><div class="wex-info"><div class="wex-name">Elevação Pélvica</div><div class="wex-muscle">Glúteo máximo</div><div class="wex-meta"><span class="wex-series" style="color:#ff6b9d;background:#ff6b9d22">4x15</span><span class="wex-dica">Ombros no banco, empurre o quadril para cima, esprema no topo</span></div>
+                <div class="wex-actions"><a class="wex-btn wex-btn-yt" href="https://www.youtube.com/results?search_query=como+fazer+Elevação+Pélvica+academia" target="_blank" rel="noopener">▶ YouTube</a><button class="wex-btn wex-btn-ai" onclick="openGroq('Elevação Pélvica')">📷 Não sei qual é</button></div></div></div></div>
+        <div class="wex"><div class="wex-inner"><div class="wex-svg"><svg viewBox="0 0 66 66" fill="none"><style>.abS{transform-origin:33px 40px;animation:abS 1.5s ease-in-out infinite alternate}@keyframes abS{from{transform:scaleX(.65)}to{transform:scaleX(1)}}
+</style><rect x="10" y="38" width="46" height="8" rx="4" fill="#ffffff10"/><circle cx="33" cy="20" r="6" fill="#ff6b9d" opacity=".9"/><rect x="30" y="26" width="6" height="14" rx="3" fill="#ff6b9d" opacity=".7"/><g class="abS"><line x1="27" y1="40" x2="12" y2="54" stroke="#ff6b9d" stroke-width="3" stroke-linecap="round"/><line x1="39" y1="40" x2="54" y2="54" stroke="#ff6b9d" stroke-width="3" stroke-linecap="round"/></g></svg></div><div class="wex-info"><div class="wex-name">Cadeira Abdutora</div><div class="wex-muscle">Glúteo médio · Abdutor</div><div class="wex-meta"><span class="wex-series" style="color:#ff6b9d;background:#ff6b9d22">4x15</span><span class="wex-dica">Movimento controlado, segure 1s no final — não jogue o peso</span></div>
+                <div class="wex-actions"><a class="wex-btn wex-btn-yt" href="https://www.youtube.com/results?search_query=como+fazer+Cadeira+Abdutora+academia" target="_blank" rel="noopener">▶ YouTube</a><button class="wex-btn wex-btn-ai" onclick="openGroq('Cadeira Abdutora')">📷 Não sei qual é</button></div></div></div></div>
       </div></div>
       <div class="wgroup"><div class="wgroup-title" style="color:#ffd166;background:#ffd16622;border:1px solid #ffd16633">QUADRÍCEPS</div><div class="wexercises">
-        <div class="wex"><div class="wex-inner"><div class="wex-svg"><svg viewBox="0 0 66 66" fill="none"><style>.lpS{transform-origin:20px 40px;animation:lpS 1.5s ease-in-out infinite alternate}@keyframes lpS{from{transform:rotate(-20deg)}to{transform:rotate(10deg)}}</style><rect x="4" y="30" width="28" height="30" rx="4" fill="#ffffff08"/><circle cx="18" cy="16" r="6" fill="#ffd166" opacity=".9"/><g class="lpS"><line x1="20" y1="34" x2="20" y2="52" stroke="#ffd166" stroke-width="3" stroke-linecap="round"/><line x1="20" y1="52" x2="10" y2="60" stroke="#ffd166" stroke-width="3" stroke-linecap="round"/><rect x="32" y="36" width="26" height="18" rx="4" fill="#ffffff10" stroke="#ffd166" stroke-width="1.5"/></g></svg></div><div class="wex-info"><div class="wex-name">Leg Press</div><div class="wex-muscle">Quadríceps · Glúteos</div><div class="wex-meta"><span class="wex-series" style="color:#ffd166;background:#ffd16622">4x12</span><span class="wex-dica">Pés afastados e mais alto na plataforma — mais ênfase no glúteo</span></div></div></div></div>
-        <div class="wex"><div class="wex-inner"><div class="wex-svg"><svg viewBox="0 0 66 66" fill="none"><style>.extS{transform-origin:20px 40px;animation:extS 1.5s ease-in-out infinite alternate}@keyframes extS{from{transform:rotate(30deg)}to{transform:rotate(-5deg)}}</style><rect x="4" y="28" width="28" height="32" rx="4" fill="#ffffff08"/><circle cx="18" cy="14" r="6" fill="#ffd166" opacity=".9"/><rect x="15" y="20" width="6" height="14" rx="3" fill="#ffd166" opacity=".7"/><g class="extS"><line x1="20" y1="34" x2="20" y2="52" stroke="#ffd166" stroke-width="3" stroke-linecap="round"/><line x1="20" y1="52" x2="34" y2="56" stroke="#ffd166" stroke-width="3" stroke-linecap="round"/><circle cx="36" cy="57" r="5" fill="#ffffff15" stroke="#ffd166" stroke-width="1.5"/></g></svg></div><div class="wex-info"><div class="wex-name">Extensora</div><div class="wex-muscle">Quadríceps</div><div class="wex-meta"><span class="wex-series" style="color:#ffd166;background:#ffd16622">3x15</span><span class="wex-dica">Extensão completa, segure 1s no topo, desça lento</span></div></div></div></div>
+        <div class="wex"><div class="wex-inner"><div class="wex-svg"><svg viewBox="0 0 66 66" fill="none"><style>.lpS{transform-origin:20px 40px;animation:lpS 1.5s ease-in-out infinite alternate}@keyframes lpS{from{transform:rotate(-20deg)}to{transform:rotate(10deg)}}
+</style><rect x="4" y="30" width="28" height="30" rx="4" fill="#ffffff08"/><circle cx="18" cy="16" r="6" fill="#ffd166" opacity=".9"/><g class="lpS"><line x1="20" y1="34" x2="20" y2="52" stroke="#ffd166" stroke-width="3" stroke-linecap="round"/><line x1="20" y1="52" x2="10" y2="60" stroke="#ffd166" stroke-width="3" stroke-linecap="round"/><rect x="32" y="36" width="26" height="18" rx="4" fill="#ffffff10" stroke="#ffd166" stroke-width="1.5"/></g></svg></div><div class="wex-info"><div class="wex-name">Leg Press</div><div class="wex-muscle">Quadríceps · Glúteos</div><div class="wex-meta"><span class="wex-series" style="color:#ffd166;background:#ffd16622">4x12</span><span class="wex-dica">Pés afastados e mais alto na plataforma — mais ênfase no glúteo</span></div>
+                <div class="wex-actions"><a class="wex-btn wex-btn-yt" href="https://www.youtube.com/results?search_query=como+fazer+Leg+Press+academia" target="_blank" rel="noopener">▶ YouTube</a><button class="wex-btn wex-btn-ai" onclick="openGroq('Leg Press')">📷 Não sei qual é</button></div></div></div></div>
+        <div class="wex"><div class="wex-inner"><div class="wex-svg"><svg viewBox="0 0 66 66" fill="none"><style>.extS{transform-origin:20px 40px;animation:extS 1.5s ease-in-out infinite alternate}@keyframes extS{from{transform:rotate(30deg)}to{transform:rotate(-5deg)}}
+</style><rect x="4" y="28" width="28" height="32" rx="4" fill="#ffffff08"/><circle cx="18" cy="14" r="6" fill="#ffd166" opacity=".9"/><rect x="15" y="20" width="6" height="14" rx="3" fill="#ffd166" opacity=".7"/><g class="extS"><line x1="20" y1="34" x2="20" y2="52" stroke="#ffd166" stroke-width="3" stroke-linecap="round"/><line x1="20" y1="52" x2="34" y2="56" stroke="#ffd166" stroke-width="3" stroke-linecap="round"/><circle cx="36" cy="57" r="5" fill="#ffffff15" stroke="#ffd166" stroke-width="1.5"/></g></svg></div><div class="wex-info"><div class="wex-name">Extensora</div><div class="wex-muscle">Quadríceps</div><div class="wex-meta"><span class="wex-series" style="color:#ffd166;background:#ffd16622">3x15</span><span class="wex-dica">Extensão completa, segure 1s no topo, desça lento</span></div>
+                <div class="wex-actions"><a class="wex-btn wex-btn-yt" href="https://www.youtube.com/results?search_query=como+fazer+Extensora+academia" target="_blank" rel="noopener">▶ YouTube</a><button class="wex-btn wex-btn-ai" onclick="openGroq('Extensora')">📷 Não sei qual é</button></div></div></div></div>
       </div></div>
       <div class="wgroup"><div class="wgroup-title" style="color:#4d9fff;background:#4d9fff22;border:1px solid #4d9fff33">POSTERIOR</div><div class="wexercises">
-        <div class="wex"><div class="wex-inner"><div class="wex-svg"><svg viewBox="0 0 66 66" fill="none"><style>.lcS{transform-origin:20px 32px;animation:lcS 1.5s ease-in-out infinite alternate}@keyframes lcS{from{transform:rotate(0deg)}to{transform:rotate(-40deg)}}</style><rect x="4" y="28" width="38" height="8" rx="4" fill="#ffffff10"/><circle cx="20" cy="20" r="6" fill="#4d9fff" opacity=".9"/><rect x="17" y="26" width="6" height="10" rx="3" fill="#4d9fff" opacity=".7"/><g class="lcS"><line x1="20" y1="36" x2="20" y2="54" stroke="#4d9fff" stroke-width="3" stroke-linecap="round"/><line x1="20" y1="54" x2="28" y2="60" stroke="#4d9fff" stroke-width="3" stroke-linecap="round"/><circle cx="30" cy="61" r="4" fill="#ffffff15" stroke="#4d9fff" stroke-width="1.5"/></g></svg></div><div class="wex-info"><div class="wex-name">Mesa Flexora</div><div class="wex-muscle">Isquiotibiais</div><div class="wex-meta"><span class="wex-series" style="color:#4d9fff;background:#4d9fff22">3x12</span><span class="wex-dica">Quadril fixo na mesa, amplitude total, suba e desça controlado</span></div></div></div></div>
-        <div class="wex"><div class="wex-inner"><div class="wex-svg"><svg viewBox="0 0 66 66" fill="none"><style>.stS{transform-origin:33px 28px;animation:stS 1.5s ease-in-out infinite alternate}@keyframes stS{from{transform:rotate(-20deg)}to{transform:rotate(0deg)}}</style><g class="stS"><circle cx="33" cy="10" r="6" fill="#4d9fff" opacity=".9"/><rect x="30" y="16" width="6" height="16" rx="3" fill="#4d9fff" opacity=".7"/><line x1="28" y1="20" x2="12" y2="22" stroke="#4d9fff" stroke-width="2.5" stroke-linecap="round"/><line x1="38" y1="20" x2="54" y2="22" stroke="#4d9fff" stroke-width="2.5" stroke-linecap="round"/></g><line x1="30" y1="32" x2="26" y2="52" stroke="#4d9fff" stroke-width="2.5" stroke-linecap="round"/><line x1="36" y1="32" x2="40" y2="52" stroke="#4d9fff" stroke-width="2.5" stroke-linecap="round"/><line x1="26" y1="52" x2="20" y2="62" stroke="#4d9fff" stroke-width="2.5" stroke-linecap="round"/><line x1="40" y1="52" x2="46" y2="62" stroke="#4d9fff" stroke-width="2.5" stroke-linecap="round"/></svg></div><div class="wex-info"><div class="wex-name">Stiff</div><div class="wex-muscle">Posterior · Glúteos</div><div class="wex-meta"><span class="wex-series" style="color:#4d9fff;background:#4d9fff22">3x12</span><span class="wex-dica">Joelhos semi-flexionados, empurre o quadril para trás</span></div></div></div></div>
+        <div class="wex"><div class="wex-inner"><div class="wex-svg"><svg viewBox="0 0 66 66" fill="none"><style>.lcS{transform-origin:20px 32px;animation:lcS 1.5s ease-in-out infinite alternate}@keyframes lcS{from{transform:rotate(0deg)}to{transform:rotate(-40deg)}}
+</style><rect x="4" y="28" width="38" height="8" rx="4" fill="#ffffff10"/><circle cx="20" cy="20" r="6" fill="#4d9fff" opacity=".9"/><rect x="17" y="26" width="6" height="10" rx="3" fill="#4d9fff" opacity=".7"/><g class="lcS"><line x1="20" y1="36" x2="20" y2="54" stroke="#4d9fff" stroke-width="3" stroke-linecap="round"/><line x1="20" y1="54" x2="28" y2="60" stroke="#4d9fff" stroke-width="3" stroke-linecap="round"/><circle cx="30" cy="61" r="4" fill="#ffffff15" stroke="#4d9fff" stroke-width="1.5"/></g></svg></div><div class="wex-info"><div class="wex-name">Mesa Flexora</div><div class="wex-muscle">Isquiotibiais</div><div class="wex-meta"><span class="wex-series" style="color:#4d9fff;background:#4d9fff22">3x12</span><span class="wex-dica">Quadril fixo na mesa, amplitude total, suba e desça controlado</span></div>
+                <div class="wex-actions"><a class="wex-btn wex-btn-yt" href="https://www.youtube.com/results?search_query=como+fazer+Mesa+Flexora+academia" target="_blank" rel="noopener">▶ YouTube</a><button class="wex-btn wex-btn-ai" onclick="openGroq('Mesa Flexora')">📷 Não sei qual é</button></div></div></div></div>
+        <div class="wex"><div class="wex-inner"><div class="wex-svg"><svg viewBox="0 0 66 66" fill="none"><style>.stS{transform-origin:33px 28px;animation:stS 1.5s ease-in-out infinite alternate}@keyframes stS{from{transform:rotate(-20deg)}to{transform:rotate(0deg)}}
+</style><g class="stS"><circle cx="33" cy="10" r="6" fill="#4d9fff" opacity=".9"/><rect x="30" y="16" width="6" height="16" rx="3" fill="#4d9fff" opacity=".7"/><line x1="28" y1="20" x2="12" y2="22" stroke="#4d9fff" stroke-width="2.5" stroke-linecap="round"/><line x1="38" y1="20" x2="54" y2="22" stroke="#4d9fff" stroke-width="2.5" stroke-linecap="round"/></g><line x1="30" y1="32" x2="26" y2="52" stroke="#4d9fff" stroke-width="2.5" stroke-linecap="round"/><line x1="36" y1="32" x2="40" y2="52" stroke="#4d9fff" stroke-width="2.5" stroke-linecap="round"/><line x1="26" y1="52" x2="20" y2="62" stroke="#4d9fff" stroke-width="2.5" stroke-linecap="round"/><line x1="40" y1="52" x2="46" y2="62" stroke="#4d9fff" stroke-width="2.5" stroke-linecap="round"/></svg></div><div class="wex-info"><div class="wex-name">Stiff</div><div class="wex-muscle">Posterior · Glúteos</div><div class="wex-meta"><span class="wex-series" style="color:#4d9fff;background:#4d9fff22">3x12</span><span class="wex-dica">Joelhos semi-flexionados, empurre o quadril para trás</span></div>
+                <div class="wex-actions"><a class="wex-btn wex-btn-yt" href="https://www.youtube.com/results?search_query=como+fazer+Stiff+academia" target="_blank" rel="noopener">▶ YouTube</a><button class="wex-btn wex-btn-ai" onclick="openGroq('Stiff')">📷 Não sei qual é</button></div></div></div></div>
       </div></div>
     </div>
   </div>
 </div>
+
+
+<div class="screen screen-ap" id="screen-ap">
+<div class="wrap">
+  <div class="topbar">
+    <div class="tbinner">
+      <button class="back-btn" onclick="go('sel')">← Início</button>
+      <div class="tbdiv"></div>
+      <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:1px">GUIA DE APARELHOS</span>
+    </div>
+  </div>
+  <header>
+    <div class="htag ap">Guia Completo · Academia</div>
+    <h1>APA<em>RELHOS</em></h1>
+    <p class="hmeta">Clique em qualquer aparelho para ver como usar, músculos trabalhados e dicas de execução.</p>
+  </header>
+  <div class="ap-search-wrap"><input class="ap-search" id="apSearch" type="text" placeholder="🔍  Buscar aparelho..." oninput="searchAp(this.value)"/></div>
+  <div class="ap-tabs" id="apTabs"><button class="ap-tab active" onclick="filterAp('all',this)">Todos</button><button class="ap-tab" onclick="filterAp('Costas',this)" style="--cat-color:#00e5cc">Costas</button><button class="ap-tab" onclick="filterAp('Peito',this)" style="--cat-color:#39d98a">Peito</button><button class="ap-tab" onclick="filterAp('Ombro',this)" style="--cat-color:#ffd166">Ombro</button><button class="ap-tab" onclick="filterAp('Bíceps',this)" style="--cat-color:#4d9fff">Bíceps</button><button class="ap-tab" onclick="filterAp('Tríceps',this)" style="--cat-color:#ff7b3d">Tríceps</button><button class="ap-tab" onclick="filterAp('Quadríceps',this)" style="--cat-color:#ff6b9d">Quadríceps</button><button class="ap-tab" onclick="filterAp('Posterior',this)" style="--cat-color:#4d9fff">Posterior</button><button class="ap-tab" onclick="filterAp('Glúteo',this)" style="--cat-color:#ff6b9d">Glúteo</button><button class="ap-tab" onclick="filterAp('Trapézio',this)" style="--cat-color:#e040fb">Trapézio</button></div>
+  <div class="ap-grid" id="apGrid"><div class="ap-card" data-cat="Costas" data-name="puxada frontal">
+  <div class="ap-card-head" style="--ac:#00e5cc" onclick="toggleAp(this)">
+    <div>
+      <span class="ap-cat-pill" style="color:#00e5cc;background:#00e5cc18;border-color:#00e5cc40">Costas</span>
+      <div class="ap-name">Puxada Frontal</div>
+      <div class="ap-muscle">Dorsal · Grande dorsal</div>
+    </div>
+    <span class="ap-chevron">▾</span>
+  </div>
+  <div class="ap-card-body">
+    <div class="ap-como-title">Como usar</div>
+    <p class="ap-como-text">Sente-se no banco e ajuste o joelheiro para travar as pernas. Segure a barra com pegada pronada (palmas para frente) um pouco mais larga que os ombros. Puxe a barra em direção ao peito contraindo o dorsal, mantendo os cotovelos apontando para baixo e para trás. Suba de forma controlada sem soltar bruscamente.</p>
+    <div class="ap-dicas-title">Dicas de execução</div>
+    <ul class="ap-dicas"><li>Não incline o tronco demais — o movimento vem do dorsal, não do corpo</li><li>Expire ao puxar, inspire ao subir</li><li>Segure 1 segundo na posição contraída</li></ul>
+    <div class="ap-actions">
+      <a class="ap-yt-btn" href="https://www.youtube.com/results?search_query=puxada+frontal+como+fazer+academia" target="_blank" rel="noopener">▶ Ver no YouTube</a>
+      <button class="ap-photo-btn" onclick="openAiPhoto('Puxada Frontal')">📷 Não achei — tirar foto</button>
+    </div>
+  </div>
+</div><div class="ap-card" data-cat="Costas" data-name="remada baixa (polia)">
+  <div class="ap-card-head" style="--ac:#00e5cc" onclick="toggleAp(this)">
+    <div>
+      <span class="ap-cat-pill" style="color:#00e5cc;background:#00e5cc18;border-color:#00e5cc40">Costas</span>
+      <div class="ap-name">Remada Baixa (Polia)</div>
+      <div class="ap-muscle">Dorsal · Romboides · Trapézio médio</div>
+    </div>
+    <span class="ap-chevron">▾</span>
+  </div>
+  <div class="ap-card-body">
+    <div class="ap-como-title">Como usar</div>
+    <p class="ap-como-text">Sente-se na máquina com os pés apoiados na plataforma e os joelhos levemente flexionados. Segure o triângulo ou a barra e puxe em direção ao abdômen mantendo as costas retas e o peito aberto. Retorne lentamente controlando o peso.</p>
+    <div class="ap-dicas-title">Dicas de execução</div>
+    <ul class="ap-dicas"><li>Não curve as costas — mantenha a coluna neutra</li><li>Cotovelos passam rente ao corpo</li><li>Não balance o tronco para trás</li></ul>
+    <div class="ap-actions">
+      <a class="ap-yt-btn" href="https://www.youtube.com/results?search_query=remada+baixa+polia+como+fazer" target="_blank" rel="noopener">▶ Ver no YouTube</a>
+      <button class="ap-photo-btn" onclick="openAiPhoto('Remada Baixa (Polia)')">📷 Não achei — tirar foto</button>
+    </div>
+  </div>
+</div><div class="ap-card" data-cat="Costas" data-name="pulley / crossover costas">
+  <div class="ap-card-head" style="--ac:#00e5cc" onclick="toggleAp(this)">
+    <div>
+      <span class="ap-cat-pill" style="color:#00e5cc;background:#00e5cc18;border-color:#00e5cc40">Costas</span>
+      <div class="ap-name">Pulley / Crossover Costas</div>
+      <div class="ap-muscle">Dorsal · Serrátil</div>
+    </div>
+    <span class="ap-chevron">▾</span>
+  </div>
+  <div class="ap-card-body">
+    <div class="ap-como-title">Como usar</div>
+    <p class="ap-como-text">De pé ou sentado, segure a polia com os braços estendidos acima. Puxe para baixo até as mãos ficarem na altura do peito, espremendo o dorsal. Retorne de forma controlada.</p>
+    <div class="ap-dicas-title">Dicas de execução</div>
+    <ul class="ap-dicas"><li>Mantenha o peito alto e aberto</li><li>Pense em 'juntar os cotovelos abaixo das costelas'</li><li>Controle o peso na subida</li></ul>
+    <div class="ap-actions">
+      <a class="ap-yt-btn" href="https://www.youtube.com/results?search_query=pulley+costas+como+fazer+academia" target="_blank" rel="noopener">▶ Ver no YouTube</a>
+      <button class="ap-photo-btn" onclick="openAiPhoto('Pulley / Crossover Costas')">📷 Não achei — tirar foto</button>
+    </div>
+  </div>
+</div><div class="ap-card" data-cat="Peito" data-name="supino máquina">
+  <div class="ap-card-head" style="--ac:#39d98a" onclick="toggleAp(this)">
+    <div>
+      <span class="ap-cat-pill" style="color:#39d98a;background:#39d98a18;border-color:#39d98a40">Peito</span>
+      <div class="ap-name">Supino Máquina</div>
+      <div class="ap-muscle">Peitoral maior · Tríceps</div>
+    </div>
+    <span class="ap-chevron">▾</span>
+  </div>
+  <div class="ap-card-body">
+    <div class="ap-como-title">Como usar</div>
+    <p class="ap-como-text">Ajuste o banco para que os pegadores fiquem na altura do peito. Sente-se com as costas apoiadas e os pés no chão. Empurre os braços para frente até quase estender, sem trancar o cotovelo. Volte controlado sem deixar o peso pousar.</p>
+    <div class="ap-dicas-title">Dicas de execução</div>
+    <ul class="ap-dicas"><li>Cotovelos na altura dos ombros ou levemente abaixo</li><li>Não trave o cotovelo no final</li><li>Peito expandido durante todo o movimento</li></ul>
+    <div class="ap-actions">
+      <a class="ap-yt-btn" href="https://www.youtube.com/results?search_query=supino+maquina+como+usar+academia" target="_blank" rel="noopener">▶ Ver no YouTube</a>
+      <button class="ap-photo-btn" onclick="openAiPhoto('Supino Máquina')">📷 Não achei — tirar foto</button>
+    </div>
+  </div>
+</div><div class="ap-card" data-cat="Peito" data-name="crossover (polia alta)">
+  <div class="ap-card-head" style="--ac:#39d98a" onclick="toggleAp(this)">
+    <div>
+      <span class="ap-cat-pill" style="color:#39d98a;background:#39d98a18;border-color:#39d98a40">Peito</span>
+      <div class="ap-name">Crossover (Polia Alta)</div>
+      <div class="ap-muscle">Peitoral · Porção interna e inferior</div>
+    </div>
+    <span class="ap-chevron">▾</span>
+  </div>
+  <div class="ap-card-body">
+    <div class="ap-como-title">Como usar</div>
+    <p class="ap-como-text">Posicione-se no centro do cabo com as polias altas. Pegue um cabo em cada mão, dê um passo à frente e incline levemente o tronco. Com cotovelos levemente flexionados, traga as mãos em arco até se cruzarem na frente do corpo. Retorne controlado.</p>
+    <div class="ap-dicas-title">Dicas de execução</div>
+    <ul class="ap-dicas"><li>Pense em 'abraçar uma árvore'</li><li>Não dobre mais o cotovelo durante o movimento</li><li>A força vem do peito, não dos braços</li></ul>
+    <div class="ap-actions">
+      <a class="ap-yt-btn" href="https://www.youtube.com/results?search_query=crossover+peitoral+como+fazer" target="_blank" rel="noopener">▶ Ver no YouTube</a>
+      <button class="ap-photo-btn" onclick="openAiPhoto('Crossover (Polia Alta)')">📷 Não achei — tirar foto</button>
+    </div>
+  </div>
+</div><div class="ap-card" data-cat="Peito" data-name="mergulho / dips">
+  <div class="ap-card-head" style="--ac:#39d98a" onclick="toggleAp(this)">
+    <div>
+      <span class="ap-cat-pill" style="color:#39d98a;background:#39d98a18;border-color:#39d98a40">Peito</span>
+      <div class="ap-name">Mergulho / Dips</div>
+      <div class="ap-muscle">Peitoral inferior · Tríceps · Deltóide anterior</div>
+    </div>
+    <span class="ap-chevron">▾</span>
+  </div>
+  <div class="ap-card-body">
+    <div class="ap-como-title">Como usar</div>
+    <p class="ap-como-text">Apoie as mãos nas barras paralelas. Incline o tronco levemente para frente (isso foca no peito). Desça até os cotovelos chegarem a 90°, depois empurre de volta. Se houver máquina assistida, use-a para ajustar o peso.</p>
+    <div class="ap-dicas-title">Dicas de execução</div>
+    <ul class="ap-dicas"><li>Inclinação do tronco determina o foco: mais à frente = mais peito</li><li>Desça controlado, sem pular</li><li>Não desça além de 90° para proteger o ombro</li></ul>
+    <div class="ap-actions">
+      <a class="ap-yt-btn" href="https://www.youtube.com/results?search_query=mergulho+dips+peito+como+fazer" target="_blank" rel="noopener">▶ Ver no YouTube</a>
+      <button class="ap-photo-btn" onclick="openAiPhoto('Mergulho / Dips')">📷 Não achei — tirar foto</button>
+    </div>
+  </div>
+</div><div class="ap-card" data-cat="Ombro" data-name="desenvolvimento máquina">
+  <div class="ap-card-head" style="--ac:#ffd166" onclick="toggleAp(this)">
+    <div>
+      <span class="ap-cat-pill" style="color:#ffd166;background:#ffd16618;border-color:#ffd16640">Ombro</span>
+      <div class="ap-name">Desenvolvimento Máquina</div>
+      <div class="ap-muscle">Deltóide anterior e medial · Trapézio</div>
+    </div>
+    <span class="ap-chevron">▾</span>
+  </div>
+  <div class="ap-card-body">
+    <div class="ap-como-title">Como usar</div>
+    <p class="ap-como-text">Ajuste o assento para que os pegadores fiquem na altura dos ombros. Sente-se com as costas apoiadas. Empurre para cima até quase estender os braços, sem trancar. Desça controlado até a posição inicial.</p>
+    <div class="ap-dicas-title">Dicas de execução</div>
+    <ul class="ap-dicas"><li>Não arqueje a lombar — use o encosto</li><li>Não trave o cotovelo no topo</li><li>Expire ao empurrar</li></ul>
+    <div class="ap-actions">
+      <a class="ap-yt-btn" href="https://www.youtube.com/results?search_query=desenvolvimento+maquina+ombro+como+usar" target="_blank" rel="noopener">▶ Ver no YouTube</a>
+      <button class="ap-photo-btn" onclick="openAiPhoto('Desenvolvimento Máquina')">📷 Não achei — tirar foto</button>
+    </div>
+  </div>
+</div><div class="ap-card" data-cat="Ombro" data-name="elevação lateral (cabo)">
+  <div class="ap-card-head" style="--ac:#ffd166" onclick="toggleAp(this)">
+    <div>
+      <span class="ap-cat-pill" style="color:#ffd166;background:#ffd16618;border-color:#ffd16640">Ombro</span>
+      <div class="ap-name">Elevação Lateral (Cabo)</div>
+      <div class="ap-muscle">Deltóide medial</div>
+    </div>
+    <span class="ap-chevron">▾</span>
+  </div>
+  <div class="ap-card-body">
+    <div class="ap-como-title">Como usar</div>
+    <p class="ap-como-text">Posicione a polia na altura da cintura ou abaixo. Segure o cabo com a mão oposta ao lado da polia, com o cabo passando à frente do corpo. Eleve o braço lateralmente até a altura do ombro, com cotovelo levemente flexionado. Desça controlado.</p>
+    <div class="ap-dicas-title">Dicas de execução</div>
+    <ul class="ap-dicas"><li>O cotovelo deve subir mais alto que o pulso</li><li>Não balance o corpo para ganhar impulso</li><li>Prefira peso menor com execução perfeita</li></ul>
+    <div class="ap-actions">
+      <a class="ap-yt-btn" href="https://www.youtube.com/results?search_query=elevacao+lateral+cabo+como+fazer" target="_blank" rel="noopener">▶ Ver no YouTube</a>
+      <button class="ap-photo-btn" onclick="openAiPhoto('Elevação Lateral (Cabo)')">📷 Não achei — tirar foto</button>
+    </div>
+  </div>
+</div><div class="ap-card" data-cat="Ombro" data-name="face pull">
+  <div class="ap-card-head" style="--ac:#ffd166" onclick="toggleAp(this)">
+    <div>
+      <span class="ap-cat-pill" style="color:#ffd166;background:#ffd16618;border-color:#ffd16640">Ombro</span>
+      <div class="ap-name">Face Pull</div>
+      <div class="ap-muscle">Deltóide posterior · Manguito rotador</div>
+    </div>
+    <span class="ap-chevron">▾</span>
+  </div>
+  <div class="ap-card-body">
+    <div class="ap-como-title">Como usar</div>
+    <p class="ap-como-text">Posicione a polia na altura da cabeça com corda dupla. Segure as pontas da corda com as palmas voltadas para dentro. Puxe em direção ao rosto separando as mãos no final, com cotovelos abertos para os lados.</p>
+    <div class="ap-dicas-title">Dicas de execução</div>
+    <ul class="ap-dicas"><li>Cotovelos acima dos pulsos durante o movimento</li><li>Puxe até as mãos ficarem ao lado das orelhas</li><li>Essencial para saúde do ombro a longo prazo</li></ul>
+    <div class="ap-actions">
+      <a class="ap-yt-btn" href="https://www.youtube.com/results?search_query=face+pull+como+fazer+academia" target="_blank" rel="noopener">▶ Ver no YouTube</a>
+      <button class="ap-photo-btn" onclick="openAiPhoto('Face Pull')">📷 Não achei — tirar foto</button>
+    </div>
+  </div>
+</div><div class="ap-card" data-cat="Bíceps" data-name="rosca direta na polia">
+  <div class="ap-card-head" style="--ac:#4d9fff" onclick="toggleAp(this)">
+    <div>
+      <span class="ap-cat-pill" style="color:#4d9fff;background:#4d9fff18;border-color:#4d9fff40">Bíceps</span>
+      <div class="ap-name">Rosca Direta na Polia</div>
+      <div class="ap-muscle">Bíceps braquial</div>
+    </div>
+    <span class="ap-chevron">▾</span>
+  </div>
+  <div class="ap-card-body">
+    <div class="ap-como-title">Como usar</div>
+    <p class="ap-como-text">Posicione a polia na parte baixa. Segure a barra reta com pegada supinada (palmas para cima). Com os cotovelos fixos ao lado do corpo, dobre os braços trazendo a barra até o peito. Desça controlado.</p>
+    <div class="ap-dicas-title">Dicas de execução</div>
+    <ul class="ap-dicas"><li>Cotovelos não devem se mover — são o ponto fixo</li><li>Contração máxima no topo</li><li>A tensão constante do cabo é uma vantagem sobre o halter</li></ul>
+    <div class="ap-actions">
+      <a class="ap-yt-btn" href="https://www.youtube.com/results?search_query=rosca+direta+polia+como+fazer" target="_blank" rel="noopener">▶ Ver no YouTube</a>
+      <button class="ap-photo-btn" onclick="openAiPhoto('Rosca Direta na Polia')">📷 Não achei — tirar foto</button>
+    </div>
+  </div>
+</div><div class="ap-card" data-cat="Bíceps" data-name="rosca martelo">
+  <div class="ap-card-head" style="--ac:#4d9fff" onclick="toggleAp(this)">
+    <div>
+      <span class="ap-cat-pill" style="color:#4d9fff;background:#4d9fff18;border-color:#4d9fff40">Bíceps</span>
+      <div class="ap-name">Rosca Martelo</div>
+      <div class="ap-muscle">Braquial · Braquiorradial</div>
+    </div>
+    <span class="ap-chevron">▾</span>
+  </div>
+  <div class="ap-card-body">
+    <div class="ap-como-title">Como usar</div>
+    <p class="ap-como-text">Segure os halteres com pegada neutra (polegar para cima). Com os cotovelos fixos ao lado do corpo, dobre os braços alternadamente ou juntos. Não gire o pulso durante o movimento.</p>
+    <div class="ap-dicas-title">Dicas de execução</div>
+    <ul class="ap-dicas"><li>Trabalha o braquial que fica 'embaixo' do bíceps — dá mais volume</li><li>Movimento lento e controlado</li><li>Pode ser feito alternado ou simultâneo</li></ul>
+    <div class="ap-actions">
+      <a class="ap-yt-btn" href="https://www.youtube.com/results?search_query=rosca+martelo+halteres+como+fazer" target="_blank" rel="noopener">▶ Ver no YouTube</a>
+      <button class="ap-photo-btn" onclick="openAiPhoto('Rosca Martelo')">📷 Não achei — tirar foto</button>
+    </div>
+  </div>
+</div><div class="ap-card" data-cat="Bíceps" data-name="rosca concentrada (polia)">
+  <div class="ap-card-head" style="--ac:#4d9fff" onclick="toggleAp(this)">
+    <div>
+      <span class="ap-cat-pill" style="color:#4d9fff;background:#4d9fff18;border-color:#4d9fff40">Bíceps</span>
+      <div class="ap-name">Rosca Concentrada (Polia)</div>
+      <div class="ap-muscle">Bíceps · Pico</div>
+    </div>
+    <span class="ap-chevron">▾</span>
+  </div>
+  <div class="ap-card-body">
+    <div class="ap-como-title">Como usar</div>
+    <p class="ap-como-text">Sentado, posicione a polia baixa e segure o cabo. Apoie o cotovelo na parte interna da coxa. Dobre o braço trazendo o peso até o ombro, espremendo o bíceps no topo.</p>
+    <div class="ap-dicas-title">Dicas de execução</div>
+    <ul class="ap-dicas"><li>Cotovelo fixo na coxa — sem movimento</li><li>Contração máxima e pausa de 1s no topo</li><li>Foca no pico do bíceps</li></ul>
+    <div class="ap-actions">
+      <a class="ap-yt-btn" href="https://www.youtube.com/results?search_query=rosca+concentrada+polia+baixa+como+fazer" target="_blank" rel="noopener">▶ Ver no YouTube</a>
+      <button class="ap-photo-btn" onclick="openAiPhoto('Rosca Concentrada (Polia)')">📷 Não achei — tirar foto</button>
+    </div>
+  </div>
+</div><div class="ap-card" data-cat="Bíceps" data-name="rosca alternada inclinada">
+  <div class="ap-card-head" style="--ac:#4d9fff" onclick="toggleAp(this)">
+    <div>
+      <span class="ap-cat-pill" style="color:#4d9fff;background:#4d9fff18;border-color:#4d9fff40">Bíceps</span>
+      <div class="ap-name">Rosca Alternada Inclinada</div>
+      <div class="ap-muscle">Bíceps · Cabeça longa</div>
+    </div>
+    <span class="ap-chevron">▾</span>
+  </div>
+  <div class="ap-card-body">
+    <div class="ap-como-title">Como usar</div>
+    <p class="ap-como-text">Ajuste o banco a 45°. Sente-se com os braços pendurados para baixo segurando os halteres. Dobre um braço de cada vez trazendo o halter até o ombro. A posição inclinada aumenta o alongamento do bíceps.</p>
+    <div class="ap-dicas-title">Dicas de execução</div>
+    <ul class="ap-dicas"><li>Não balance o corpo para levantar o peso</li><li>A posição inclinada é o diferencial — não perca essa amplitude</li><li>Excelente para hipertrofia da cabeça longa</li></ul>
+    <div class="ap-actions">
+      <a class="ap-yt-btn" href="https://www.youtube.com/results?search_query=rosca+alternada+banco+inclinado+como+fazer" target="_blank" rel="noopener">▶ Ver no YouTube</a>
+      <button class="ap-photo-btn" onclick="openAiPhoto('Rosca Alternada Inclinada')">📷 Não achei — tirar foto</button>
+    </div>
+  </div>
+</div><div class="ap-card" data-cat="Tríceps" data-name="tríceps pulley (polia)">
+  <div class="ap-card-head" style="--ac:#ff7b3d" onclick="toggleAp(this)">
+    <div>
+      <span class="ap-cat-pill" style="color:#ff7b3d;background:#ff7b3d18;border-color:#ff7b3d40">Tríceps</span>
+      <div class="ap-name">Tríceps Pulley (Polia)</div>
+      <div class="ap-muscle">Tríceps · Todas as cabeças</div>
+    </div>
+    <span class="ap-chevron">▾</span>
+  </div>
+  <div class="ap-card-body">
+    <div class="ap-como-title">Como usar</div>
+    <p class="ap-como-text">Posicione a polia alta com barra reta ou corda. Segure com cotovelos dobrados a 90° ao lado do corpo. Empurre para baixo até estender completamente os braços. Retorne controlado mantendo os cotovelos fixos.</p>
+    <div class="ap-dicas-title">Dicas de execução</div>
+    <ul class="ap-dicas"><li>Cotovelos fixos — são o ponto de pivô</li><li>Extensão completa é fundamental</li><li>Com a corda, abra as mãos no final para maior contração</li></ul>
+    <div class="ap-actions">
+      <a class="ap-yt-btn" href="https://www.youtube.com/results?search_query=triceps+pulley+como+fazer" target="_blank" rel="noopener">▶ Ver no YouTube</a>
+      <button class="ap-photo-btn" onclick="openAiPhoto('Tríceps Pulley (Polia)')">📷 Não achei — tirar foto</button>
+    </div>
+  </div>
+</div><div class="ap-card" data-cat="Tríceps" data-name="tríceps testa (polia)">
+  <div class="ap-card-head" style="--ac:#ff7b3d" onclick="toggleAp(this)">
+    <div>
+      <span class="ap-cat-pill" style="color:#ff7b3d;background:#ff7b3d18;border-color:#ff7b3d40">Tríceps</span>
+      <div class="ap-name">Tríceps Testa (Polia)</div>
+      <div class="ap-muscle">Tríceps · Cabeça longa</div>
+    </div>
+    <span class="ap-chevron">▾</span>
+  </div>
+  <div class="ap-card-body">
+    <div class="ap-como-title">Como usar</div>
+    <p class="ap-como-text">Deite no banco com a cabeça próxima à polia baixa. Segure a barra com cotovelos apontando para o teto. Estenda os braços trazendo a barra acima da cabeça. Cotovelos fixos o tempo todo.</p>
+    <div class="ap-dicas-title">Dicas de execução</div>
+    <ul class="ap-dicas"><li>Cotovelos não devem abrir para os lados</li><li>Movimento só nos antebraços</li><li>Ótimo para cabeça longa do tríceps</li></ul>
+    <div class="ap-actions">
+      <a class="ap-yt-btn" href="https://www.youtube.com/results?search_query=triceps+testa+polia+como+fazer" target="_blank" rel="noopener">▶ Ver no YouTube</a>
+      <button class="ap-photo-btn" onclick="openAiPhoto('Tríceps Testa (Polia)')">📷 Não achei — tirar foto</button>
+    </div>
+  </div>
+</div><div class="ap-card" data-cat="Tríceps" data-name="tríceps francês (cabo)">
+  <div class="ap-card-head" style="--ac:#ff7b3d" onclick="toggleAp(this)">
+    <div>
+      <span class="ap-cat-pill" style="color:#ff7b3d;background:#ff7b3d18;border-color:#ff7b3d40">Tríceps</span>
+      <div class="ap-name">Tríceps Francês (Cabo)</div>
+      <div class="ap-muscle">Tríceps · Cabeça longa</div>
+    </div>
+    <span class="ap-chevron">▾</span>
+  </div>
+  <div class="ap-card-body">
+    <div class="ap-como-title">Como usar</div>
+    <p class="ap-como-text">De pé de costas para a polia alta. Segure a corda com as duas mãos atrás da cabeça. Estenda os braços para cima mantendo os cotovelos apontados para frente e fixos.</p>
+    <div class="ap-dicas-title">Dicas de execução</div>
+    <ul class="ap-dicas"><li>Cotovelos não devem se abrir — aponte para o teto</li><li>Extensão completa no topo</li><li>Ótimo para dar volume e comprimento ao tríceps</li></ul>
+    <div class="ap-actions">
+      <a class="ap-yt-btn" href="https://www.youtube.com/results?search_query=triceps+frances+cabo+como+fazer" target="_blank" rel="noopener">▶ Ver no YouTube</a>
+      <button class="ap-photo-btn" onclick="openAiPhoto('Tríceps Francês (Cabo)')">📷 Não achei — tirar foto</button>
+    </div>
+  </div>
+</div><div class="ap-card" data-cat="Quadríceps" data-name="leg press">
+  <div class="ap-card-head" style="--ac:#ff6b9d" onclick="toggleAp(this)">
+    <div>
+      <span class="ap-cat-pill" style="color:#ff6b9d;background:#ff6b9d18;border-color:#ff6b9d40">Quadríceps</span>
+      <div class="ap-name">Leg Press</div>
+      <div class="ap-muscle">Quadríceps · Glúteos · Isquiotibiais</div>
+    </div>
+    <span class="ap-chevron">▾</span>
+  </div>
+  <div class="ap-card-body">
+    <div class="ap-como-title">Como usar</div>
+    <p class="ap-como-text">Deite na máquina com as costas apoiadas. Posicione os pés na plataforma na largura dos ombros. Solte o travão e desça controlado até os joelhos chegarem a 90°, sem tirar a lombar do apoio. Empurre de volta sem trancar os joelhos.</p>
+    <div class="ap-dicas-title">Dicas de execução</div>
+    <ul class="ap-dicas"><li>Pés mais altos e afastados = mais glúteo</li><li>Pés mais baixos e próximos = mais quadríceps</li><li>Nunca trave o joelho no final da extensão</li></ul>
+    <div class="ap-actions">
+      <a class="ap-yt-btn" href="https://www.youtube.com/results?search_query=leg+press+como+usar+academia" target="_blank" rel="noopener">▶ Ver no YouTube</a>
+      <button class="ap-photo-btn" onclick="openAiPhoto('Leg Press')">📷 Não achei — tirar foto</button>
+    </div>
+  </div>
+</div><div class="ap-card" data-cat="Quadríceps" data-name="extensora">
+  <div class="ap-card-head" style="--ac:#ff6b9d" onclick="toggleAp(this)">
+    <div>
+      <span class="ap-cat-pill" style="color:#ff6b9d;background:#ff6b9d18;border-color:#ff6b9d40">Quadríceps</span>
+      <div class="ap-name">Extensora</div>
+      <div class="ap-muscle">Quadríceps</div>
+    </div>
+    <span class="ap-chevron">▾</span>
+  </div>
+  <div class="ap-card-body">
+    <div class="ap-como-title">Como usar</div>
+    <p class="ap-como-text">Sente-se com as costas apoiadas e as canelas atrás do apoio. Ajuste o apoio para que fique logo acima do tornozelo. Estenda as pernas até a posição horizontal, segure 1 segundo e desça controlado.</p>
+    <div class="ap-dicas-title">Dicas de execução</div>
+    <ul class="ap-dicas"><li>Extensão completa para trabalhar todo o músculo</li><li>Segure 1s no topo para maior ativação</li><li>Desça devagar — a fase excêntrica é essencial</li></ul>
+    <div class="ap-actions">
+      <a class="ap-yt-btn" href="https://www.youtube.com/results?search_query=cadeira+extensora+como+usar" target="_blank" rel="noopener">▶ Ver no YouTube</a>
+      <button class="ap-photo-btn" onclick="openAiPhoto('Extensora')">📷 Não achei — tirar foto</button>
+    </div>
+  </div>
+</div><div class="ap-card" data-cat="Quadríceps" data-name="agachamento livre / smith">
+  <div class="ap-card-head" style="--ac:#ff6b9d" onclick="toggleAp(this)">
+    <div>
+      <span class="ap-cat-pill" style="color:#ff6b9d;background:#ff6b9d18;border-color:#ff6b9d40">Quadríceps</span>
+      <div class="ap-name">Agachamento Livre / Smith</div>
+      <div class="ap-muscle">Quadríceps · Glúteos · Posterior · Core</div>
+    </div>
+    <span class="ap-chevron">▾</span>
+  </div>
+  <div class="ap-card-body">
+    <div class="ap-como-title">Como usar</div>
+    <p class="ap-como-text">Pés na largura dos ombros, pontas levemente abertas para fora. Desça como se fosse sentar numa cadeira, mantendo o peito aberto e a coluna reta. Joelhos seguem a direção dos pés. Desça até as coxas ficarem paralelas ao chão.</p>
+    <div class="ap-dicas-title">Dicas de execução</div>
+    <ul class="ap-dicas"><li>Não deixe os joelhos caírem para dentro</li><li>O peso fica no meio do pé — não na ponta</li><li>Agachamento no Smith é mais seguro para iniciantes</li></ul>
+    <div class="ap-actions">
+      <a class="ap-yt-btn" href="https://www.youtube.com/results?search_query=agachamento+como+fazer+academia+iniciante" target="_blank" rel="noopener">▶ Ver no YouTube</a>
+      <button class="ap-photo-btn" onclick="openAiPhoto('Agachamento Livre / Smith')">📷 Não achei — tirar foto</button>
+    </div>
+  </div>
+</div><div class="ap-card" data-cat="Posterior" data-name="mesa flexora">
+  <div class="ap-card-head" style="--ac:#4d9fff" onclick="toggleAp(this)">
+    <div>
+      <span class="ap-cat-pill" style="color:#4d9fff;background:#4d9fff18;border-color:#4d9fff40">Posterior</span>
+      <div class="ap-name">Mesa Flexora</div>
+      <div class="ap-muscle">Isquiotibiais</div>
+    </div>
+    <span class="ap-chevron">▾</span>
+  </div>
+  <div class="ap-card-body">
+    <div class="ap-como-title">Como usar</div>
+    <p class="ap-como-text">Deite de bruços na máquina com os calcanhares sob o apoio. Ajuste para que o apoio fique logo acima dos calcanhares. Dobre os joelhos trazendo os calcanhares em direção ao glúteo. Desça controlado.</p>
+    <div class="ap-dicas-title">Dicas de execução</div>
+    <ul class="ap-dicas"><li>Quadril fixo na mesa — não levante</li><li>Amplitude total para máxima eficiência</li><li>Desça devagar para maior ativação</li></ul>
+    <div class="ap-actions">
+      <a class="ap-yt-btn" href="https://www.youtube.com/results?search_query=mesa+flexora+como+usar" target="_blank" rel="noopener">▶ Ver no YouTube</a>
+      <button class="ap-photo-btn" onclick="openAiPhoto('Mesa Flexora')">📷 Não achei — tirar foto</button>
+    </div>
+  </div>
+</div><div class="ap-card" data-cat="Posterior" data-name="stiff (terra romeno)">
+  <div class="ap-card-head" style="--ac:#4d9fff" onclick="toggleAp(this)">
+    <div>
+      <span class="ap-cat-pill" style="color:#4d9fff;background:#4d9fff18;border-color:#4d9fff40">Posterior</span>
+      <div class="ap-name">Stiff (Terra Romeno)</div>
+      <div class="ap-muscle">Isquiotibiais · Glúteos</div>
+    </div>
+    <span class="ap-chevron">▾</span>
+  </div>
+  <div class="ap-card-body">
+    <div class="ap-como-title">Como usar</div>
+    <p class="ap-como-text">De pé, segure os halteres ou barra na frente das coxas. Empurre o quadril para trás e incline o tronco para frente com joelhos levemente flexionados. Desça até sentir o alongamento nos isquiotibiais e suba empurrando o quadril para frente.</p>
+    <div class="ap-dicas-title">Dicas de execução</div>
+    <ul class="ap-dicas"><li>O movimento vem do quadril, não da coluna</li><li>Mantenha a coluna neutra (sem curvar)</li><li>Sinta o alongamento na parte de trás da coxa</li></ul>
+    <div class="ap-actions">
+      <a class="ap-yt-btn" href="https://www.youtube.com/results?search_query=stiff+terra+romeno+como+fazer" target="_blank" rel="noopener">▶ Ver no YouTube</a>
+      <button class="ap-photo-btn" onclick="openAiPhoto('Stiff (Terra Romeno)')">📷 Não achei — tirar foto</button>
+    </div>
+  </div>
+</div><div class="ap-card" data-cat="Glúteo" data-name="cadeira abdutora">
+  <div class="ap-card-head" style="--ac:#ff6b9d" onclick="toggleAp(this)">
+    <div>
+      <span class="ap-cat-pill" style="color:#ff6b9d;background:#ff6b9d18;border-color:#ff6b9d40">Glúteo</span>
+      <div class="ap-name">Cadeira Abdutora</div>
+      <div class="ap-muscle">Glúteo médio · Tensor da fáscia lata</div>
+    </div>
+    <span class="ap-chevron">▾</span>
+  </div>
+  <div class="ap-card-body">
+    <div class="ap-como-title">Como usar</div>
+    <p class="ap-como-text">Sente-se com as costas apoiadas e as pernas dentro dos apoios laterais. Abra as pernas contra a resistência até o limite confortável. Feche controlado sem deixar o peso guiar o movimento.</p>
+    <div class="ap-dicas-title">Dicas de execução</div>
+    <ul class="ap-dicas"><li>Mantenha as costas apoiadas no banco</li><li>Segure 1s na posição aberta</li><li>Movimento controlado — não deixe bater</li></ul>
+    <div class="ap-actions">
+      <a class="ap-yt-btn" href="https://www.youtube.com/results?search_query=cadeira+abdutora+como+usar" target="_blank" rel="noopener">▶ Ver no YouTube</a>
+      <button class="ap-photo-btn" onclick="openAiPhoto('Cadeira Abdutora')">📷 Não achei — tirar foto</button>
+    </div>
+  </div>
+</div><div class="ap-card" data-cat="Glúteo" data-name="elevação pélvica / hip thrust">
+  <div class="ap-card-head" style="--ac:#ff6b9d" onclick="toggleAp(this)">
+    <div>
+      <span class="ap-cat-pill" style="color:#ff6b9d;background:#ff6b9d18;border-color:#ff6b9d40">Glúteo</span>
+      <div class="ap-name">Elevação Pélvica / Hip Thrust</div>
+      <div class="ap-muscle">Glúteo máximo</div>
+    </div>
+    <span class="ap-chevron">▾</span>
+  </div>
+  <div class="ap-card-body">
+    <div class="ap-como-title">Como usar</div>
+    <p class="ap-como-text">Apoie as costas num banco com os pés no chão. Com ou sem barra/halter no quadril, empurre o quadril para cima contraindo o glúteo no topo. Desça controlado até quase tocar o chão.</p>
+    <div class="ap-dicas-title">Dicas de execução</div>
+    <ul class="ap-dicas"><li>Esprema o glúteo com força no topo — não acelere</li><li>Queixo no peito — não jogue a cabeça para trás</li><li>Pés afastados na largura dos ombros ou um pouco mais</li></ul>
+    <div class="ap-actions">
+      <a class="ap-yt-btn" href="https://www.youtube.com/results?search_query=hip+thrust+elevacao+pelvica+como+fazer" target="_blank" rel="noopener">▶ Ver no YouTube</a>
+      <button class="ap-photo-btn" onclick="openAiPhoto('Elevação Pélvica / Hip Thrust')">📷 Não achei — tirar foto</button>
+    </div>
+  </div>
+</div><div class="ap-card" data-cat="Trapézio" data-name="encolhimento de ombros">
+  <div class="ap-card-head" style="--ac:#e040fb" onclick="toggleAp(this)">
+    <div>
+      <span class="ap-cat-pill" style="color:#e040fb;background:#e040fb18;border-color:#e040fb40">Trapézio</span>
+      <div class="ap-name">Encolhimento de Ombros</div>
+      <div class="ap-muscle">Trapézio superior</div>
+    </div>
+    <span class="ap-chevron">▾</span>
+  </div>
+  <div class="ap-card-body">
+    <div class="ap-como-title">Como usar</div>
+    <p class="ap-como-text">Segure a barra ou halteres com os braços estendidos. Eleve os ombros em direção às orelhas sem dobrar os cotovelos. Segure 1 segundo no topo e desça controlado.</p>
+    <div class="ap-dicas-title">Dicas de execução</div>
+    <ul class="ap-dicas"><li>Não gire os ombros — movimento vertical puro</li><li>Não dobre os cotovelos</li><li>Controle a descida — fase excêntrica importante</li></ul>
+    <div class="ap-actions">
+      <a class="ap-yt-btn" href="https://www.youtube.com/results?search_query=encolhimento+ombros+barra+halteres+como+fazer" target="_blank" rel="noopener">▶ Ver no YouTube</a>
+      <button class="ap-photo-btn" onclick="openAiPhoto('Encolhimento de Ombros')">📷 Não achei — tirar foto</button>
+    </div>
+  </div>
+</div></div>
+  <div class="ap-not-found" id="apNotFound" style="display:none">
+    <div class="ap-nf-icon">🤔</div>
+    <div class="ap-nf-title">Não encontrou o aparelho?</div>
+    <p class="ap-nf-sub">Tire uma foto e a IA identifica e explica como usar</p>
+    <button class="ap-nf-btn" onclick="openAiPhoto('este aparelho')">📷 Fotografar aparelho</button>
+  </div>
+  <footer>Guia de Aparelhos · Academia · 2026</footer>
+</div>
+</div>
+
+<div class="groq-overlay" id="groqOverlay" onclick="closeGroq(event)">
+  <div class="groq-modal">
+    <div class="groq-title">📷 Identificar Aparelho</div>
+    <p class="groq-sub" id="groqSubText">Tire uma foto do aparelho e a IA explica como usar</p>
+    <div class="groq-upload-area" id="groqUploadArea">
+      <input type="file" accept="image/*" capture="environment" class="groq-upload-input" id="groqFileInput" onchange="handleGroqImg(this)"/>
+      <div class="groq-upload-icon">📷</div>
+      <div class="groq-upload-text"><strong>Tire foto ou escolha da galeria</strong>Aponte para o aparelho desconhecido</div>
+    </div>
+    <img class="groq-preview" id="groqPreview" src="" alt=""/>
+    <div class="groq-loading" id="groqLoading"><span class="groq-spinner"></span>Identificando com IA...</div>
+    <button class="groq-analyze-btn" id="groqBtn" onclick="analyzeGroq()" disabled>✦ Identificar e Explicar</button>
+    <div class="groq-result" id="groqResult">
+      <div class="groq-result-title">✦ Resultado</div>
+      <div class="groq-result-text" id="groqResultText"></div>
+    </div>
+    <button class="groq-close-btn" onclick="closeGroq()">Fechar</button>
+  </div>
+</div>
+
 </body>
 </html>
