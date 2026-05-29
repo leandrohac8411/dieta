@@ -1254,17 +1254,24 @@ async function analyzeGroq(){
   document.getElementById('groqResult').style.display='none';
   document.getElementById('groqBtn').disabled=true;
   var prompt='Você é um personal trainer especialista em equipamentos de academia. '
-    +'Analise cuidadosamente a FOTO do aparelho enviada pelo usuário. '
-    +'Observe os detalhes físicos: formato do banco, tipo de alavanca, posição dos apoios, cabos ou pesos. '
-    +'IMPORTANTE: não confunda aparelhos parecidos. Exemplos comuns de confusão: '
-    +'extensora de perna ≠ flexora ≠ cadeira abdutora; pulley ≠ remada; supino ≠ desenvolvimento. '
+    +'Analise VISUALMENTE a foto com muito cuidado antes de identificar o aparelho. '
+    +'Descreva internamente o que você vê: há uma plataforma para os pés? O usuário fica deitado ou sentado? Há cabos ou pesos livres? O movimento é de empurrar, puxar, dobrar ou abrir pernas? '
+    +'REGRAS CRÍTICAS de identificação: '
+    +'- Leg Press: banco reclinado, plataforma grande inclinada para os pés, usuário empurra com as pernas para cima/frente '
+    +'- Cadeira Extensora: usuário sentado, apoio na canela, estende as pernas para frente '
+    +'- Mesa Flexora: usuário deitado de bruços, apoio nos calcanhares, dobra os joelhos '
+    +'- Cadeira Abdutora: usuário sentado, abre as pernas lateralmente contra resistência '
+    +'- Puxada/Pulley: polia com cabo acima, usuário puxa para baixo '
+    +'- Remada: cabo ou barra puxado horizontalmente '
+    +'- Supino Máquina: usuário sentado empurra para frente na altura do peito '
+    +'- Desenvolvimento Ombro: usuário sentado empurra para cima '
+    +'NÃO adivinhe — se a imagem não estiver clara, diga que não foi possível identificar. '
     +(_groqEx!=='este aparelho'?'O usuário quer usar para: '+_groqEx+'. Verifique se o aparelho da foto serve para esse exercício. ':'')
     +'Responda em português com: '
     +'1) 🏋️ Nome exato do aparelho identificado na foto '
     +'2) 💪 Músculo(s) principal(is) trabalhado(s) '
     +'3) 📋 Como usar passo a passo (3-4 passos simples) '
-    +'4) ⚠️ 2 dicas importantes de execução e segurança. '
-    +'Se não conseguir identificar com certeza, diga que a imagem não está clara o suficiente.';
+    +'4) ⚠️ 2 dicas importantes de execução e segurança.';
   try{
     var res=await fetch('https://api.groq.com/openai/v1/chat/completions',{
       method:'POST',
